@@ -130,48 +130,49 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-2nd Workshop in Advanced Bioinformatics: Network Medicine.
-
 \hypertarget{workshop-on-network-medicine}{%
 \chapter{Workshop on Network Medicine}\label{workshop-on-network-medicine}}
 
-Network medicine (\textbf{NetMed}) is a field of Network Science that uses Systems Biology to understand its impact on medicine, and it is mostly focused on network topology. In NetMed we often use biological networks to represent the topological space and it be used to identify disease modules, their relationship to other diseases, drug repurpusing, and drug combinations. The biological networks often used for it are based on protein-protein interactions (PPI), Gene-Disease-Associations (GDA), and Drug-Targets.
+Network medicine (\textbf{NetMed}) is a field of Network Science that combines Systems Biology to understand its impact on medicine, and it is mostly focused on network topology. In NetMed we often use biological networks to represent the topological space and can be used to identify disease modules, their relationship to other diseases, drug repurpusing, and drug combinations. The biological networks often used for it are based on protein-protein interactions (PPI), Gene-Disease-Associations (GDA), and Drug-Targets.
 
 In this workshop, we will learn:
 
 \begin{itemize}
 \tightlist
 \item
-  how to identify disease modules (Session \ref{diseasemodule});
+  how to identify disease modules
 \item
-  how to predict disease comorbidities (Session \ref{dissep});
+  how to predict disease comorbidities
 \item
-  how to repurpuse drugs using a network approach (Session \ref{proximity}).
+  how to repurpuse drugs using a network approach.
 \end{itemize}
+
+\hypertarget{intro}{%
+\chapter{Introduction}\label{intro}}
+
+Adapted from \citet{Gysi2020}.
 
 \hypertarget{whatarenets}{%
 \section{What are networks?}\label{whatarenets}}
 
-\begin{quote}
-Adapted from \citet{Gysi2020}.
-\end{quote}
-
-Network Science is broadly employed in many fields: from understanding \emph{how friends bond in a party} to \emph{how animals interact}; from \emph{how superheroes appear in the same comic books} to \emph{how genes can be related to a specific biological process}. Network analysis is especially beneficial for understanding complex systems, in all research fields. Examples of complex biological or medical systems include gene regulatory, ecological and neuropsychology networks. In this workshop, focus is given to applications of Network Science to the medical sciences.
+Network Science is broadly employed in many fields: from understanding \emph{how friends bond in a party} to \emph{how animals interact}; from \emph{how superheroes appear in the same comic books} to \emph{how genes can be related to a specific biological process}. Network analysis is especially beneficial for understanding complex systems, independent of the research field. Examples of complex biological or medical systems include gene regulatory, ecological and neuropsychology networks.
 
 Here, I will start by introducing the basic network terminologies and then explore how can we define and identify disease modules, identify disease commorbidities and lastly, we will learn how to repurpuse drugs for diseases with known modules. For each step, I will then present some classical and some new studies.
 
-It is expected some degree of familiarity with \texttt{R}, \texttt{ggplot2}, \texttt{tidyr}, and \texttt{igraph}.
+It is expected some degree of familiarity with \texttt{R} and \texttt{igraph}.
 
 \hypertarget{terminology}{%
 \section{Terminology}\label{terminology}}
 
-While the nature of each system, i.e.~what its entities are and what kind of interactions they have, is different, there are common notations. A short review of common network terms can be found in Session \ref{network-terminology} and a brief review of biological terms can be found in Session \ref{biological-terminology}.
+While the nature of each system, i.e.~what its entities are and what kind of interactions they have, is different, there are common notations. A short dictionary of common network terms can be found in Session \ref{network-terminology} and a brief description of biological terms can be found in Session \ref{biological-terminology}.
 
-The set of interactions among a set of entities is, in general, called a graph or a network \citep{Newman2018, Barabasi2016}. In graph theory, each entity is called a vertex, while in network notation it is called a node \citep{Barabasi2016}. Accordingly, the connections between two entities are called edges or links, respectively \citep{Barabasi2016}. In this workshop, I will always use the network notation, unless otherwise specified. The total number of nodes in a network is often denoted as \textbf{N} and the number of links in a network is denoted as \textbf{L}. While nodes can receive a label, links in general, are not labeled \citep{Barabasi2016} (although, in many cases, weights can also be perceived as a label). A network can be represented mathematically as an adjacency matrix (usually denoted as \textbf{A}) (Table \ref{tab:ADJ}), an edge-list (Table \ref{tab:EL}), or visually as a graph (Figure \ref{fig:GRAPH}).
+The set of interactions among a set of entities is, in general, called a graph or a network \citep{Newman2018, Barabasi2016}. In graph theory, each entity is called a vertex, while in network notation it is called a node \citep{Barabasi2016}.
+
+Accordingly, the connections between two entities are called edges or links, respectively \citep{Barabasi2016}. In this workshop, I will always use the network notation, unless otherwise specified. The total number of nodes in a network is often denoted as N and the number of links in a network is denoted as L. While nodes can receive a label, links in general, are not labeled \citep{Barabasi2016} (although, in many cases, weights can also be perceived as a label). A network can be represented mathematically as an adjacency matrix (usually denoted as \textbf{A}) (Table \ref{tab:ADJ}), an edge-list (Table \ref{tab:EL}), or visually as a graph (Figure \ref{fig:GRAPH}).
 
 \begin{table}
 
-\caption{\label{tab:ADJ}Mathematical Representation of a Network: Adjacency Matrix}
+\caption{\label{tab:ADJ}Adjacency Matrix}
 \centering
 \begin{tabular}[t]{l|r|r|r|r|r|r|r|r|r|r}
 \hline
@@ -200,11 +201,9 @@ G & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
 \end{tabular}
 \end{table}
 
-Links of a network can possess a direction (normally depicted by an arrow), which indicates that the interaction is asymmetric, e.g.~one gene is regulating another gene, or a person follows somebody else in a social network. Networks with directed links are called directed networks, while networks without directed interactions or in which the direction is not known are referred to as undirected networks, e.g.~collaboration in the same study or interactions between proteins. In NetMed - and in this workshop - most of the times we assume that networks do not posses a direction. The links can also have a weight to express the strength of the interaction, which results in a weighted network \citep{Newman2018, Barabasi2016}. Usually, the weight is graphically displayed as the thickness or the length of the links.
-
 \begin{table}
 
-\caption{\label{tab:EL}Mathematical Representation of a Network: Edge List}
+\caption{\label{tab:EL}Edge List}
 \centering
 \begin{tabular}[t]{l|l}
 \hline
@@ -233,16 +232,16 @@ A & C\\
 \end{tabular}
 \end{table}
 
-Networks can also have different dimensions. These dimensions can be understood as layers (or different link types) of the same system \citep{Kurant2006LayeredNetworks, Kivela2014MultilayerNetworks}. For example, in a multi-omics multilayer system, each layer can be constructed using different -omics data (for example genomics, transcriptomics, proteomics, etc.) where the `whole' biological system can be understood as a network of networks \citep{DeDomenico2017}. The topology and the dynamic properties of the whole network can be changed by simply transforming the weights of the interactions, or by ignoring that nodes can interact in many ways \citep{Mucha2010CommunityNetworks, Radicchi2013AbruptNetworks} also ignoring the node's importance to the system. We will not deal with multi-layer networks in this workshop.
-
 \begin{figure}
 
 {\centering \includegraphics[width=0.8\linewidth]{NetMed_files/figure-latex/GRAPH-1} 
 
 }
 
-\caption{Visual Representation of a Network: Graph}\label{fig:GRAPH}
+\caption{Graph}\label{fig:GRAPH}
 \end{figure}
+
+Links of a network can possess a direction (normally depicted by an arrow), which indicates that the interaction is asymmetric, e.g.~one gene is regulating another gene, or a person follows somebody else in a social network. Networks with directed links are called directed networks, while networks without directed interactions or in which the direction is not known are referred to as undirected networks, e.g.~collaboration in the same study or interactions between proteins. The links can also have a weight to express the strength of the interaction, which results in a weighted network \citep{Newman2018, Barabasi2016}. Usually, the weight is graphically displayed as the thickness or the length of the links. Networks can also have different dimensions. These dimensions can be understood as layers (or different link types) of the same system \citep{Kurant2006LayeredNetworks, Kivela2014MultilayerNetworks}. For example, in a multi-omics multilayer system, each layer can be constructed using different -omics data (for example genomics, transcriptomics, proteomics, etc.) where the `whole' biological system can be understood as a network of networks \citep{DeDomenico2017}. The topology and the dynamic properties of the whole network can be changed by simply transforming the weights of the interactions, or by ignoring that nodes can interact in many ways \citep{Mucha2010CommunityNetworks, Radicchi2013AbruptNetworks} also ignoring the node's importance to the system. We will not deal with multi-layer networks in this workshop.
 
 \hypertarget{network-terminology}{%
 \subsection{Network Terminology}\label{network-terminology}}
@@ -306,17 +305,15 @@ Networks can also have different dimensions. These dimensions can be understood 
 \item
   \textbf{Genes} are the basic physical and functional units of heredity. They are parts of the DNA and contain the information for producing functional RNAs and proteins. \citep{Slack2013}.
 \item
-  \textbf{Proteins} are large, complex molecules that play many critical roles in the body. The proteins are responsible for most of the work in cells and are necessary for structure, function, and regulation of the cells. They can act as enzymes, antibodies, transporters, transcription factors etc. \citep{Slack2013}.
-\item
   The \textbf{RNA} is synthesized from the DNA but has different properties and functions than the DNA. Some RNAs carry out biological functions in a cell, while others, messenger RNA (mRNA), are turned into proteins that fulfil biological functions \citep{Slack2013}.
 \item
   A \textbf{non-coding RNA (ncRNA)} is an RNA that does not encode a protein. NcRNAs often play a role in gene regulation \citep{MattickNon-codingRNA}.
 \item
   \textbf{microRNAs (miRNA)} are examples of ncRNA; they are involved in posttranscriptional regulation of protein expression \citep{Tanase2012MicroRNAs}.
 \item
-  \textbf{Gene expression} is, in short, the coupled process of transcription (from DNA to RNA) and translation (from RNA to proteins) to transform the stored information inside the DNA into proteins \citep{Slack2013}.
+  \textbf{Proteins} are large, complex molecules that play many critical roles in the body. The proteins are responsible for most of the work in cells and are necessary for structure, function, and regulation of the cells. They can act as enzymes, antibodies, transporters, transcription factors etc. \citep{Slack2013}.
 \item
-  \textbf{RNA-Seq} is a technique used to sequence the RNAs in a sample. The result is the snapshot abundance of all RNAs expressed in the sample at a particular time, often called the transcriptome \citep{Metzker2010SequencingGeneration}.
+  \textbf{Gene expression} is, in short, the coupled process of transcription (from DNA to RNA) and translation (from RNA to proteins) to transform the stored information inside the DNA into proteins \citep{Slack2013}. \textbf{RNA-Seq} is a technique used to sequence the RNAs in a sample. The result is the snapshot abundance of all RNAs expressed in the sample at a particular time, often called the transcriptome \citep{Metzker2010SequencingGeneration}.
 \item
   \textbf{Microarrays}, or \textbf{gene chips}, are chips with thousands of tiny spots containing a known DNA sequence. It is used to measure the abundance of mRNAs by eminence of fluorescence \citep{Slack2013}.
 \item
@@ -334,7 +331,7 @@ Networks can also have different dimensions. These dimensions can be understood 
 \item
   \textbf{High-throughput Mass Spectrometry} has the ability to detect a characteristic mass to charge ratio of different substances in a sample. It is used to identify the proteins present in a sample \citep{Kempa2019HighAnalysis}.
 \item
-  \textbf{Chromatin immunoprecipitation followed by sequencing (ChIP--Seq)} can be used to identify binding sites of transcription factors in the DNA or of histone modification in a genome-wide manner \citep{Park2009ChIP-seq:Technology}.
+  \textbf{Chromatin immunoprecipitation followed by sequencing (ChIP--Seq)} can be used to identify binding sites of transcription factors in the DNA or of histone modification in a genome-wide manner \citep{Park2009ChIP-seq:Technology}.\\
 \item
   \textbf{Chromatin Isolation by RNA Purification followed by sequencing (ChIRP-seq)} maps lncRNA interactions to the chromatin \citep{Park2009ChIP-seq:Technology}.
 \item
@@ -343,15 +340,16 @@ Networks can also have different dimensions. These dimensions can be understood 
   \textbf{Omics} is a term that refers to the study of different areas in biology, and indicates the totality of some kind, e.g.~genome, transcriptome, proteome, etc.
 \end{itemize}
 
-\hypertarget{data-commonly-used-in-network-medicine}{%
-\chapter{Data Commonly Used in Network Medicine}\label{data-commonly-used-in-network-medicine}}
+\hypertarget{aim-of-the-workshop}{%
+\section{Aim of the workshop}\label{aim-of-the-workshop}}
 
-In NetMed we are often interested in understanding \emph{how genes associated to a particular disease can influence each other}, \emph{how two diseases are similar (or different)}, \emph{and how a drug can be used in different set-ups.}
-
-For that end, it is necessary to use data sets that are able to represent those associations: \textbf{Protein-Protein Interactions} are used as a map of the interactions inside our cells (Session \ref{PPI}); \textbf{Gene-Disease-Associations} are used for us to identify genes that were previously associated to diseases, often using a GWAS approach (Session \ref{GDA}); and Drug-Target interactions, often measured by identifying physical binding of a therapeutic compound (often a drug) and a protein (Session \ref{DTs}).
+In this workshop we will deal with some diseases diseases. We will be able to identify its disease modules, identify possible commorbidities and drug repurpusing candidates using Network Medicine tools.
 
 \hypertarget{PPI}{%
-\section{Protein Protein Interaction Networks}\label{PPI}}
+\chapter{The Interactome}\label{PPI}}
+
+\hypertarget{protein-protein-interaction-networks}{%
+\section{Protein Protein Interaction Networks}\label{protein-protein-interaction-networks}}
 
 In PPI networks, the nodes represent proteins and they are connected by a link if they physically interact with each other \citep{rual2005}. Typically, these interactions are measured experimentally, for instance with the Yeast-Two-Hybrid (Y2H) system \citep{uetz2000}, or by protein complex immunoprecipitation followed by high-throughput Mass Spectrometry \citep{zhang2008, koh2012}, or inferred computationally based on sequence similarity \citep{fong2004}. PPI can be used to infer gene functions and the association of sub-networks to diseases \citep{Menche2015}. In this type of network, a highly connected protein tends to interact with proteins that are less connected, probably to prevent unwanted cross-talk of functional modules. As mentioned, most of the methods in network medicine are based on PPI.
 
@@ -370,12 +368,18 @@ Protein Protein Interactions can be measured mainly using three different techni
   By systematic experimental mapping of proteins identify complex association and/or binary interactions. We will focus here only in the third.
 \end{enumerate}
 
-Co-complex associations interrogate a protein composition of protein complex in one or several cell lines. The most common approach uses affinity purification to extract the proteins that associate with the \emph{bait} proteins followed by mass expectometry in order to identify proteins that associate with the \emph{bait.} This approach is often used for simple organisms, however similar approaches have been reported for humans. Unfortunately, achieving stable expression of bait proteins is challenging. Co-complex map associations are composed by indirect and some direct binary associations. However, raw association data cannot distinguish the indirect from direct association and therefore, co-complex datasets have to be filtered and needs to have incorporated prior knowledge that might lead to bias towards super-start genes. On the other side, for experimental determination of binary interactions between proteins, all possible pair of proteins are systematically tested to generate a data set of all possible biophysical interactions.
+Co-complex associations interrogate a protein composition of protein complex in one or several cell lines. The most common approach uses affinity purification to extract the proteins that associate with the \emph{bait} proteins followed by mass expectometry in order to identify proteins that associate with the \emph{bait.}
+
+This approach is often used for simple organisms, however similar approaches have been reported for humans. Unfortunately, achieving stable expression of bait proteins is challenging.
+
+Co-complex map associations are composed by indirect and some direct binary associations. However, raw association data cannot distinguish the indirect from direct association and therefore, co-complex datasets have to be filtered and needs to have incorporated prior knowledge that might lead to bias towards super-start genes.
+
+On the other side, for experimental determination of binary interactions between proteins, all possible pair of proteins are systematically tested to generate a data set of all possible biophysical interactions.
 
 Because the human genome is composed by \textasciitilde20,000 unique genes - not even considering its isophorms - we would have \textasciitilde200 million possible combinations in order to robust systematically identify interactions. To meet this requirement Yeast-to-Hybrid (Y2H) technology is the only one that can meet this requirement. This technology is able to interrogate hundreds of millions of human proteins pairs for binary interactions. In short the method works as follows: Protein of interest X and a DNA binding domain (DBD-X) fuse to form \emph{bait}. Fusion of transcriptional activation domain (AD-Y) and a cDNA library Y results in \emph{prey}. Those two form the basis of the protein--protein interaction detection system. Without bait--prey interaction, the activation domain is unable to restrict the gene-to-gene expression drive.
 
-\hypertarget{commonly-used-data-sources-for-ppis}{%
-\subsection{Commonly used data sources for PPIs}\label{commonly-used-data-sources-for-ppis}}
+\hypertarget{data-sets}{%
+\subsection{Data Sets}\label{data-sets}}
 
 PPIs can be found from different sources. I list here some well known databases for that.
 
@@ -518,16 +522,13 @@ PPIs can be found from different sources. I list here some well known databases 
   ENCODE consortium.
 \end{itemize}
 
-\hypertarget{understanding-a-ppi}{%
-\subsection{Understanding a PPI}\label{understanding-a-ppi}}
+\hypertarget{our-ppi}{%
+\subsection{Our PPI}\label{our-ppi}}
 
-For this workshop, we will be using for this workshop is a combination of a manually curated PPI that combines all previous data sets. The data can be \href{https://github.com/deisygysi/NetMed_Workshop/blob/master/data/PPI_Symbol_Entrez.csv}{found here}. This PPI was previously published in \citet{Gysi2020a}.
+The PPI we will be using for this workshop is a combination of all previous data sets - and manually curated. The data can be found here: LINK. Data was published in \citet{Gysi2020a}.
 
-Before we can start any analysis using this interactome, let us first understand this data.
-
-The PPI contains the EntrezID and the HGNC symbol of each gene, and some might not have a proper map, therefore, it should be removed from further analysis. Moreover, we might have loops, and those should also be removed.
-
-Let us begin by preparing our environment and calling all libraries we will need at this point.
+\hypertarget{understanding-the-data}{%
+\subsubsection{Understanding the data}\label{understanding-the-data}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -540,7 +541,7 @@ Let us begin by preparing our environment and calling all libraries we will need
 \end{Highlighting}
 \end{Shaded}
 
-Let's read in our data.
+Let's read in our data, and check basic statistics of it.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -588,15 +589,9 @@ Let's transform our edge-list into a network.
 \end{Shaded}
 
 \begin{verbatim}
-<<<<<<< HEAD
-## IGRAPH 2b57ea0 UN-- 18507 322289 -- 
+## IGRAPH 6412a62 UN-- 18507 322289 -- 
 ## + attr: name (v/c)
-## + edges from 2b57ea0 (vertex names):
-=======
-## IGRAPH 4967c88 UN-- 18507 322289 -- 
-## + attr: name (v/c)
-## + edges from 4967c88 (vertex names):
->>>>>>> parent of 13c13be... Update
+## + edges from 6412a62 (vertex names):
 ##  [1] PHYHIP--TTR      PHYHIP--NFE2     PHYHIP--DYRK1A   PHYHIP--HNRNPA1 
 ##  [5] PHYHIP--COPS6    PHYHIP--SUPT5H   PHYHIP--SMARCC2  PHYHIP--EEF1A1  
 ##  [9] PHYHIP--TRIP6    PHYHIP--NDUFV3   PHYHIP--CA10     PHYHIP--ERG28   
@@ -608,9 +603,7 @@ Let's transform our edge-list into a network.
 ## + ... omitted several edges
 \end{verbatim}
 
-How many genes do we have? How many interactions?
-
-Next, let's check the degree distribution:
+Let's check the degree distribution:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -670,58 +663,44 @@ AR & 1099\\
 \hline
 \end{tabular}
 
-\hypertarget{exercises}{%
-\subsection{Exercises}\label{exercises}}
+\hypertarget{gene-disease-association}{%
+\section{Gene Disease Association}\label{gene-disease-association}}
 
-Now is your turn. Spend some minutes understanding the data and getting some familiarity with it.
+A Gene Disease Association Database is a systematic data base, typically used to understand the association of genes to diseases, and model the underlying mechanisms of complex diseases.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  What are the top 10 genes with higher degree?
-\item
-  Are those genes connected?
-\end{enumerate}
-
-\hypertarget{GDA}{%
-\section{Gene Disease Association}\label{GDA}}
-
-A Gene-Disease-Association (GDA) database are typically used to understand the association of genes to diseases, and model the underlying mechanisms of complex diseases. Those associations often come from GWAS studies and knock-out studies.
-
-\hypertarget{commonly-used-data-sources-for-gdas}{%
-\subsection{Commonly used data sources for GDAs}\label{commonly-used-data-sources-for-gdas}}
-
-As PPIs, GDAs can be found from different sources and with different evidences for each Gene-Disease association. I list here some well known databases for that.
+\hypertarget{data-sets-1}{%
+\subsection{Data Sets}\label{data-sets-1}}
 
 \begin{itemize}
 \item
-  CTD -- Curated scientific literature \citep{davis2020}
+  CTD -- Curated scientific literature
 \item
-  OMIM -- Curated scientific literature \citep{mckusick2007}
+  OMIM -- Curated scientific literature
 \item
-  DisGeNet -- Based on OMIM, ClinVar and other data bases \citep{piñero2019}
+  DisGeNet -- Based on OMIM, ClinVar and other data bases
 \item
   Orphanet -- Validated - and non validated - GDAs
 \item
-  ClinGen -- Validated - and non validated - GDAs \citep{rehm2015}
+  ClinGen -- Validated - and non validated - GDAs
 \item
-  ClinVar -- Different levels of evidence \citep{landrum2019}
+  ClinVar -- Different levels of evidence
 \item
-  GWAS catalogue -- GWAS associations to diseases \citep{buniello2018}
+  GWAS catalogue -- GWAS associations to diseases
 \item
-  PheGenI -- GWAS associations to diseases \citep{ramos2013}
+  PheGenI -- GWAS associations to diseases
 \item
-  lncRNADisease -- Experimental validated lncRNAs in diseases \citep{chen2012}
+  lncRNADisease -- Experimental validated lncRNAs in diseases
 \item
-  HMDD -- Experimental validated miRNAs in diseases \citep{huang2018}
+  HMDD -- Experimental validated miRNAs in diseases
 \end{itemize}
 
-\hypertarget{understanding-a-gda-dataset}{%
-\subsection{Understanding a GDA dataset}\label{understanding-a-gda-dataset}}
+\hypertarget{our-gda}{%
+\subsection{Our GDA}\label{our-gda}}
 
-We will use in this workshop Gene-Disease-Association from DisGeNet. And can be \href{https://github.com/deisygysi/NetMed_Workshop/blob/master/data/curated_gene_disease_associations.tsv}{found here}.
+We will use in this workshop Gene-Disease-Association from DisGeNet.
 
-Similar to the PPI, let us first get some familiarity with the data, before we are able to perform any analysis.
+\hypertarget{understanding-the-data-1}{%
+\subsubsection{Understanding the data}\label{understanding-the-data-1}}
 
 Let's read in the data and again, do some basic statistics.
 
@@ -750,8 +729,6 @@ geneId & geneSymbol & DSI & DPI & diseaseId & diseaseName & diseaseType & diseas
 2 & A2M & 0.529 & 0.769 & C0011265 & Presenile dementia & disease & C10;F03 & Mental or Behavioral Dysfunction & 0.30 & 1.000 & 1998 & 2004 & 3 & 0 & CTD\_human\\
 \hline
 \end{tabular}
-
-The first thing to notice is the inconsistency with the disease names, in order to be able to work with it, let's first put every disease to lower-case.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -789,8 +766,6 @@ The first thing to notice is the inconsistency with the disease names, in order 
 \end{Highlighting}
 \end{Shaded}
 
-Let's also understand the degree distribution of the diseases.
-
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(numGenes) }\SpecialCharTok{+}
@@ -809,7 +784,7 @@ Let's also understand the degree distribution of the diseases.
 \caption{\label{fig:unnamed-chunk-11}Gene-Disease degree distribution}
 \end{figure}
 
-Because we want to focus in well studied diseases, and also that are known to be complex diseases, let's filter for diseases with at least 10 genes.
+Importantly is to filter for diseases with at least 10 genes.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -826,23 +801,8 @@ Because we want to focus in well studied diseases, and also that are known to be
 ## [1] 920
 \end{verbatim}
 
-\hypertarget{exercises-1}{%
-\subsection{Exercises}\label{exercises-1}}
-
-Now is your turn. Spend some minutes understanding the data and getting some familiarity with it.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  What are the top 10 genes mostly involved with diseases? What are those diseases?
-\item
-  What are the top 10 highly polygenic diseases?
-\item
-  What are the top 10 highly polygenic disease classes?
-\end{enumerate}
-
-\hypertarget{DTs}{%
-\section{Drug-Targets}\label{DTs}}
+\hypertarget{drug-targets}{%
+\section{Drug-Targets}\label{drug-targets}}
 
 A \emph{druggable} target is a protein, peptide or nucleic acid that has activity which can be modulated by a drug. A \emph{drug} can be any small molecular weight chemical compound (SMOL) or a biologic (BIOL), such as an antibody or a recombinant protein that can treat a disease or a sympthom.
 
@@ -870,10 +830,10 @@ A drug-target has a couple of proprieties that are highly desired when construct
   Target has a favorable IP situation (no competitors on target, freedom to operate).
 \end{itemize}
 
-\hypertarget{commonly-used-data-sources-for-gdas-1}{%
-\subsection{Commonly used data sources for GDAs}\label{commonly-used-data-sources-for-gdas-1}}
+\hypertarget{data-sets-2}{%
+\subsection{Data Sets}\label{data-sets-2}}
 
-There are a couple of really good data sets that report drug-target interactions, I list here three good examples:
+There are a couple of really good data sets that report drug-target interactions:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -885,12 +845,13 @@ There are a couple of really good data sets that report drug-target interactions
   Broad Institute Drug Repositioning Hub \citep{corsello2017}
 \end{enumerate}
 
-\hypertarget{understanding-a-drug-target-dataset}{%
-\subsection{Understanding a Drug-Target dataset}\label{understanding-a-drug-target-dataset}}
+\hypertarget{our-dt}{%
+\subsection{Our DT}\label{our-dt}}
 
-For this workshop we will use the drug bank drug-target dataset, and can be \href{https://github.com/deisygysi/NetMed_Workshop/blob/master/data/DB_DrugTargets_1201.csv}{found here}. This dataset is from Drug-Bank, and has been previously parsed for your convenience. The original file is an XML file, and needs to be carefully handled to get information needed.
+For this workshop we will use the drug bank drug-target dataset. This dataset has been previously parsed for your convenience.
 
-Similar to the PPI and the GDA, let us understand a little bit of the data set, and what kind of information we have here.
+\hypertarget{understanding-the-data-2}{%
+\subsubsection{Understanding the data}\label{understanding-the-data-2}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1021,19 +982,6 @@ Which Target is the most targetted gene?
 \caption{\label{fig:unnamed-chunk-19}Drug distribution}
 \end{figure}
 
-\hypertarget{exercises-2}{%
-\subsection{Exercises}\label{exercises-2}}
-
-Let us understand a little bit more about the data.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  What are the top 10 genes mostly targeted by drugs? Are they types are they mostly?
-\item
-  What are the top 10 most promiscuous drugs? What are their indication?
-\end{enumerate}
-
 \hypertarget{methods}{%
 \chapter{Methods fo Disease Module Identification and Disease Similarity}\label{methods}}
 
@@ -1042,20 +990,15 @@ In this chapter, I will introduce the main methods used in Network Medicine. We 
 \hypertarget{diseasemodule}{%
 \section{Disease Module}\label{diseasemodule}}
 
-In biological networks often genes involved in the same topological communities are also associated with similar biological processes \citep{Ahn2010}. It also reflects on \emph{how diseases localized themselves in the interaction}; meaning that disease modules are highly localized in specific network neighborhoods \citep{Menche2015} (Figure \ref{fig:diseasemodule}).
+In biological networks often genes involved in the same topological communities are also associated with similar biological processes \citep{Ahn2010}. It also reflects on how diseases localized themselves in the interaction; meaning that disease modules are highly localized in specific network neighborhoods \citep{Menche2015} (Figure \ref{fig:diseasemodule}).
 
-\hypertarget{largest-connected-component}{%
-\subsection{Largest connected component}\label{largest-connected-component}}
-
-The size of the largest connected component (LCC) is the number of nodes that form a connected subgraph (in our case, it is the number of proteins that are interconnected in the PPI). Many properties of this quantity allow us to understand how a particular disease interacts with the interactome. It is important to note here that this measure is highly dependent on the completeness of an interactome. If a link between a protein and their counterparts is unknown -- therefore missing -- we might say that that particular node is not involved in a disease module (or that the LCC is not significant).
+\textbf{Size of the largest connected component (LCC)}: this is the number of nodes that form a connected sub graph. Many properties of this quantity can Help us understand how a particular disease interacts with the interactome. It is important to note here that this measure is highly dependent on the completeness of an interactome. If a link between a protein and their counterparts is unknown -- therefore missing -- we might say that that particular node is not involved in a disease module (or that the LCC is not significant). We often calculate the significance of the LCC by selecting proteins in the interactome with similar degrees (aka degree preserving normalization).
 
 \begin{figure}
 \centering
 \includegraphics{NetMed_files/figure-latex/diseasemodule-1.pdf}
 \caption{\label{fig:diseasemodule}Disease-Module. A schematic of a PPI, in pink we see genes associated with a disease, forming a connected component of size 4.}
 \end{figure}
-
-However, just computing this number might not be informative, and it is expected a randomness. To calculate this randomness, we often calculate the significance of the LCC by selecting proteins in the interactome with similar degrees (aka degree preserving randomization).
 
 To calculate the significance of the LCC one can calculate its Z-Score or simply calculate the empirical probability under the curve from the empirical distribution. The Z-score is given by:
 
@@ -1131,15 +1074,9 @@ The idea now is: Gather the genes associated to our disease in the data, find th
 \end{Shaded}
 
 \begin{verbatim}
-<<<<<<< HEAD
-## IGRAPH cbb464f UN-- 846 2564 -- 
+## IGRAPH 84481c7 UN-- 846 2564 -- 
 ## + attr: name (v/c)
-## + edges from cbb464f (vertex names):
-=======
-## IGRAPH 598163a UN-- 846 2564 -- 
-## + attr: name (v/c)
-## + edges from 598163a (vertex names):
->>>>>>> parent of 13c13be... Update
+## + edges from 84481c7 (vertex names):
 ##  [1] PI4KA  --SP1    F2     --SP1    DNM1   --CTCF   GSK3B  --HSPA1A
 ##  [5] DNM1   --GRB2   SP1    --GRB2   MET    --GRB2   GSK3B  --MAPK14
 ##  [9] SP1    --MAPK14 CTCF   --MAPK14 GRB2   --MAPK14 MET    --ACTB  
@@ -1191,8 +1128,8 @@ The idea now is: Gather the genes associated to our disease in the data, find th
 
 \includegraphics{NetMed_files/figure-latex/unnamed-chunk-25-1.pdf}
 
-\hypertarget{exercises-3}{%
-\subsection{Exercises}\label{exercises-3}}
+\hypertarget{exercises}{%
+\subsection{Exercises}\label{exercises}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1206,18 +1143,16 @@ The idea now is: Gather the genes associated to our disease in the data, find th
   \item
     Obesity;
   \item
-    Hyperlipidemia;
+    hyperlipidemia;
   \item
     Rheumatoid Arthritis.
   \end{itemize}
-\item
-  Now choose any disease you are interested in and do the same thing.
 \end{enumerate}
 
 \hypertarget{gene-overlap}{%
 \section{Gene Overlap}\label{gene-overlap}}
 
-A first intuitive way to measure the overlap of two gene sets is by calculating its overlap, or its normalized overlap, the \textbf{Jaccard Index}. The Jaccard index is calculated by taking the ratio of \textbf{Intersection of two sets over Union of those sets}. The Jaccard coefficient measures similarity between finite sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets:
+A first intuitive way to measure the overlap of two gene sets is by calculating its Jaccard Index. The Jaccard index is calculated by taking the ratio of \textbf{Intersection over Union}. The Jaccard coefficient measures similarity between finite sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets:
 
 \[
 J(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{|A \cap B|}{|A| + |B| - |A \cap B|}
@@ -1302,9 +1237,10 @@ Let's calculate the Jaccard Index for the 5 diseases we calculated its LCCs.
 \hypertarget{dissep}{%
 \section{Disease Separation}\label{dissep}}
 
-When looking into the Jaccard Index, we have a sense of how similar two diseases are based on genes that are \textbf{known} to be associated to both diseases. The main problem with this is that we assume that all genes associated with a disease is known, and we do not take the topology of the underlying network into account.
+When looking into the Jaccard Index, we have a sense of how similar two diseases are based on genes that are \textbf{known} to be associated to both diseases.
+The main problem with this, is that we assume that all genes associated with a disease is known, and we do not take the topology of the underliying network into account.
 
-The \textbf{separation} is a complementary quantity that is a bit less sensitive to the incompleteness of the PPI, we can measure the distances \(d_s\) of each disease associated node to all other disease associated nodes. Taking into account only the shortest distance among the result among them results in a distribution \(P(d_s)\). The mean value \(<d_s>\) can be interpreted as the diameter of the disease model. \textbf{Note} the diameter here is the average distance instead of the maximal distance.
+The \textbf{separation} as a complementary quantity that is a bit less sensitive to the incompleteness of the PPI, we can measure the distances \(d_s\) of each disease associated node to all other disease associated nodes. Taking into account only the shortest distance among the result among them results in a distribution \(P(d_s)\). The mean value \(<d_s>\) can be interpreted as the diameter of the disease model. \textbf{Note} the diameter here is the average distance instead of the maximal distance.
 
 The \textbf{concept of network localization} can be further generalized to exam the relationship between any different sets of nodes, for example, proteins associated with two different diseases.
 
@@ -1324,13 +1260,9 @@ S_{AB} = <d_{AB}> - \frac{<d_{AA}> + <d_BB>}{2}
 
 The size of the overlap is highly predictive of pathological and functional similarity, elevated co-expression, symptoms similarity and high comorbidity diseases.
 
-\begin{figure}
-\centering
 \includegraphics{NetMed_files/figure-latex/separation-1.pdf}
-\caption{\label{fig:separation}Disease-Separation. A schematic of a PPI, in pink we see genes associated with a disease A, and in green genes associated to disease B.}
-\end{figure}
-
-The separation of diseases A and B is given by: \[
+The separation of diseases A and B is given by:
+\[
 <d_{AA}> = 1.5
 \]
 
@@ -1340,7 +1272,8 @@ The separation of diseases A and B is given by: \[
 
 \[
 <d_{AB}> = 2.7
-\] \[
+\]
+\[
 S_{AB} = 2.7 - \frac{1.5+ 1.5}2 = 1.2
 \]
 
@@ -1387,8 +1320,8 @@ We can visualize the network separation of the diseases using a heatmap.
 
 \includegraphics{NetMed_files/figure-latex/unnamed-chunk-29-1.pdf}
 
-\hypertarget{exercises-4}{%
-\section{Exercises}\label{exercises-4}}
+\hypertarget{exercise}{%
+\subsection{Exercise}\label{exercise}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1413,7 +1346,7 @@ We can visualize the network separation of the diseases using a heatmap.
 
 In this Chapter we will learn how to calculate the proximity of a drug to a disease - and infer drug repurpusing (Session \ref{proximity})- based on network methodologies.
 
-There are different methods that are used for drug-repurpusing based on networks, such as the \textbf{diffusion state distance (DSD)} \citep{Cao2013}, that uses a \textbf{graph diffusion property} to derive a similarity metric for pairs of nodes that takes into account how similarly they affect the rest of the network; and \textbf{AI-based methods}, where a heterogeneous graph \(G = (V,R)\) with N nodes \(v_i \in V\) representing distinct types of biomedical entities and labeled edges representing semantically distinct types of edges between the entities (i.e., protein-protein interactions, drug-target associations, disease-protein associations, and drug-disease indications) and are tasked to predict drugs for a particular disease \citep{Zitnik2018}. Due to the limited time, we will focus only on the proximity based method.
+There are different methods that are used for drug-repurpusing based on networks, such as the diffusion state distance (DSD) \citep{Cao2013}, that uses a graph diffusion property to derive a similarity metric for pairs of nodes that takes into account how similarly they affect the rest of the network and AI-based methods, where a heterogeneous graph \(G = (V,R)\) with N nodes \(v_i \in V\) representing distinct types of biomedical entities and labeled edges representing semantically distinct types of edges between the entities (i.e., protein-protein interactions, drug-target associations, disease-protein associations, and drug-disease indications) and are tasked to predict drugs for a particular disease \citep{Zitnik2018}. Due to the limited time, we will focus only on the proximity based method.
 
 For this, we will be using the \texttt{R} package \texttt{NetSci} and to make the appropriate visualizations we will use \texttt{igraph}.
 
@@ -1426,7 +1359,7 @@ Given G, the set of Disease-Genes, T, the set of drug targets, and d(g,t), the s
 d(g,t)  = \frac{1}{|\left|T\right||}\sum_{t\in T}\underset{v\in V}\min{d(g,t)}
 \]
 
-A visual representation of the method can be seen in Figure \ref{fig:proximity}.
+A visual represenattion of the method can be seen in Figure \ref{fig:proximity}.
 
 The proximity for drug 2 to the disease is calculated by the average of the shortest path from its targets to the disease genes. The shortest path from N to D is 1, from F to D is 3, the average is 2.
 
@@ -1551,59 +1484,8 @@ Now, let's do the same, but also calculating the significance of the proximity.
 ##   |                                                                              |                                                                      |   0%  |                                                                              |==============                                                        |  20%  |                                                                              |============================                                          |  40%  |                                                                              |==========================================                            |  60%  |                                                                              |========================================================              |  80%  |                                                                              |======================================================================| 100%
 \end{verbatim}
 
-Which are the drugs that we can use for hyperlipidemia?
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{proximity\_significance}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##                    Drug targets targets_G proximity  IC_97.5   IC_2.5 p_gt p_lt
-## Asenapine     Asenapine      26        26  1.961538 2.251923 1.978846  0.9  0.1
-## Phentermine Phentermine       7         7  2.000000 2.792857 2.142857  1.0  0.0
-## Simvastatin Simvastatin      20        19  2.157895 2.619737 2.327632  1.0  0.0
-## Pizotifen     Pizotifen      17        17  2.058824 2.294118 1.876471  0.7  0.3
-## Eprotirome   Eprotirome       2         2  1.500000 2.000000 2.000000  1.0  0.0
-##                      Z
-## Asenapine   -1.7084389
-## Phentermine -1.8973666
-## Simvastatin -2.8460499
-## Pizotifen   -0.5217939
-## Eprotirome        -Inf
-\end{verbatim}
-
-Now, let us check those drug indications:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{Indication }\OtherTok{=}\NormalTok{ DT }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{filter}\NormalTok{(Name }\SpecialCharTok{\%in\%}\NormalTok{ drugs) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(Name, Indication) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{unique}\NormalTok{()}
-
-\NormalTok{Indication}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##           Name
-## 1: Phentermine
-## 2: Simvastatin
-## 3:  Eprotirome
-## 4:   Pizotifen
-## 5:   Asenapine
-##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Indication
-## 1:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Phentermine is indicated, alone or in combination with topiramate, as a short-term adjunct, not pass a few weeks, in a regimen of weight reduction based on exercise, behavioral modifications and caloric restriction in the management of exogenous obesity for patients with an initial body mass index (BMI) greater than 30 kg/m2 or greater than 27 kg/m2 in presence of other risk factors such as controller hypertension, diabetes or hyperlipidemia.[FDA label]\r\n\r\nExogenous obesity is considered when the overweight is caused by consuming more food than the person activity level warrants. This condition commonly causes an increase in fat storage. It is an epidemic condition in the United States where over two-thirds of adults are overweight or obese and one in three Americans is obese. In the world, the incidence of obesity has nearly doubled.[A174391]
-## 2: Simvastatin is indicated for the treatment of hyperlipidemia to reduce elevated total cholesterol (total-C), low-density lipoprotein cholesterol (LDL‑C), apolipoprotein B (Apo B), and triglycerides (TG), and to increase high-density lipoprotein cholesterol (HDL-C).[F4655, F4658]\r\n\r\nThis includes the treatment of primary hyperlipidemia (Fredrickson type IIa, heterozygous familial and nonfamilial), mixed dyslipidemia (Fredrickson type IIb), hypertriglyceridemia (Fredrickson type IV hyperlipidemia), primary dysbetalipoproteinemia (Fredrickson type III hyperlipidemia), homozygous familial hypercholesterolemia (HoFH) as an adjunct to other lipid-lowering treatments, as well as adolescent patients with Heterozygous Familial Hypercholesterolemia (HeFH).[F4655, F4658]\r\n\r\nSimvastatin is also indicated to reduce the risk of cardiovascular morbidity and mortality including myocardial infarction, stroke, and the need for revascularization procedures. It is primarily used in patients at high risk of coronary events because of existing coronary heart disease, diabetes, peripheral vessel disease, history of stroke or other cerebrovascular disease.[F4655, F4658]\r\n\r\nPrescribing of statin medications is considered standard practice following any cardiovascular events and for people with a moderate to high risk of development of CVD. Statin-indicated conditions include diabetes mellitus, clinical atherosclerosis (including myocardial infarction, acute coronary syndromes, stable angina, documented coronary artery disease, stroke, trans ischemic attack (TIA), documented carotid disease, peripheral artery disease, and claudication), abdominal aortic aneurysm, chronic kidney disease, and severely elevated LDL-C levels.[A181087, A181406]
-## 3:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Investigated for use/treatment in hyperlipidemia, metabolic disease, and obesity.
-## 4:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             Indicated for the prophylactic management of migraines [L2292].
-## 5:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Used for treatment in psychosis, schizophrenia and schizoaffective disorders, manic disorders, and bipolar disorders as monotherapy or in combination.
-\end{verbatim}
-
-\hypertarget{exercises-5}{%
-\section{Exercises}\label{exercises-5}}
+\hypertarget{exercises-1}{%
+\section{Exercises}\label{exercises-1}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1617,7 +1499,7 @@ Now, let us check those drug indications:
   \item
     Obesity;
   \item
-    Hyperlipidemia;
+    hyperlipidemia;
   \item
     Rheumatoid Arthritis.
   \end{itemize}
