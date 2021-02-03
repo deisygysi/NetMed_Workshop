@@ -586,9 +586,9 @@ Let's transform our edge-list into a network.
 \end{Shaded}
 
 \begin{verbatim}
-## IGRAPH 3feea0f UN-- 18507 322289 -- 
+## IGRAPH 5fec2b6 UN-- 18507 322289 -- 
 ## + attr: name (v/c)
-## + edges from 3feea0f (vertex names):
+## + edges from 5fec2b6 (vertex names):
 ##  [1] PHYHIP--TTR      PHYHIP--NFE2     PHYHIP--DYRK1A   PHYHIP--HNRNPA1 
 ##  [5] PHYHIP--COPS6    PHYHIP--SUPT5H   PHYHIP--SMARCC2  PHYHIP--EEF1A1  
 ##  [9] PHYHIP--TRIP6    PHYHIP--NDUFV3   PHYHIP--CA10     PHYHIP--ERG28   
@@ -1034,15 +1034,20 @@ In this chapter, I will introduce the main methods used in Network Medicine. We 
 \hypertarget{diseasemodule}{%
 \section{Disease Module}\label{diseasemodule}}
 
-In biological networks often genes involved in the same topological communities are also associated with similar biological processes \citep{Ahn2010}. It also reflects on how diseases localized themselves in the interaction; meaning that disease modules are highly localized in specific network neighborhoods \citep{Menche2015} (Figure \ref{fig:diseasemodule}).
+In biological networks often genes involved in the same topological communities are also associated with similar biological processes \citep{Ahn2010}. It also reflects on \emph{how diseases localized themselves in the interaction}; meaning that disease modules are highly localized in specific network neighborhoods \citep{Menche2015} (Figure \ref{fig:diseasemodule}).
 
-\textbf{Size of the largest connected component (LCC)}: this is the number of nodes that form a connected sub graph. Many properties of this quantity can Help us understand how a particular disease interacts with the interactome. It is important to note here that this measure is highly dependent on the completeness of an interactome. If a link between a protein and their counterparts is unknown -- therefore missing -- we might say that that particular node is not involved in a disease module (or that the LCC is not significant). We often calculate the significance of the LCC by selecting proteins in the interactome with similar degrees (aka degree preserving normalization).
+\hypertarget{largest-connected-component}{%
+\subsection{Largest connected component}\label{largest-connected-component}}
+
+The size of the largest connected component (LCC) is the number of nodes that form a connected subgraph (in our case, it is the number of proteins that are interconnected in the PPI). Many properties of this quantity allow us to understand how a particular disease interacts with the interactome. It is important to note here that this measure is highly dependent on the completeness of an interactome. If a link between a protein and their counterparts is unknown -- therefore missing -- we might say that that particular node is not involved in a disease module (or that the LCC is not significant).
 
 \begin{figure}
 \centering
 \includegraphics{NetMed_files/figure-latex/diseasemodule-1.pdf}
 \caption{\label{fig:diseasemodule}Disease-Module. A schematic of a PPI, in pink we see genes associated with a disease, forming a connected component of size 4.}
 \end{figure}
+
+However, just computing this number might not be informative, and it is expected a randomness. To calculate this randomness, we often calculate the significance of the LCC by selecting proteins in the interactome with similar degrees (aka degree preserving randomization).
 
 To calculate the significance of the LCC one can calculate its Z-Score or simply calculate the empirical probability under the curve from the empirical distribution. The Z-score is given by:
 
@@ -1118,9 +1123,9 @@ The idea now is: Gather the genes associated to our disease in the data, find th
 \end{Shaded}
 
 \begin{verbatim}
-## IGRAPH 537245a UN-- 846 2564 -- 
+## IGRAPH 5a15de8 UN-- 846 2564 -- 
 ## + attr: name (v/c)
-## + edges from 537245a (vertex names):
+## + edges from 5a15de8 (vertex names):
 ##  [1] PI4KA  --SP1    F2     --SP1    DNM1   --CTCF   GSK3B  --HSPA1A
 ##  [5] DNM1   --GRB2   SP1    --GRB2   MET    --GRB2   GSK3B  --MAPK14
 ##  [9] SP1    --MAPK14 CTCF   --MAPK14 GRB2   --MAPK14 MET    --ACTB  
@@ -1187,16 +1192,18 @@ The idea now is: Gather the genes associated to our disease in the data, find th
   \item
     Obesity;
   \item
-    hyperlipidemia;
+    Hyperlipidemia;
   \item
     Rheumatoid Arthritis.
   \end{itemize}
+\item
+  Now choose any disease you are interested in and do the same thing.
 \end{enumerate}
 
 \hypertarget{gene-overlap}{%
 \section{Gene Overlap}\label{gene-overlap}}
 
-A first intuitive way to measure the overlap of two gene sets is by calculating its Jaccard Index. The Jaccard index is calculated by taking the ratio of \textbf{Intersection over Union}. The Jaccard coefficient measures similarity between finite sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets:
+A first intuitive way to measure the overlap of two gene sets is by calculating its overlap, or its normalized overlap, the \textbf{Jaccard Index}. The Jaccard index is calculated by taking the ratio of \textbf{Intersection of two sets over Union of those sets}. The Jaccard coefficient measures similarity between finite sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets:
 
 \[
 J(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{|A \cap B|}{|A| + |B| - |A \cap B|}
@@ -1281,10 +1288,9 @@ Let's calculate the Jaccard Index for the 5 diseases we calculated its LCCs.
 \hypertarget{dissep}{%
 \section{Disease Separation}\label{dissep}}
 
-When looking into the Jaccard Index, we have a sense of how similar two diseases are based on genes that are \textbf{known} to be associated to both diseases.
-The main problem with this, is that we assume that all genes associated with a disease is known, and we do not take the topology of the underliying network into account.
+When looking into the Jaccard Index, we have a sense of how similar two diseases are based on genes that are \textbf{known} to be associated to both diseases. The main problem with this is that we assume that all genes associated with a disease is known, and we do not take the topology of the underlying network into account.
 
-The \textbf{separation} as a complementary quantity that is a bit less sensitive to the incompleteness of the PPI, we can measure the distances \(d_s\) of each disease associated node to all other disease associated nodes. Taking into account only the shortest distance among the result among them results in a distribution \(P(d_s)\). The mean value \(<d_s>\) can be interpreted as the diameter of the disease model. \textbf{Note} the diameter here is the average distance instead of the maximal distance.
+The \textbf{separation} is a complementary quantity that is a bit less sensitive to the incompleteness of the PPI, we can measure the distances \(d_s\) of each disease associated node to all other disease associated nodes. Taking into account only the shortest distance among the result among them results in a distribution \(P(d_s)\). The mean value \(<d_s>\) can be interpreted as the diameter of the disease model. \textbf{Note} the diameter here is the average distance instead of the maximal distance.
 
 The \textbf{concept of network localization} can be further generalized to exam the relationship between any different sets of nodes, for example, proteins associated with two different diseases.
 
@@ -1304,9 +1310,13 @@ S_{AB} = <d_{AB}> - \frac{<d_{AA}> + <d_BB>}{2}
 
 The size of the overlap is highly predictive of pathological and functional similarity, elevated co-expression, symptoms similarity and high comorbidity diseases.
 
+\begin{figure}
+\centering
 \includegraphics{NetMed_files/figure-latex/separation-1.pdf}
-The separation of diseases A and B is given by:
-\[
+\caption{\label{fig:separation}Disease-Separation. A schematic of a PPI, in pink we see genes associated with a disease A, and in green genes associated to disease B.}
+\end{figure}
+
+The separation of diseases A and B is given by: \[
 <d_{AA}> = 1.5
 \]
 
@@ -1316,8 +1326,7 @@ The separation of diseases A and B is given by:
 
 \[
 <d_{AB}> = 2.7
-\]
-\[
+\] \[
 S_{AB} = 2.7 - \frac{1.5+ 1.5}2 = 1.2
 \]
 
@@ -1364,8 +1373,8 @@ We can visualize the network separation of the diseases using a heatmap.
 
 \includegraphics{NetMed_files/figure-latex/unnamed-chunk-29-1.pdf}
 
-\hypertarget{exercise}{%
-\subsection{Exercise}\label{exercise}}
+\hypertarget{exercises-4}{%
+\section{Exercises}\label{exercises-4}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1390,7 +1399,7 @@ We can visualize the network separation of the diseases using a heatmap.
 
 In this Chapter we will learn how to calculate the proximity of a drug to a disease - and infer drug repurpusing (Session \ref{proximity})- based on network methodologies.
 
-There are different methods that are used for drug-repurpusing based on networks, such as the diffusion state distance (DSD) \citep{Cao2013}, that uses a graph diffusion property to derive a similarity metric for pairs of nodes that takes into account how similarly they affect the rest of the network and AI-based methods, where a heterogeneous graph \(G = (V,R)\) with N nodes \(v_i \in V\) representing distinct types of biomedical entities and labeled edges representing semantically distinct types of edges between the entities (i.e., protein-protein interactions, drug-target associations, disease-protein associations, and drug-disease indications) and are tasked to predict drugs for a particular disease \citep{Zitnik2018}. Due to the limited time, we will focus only on the proximity based method.
+There are different methods that are used for drug-repurpusing based on networks, such as the \textbf{diffusion state distance (DSD)} \citep{Cao2013}, that uses a \textbf{graph diffusion property} to derive a similarity metric for pairs of nodes that takes into account how similarly they affect the rest of the network; and \textbf{AI-based methods}, where a heterogeneous graph \(G = (V,R)\) with N nodes \(v_i \in V\) representing distinct types of biomedical entities and labeled edges representing semantically distinct types of edges between the entities (i.e., protein-protein interactions, drug-target associations, disease-protein associations, and drug-disease indications) and are tasked to predict drugs for a particular disease \citep{Zitnik2018}. Due to the limited time, we will focus only on the proximity based method.
 
 For this, we will be using the \texttt{R} package \texttt{NetSci} and to make the appropriate visualizations we will use \texttt{igraph}.
 
@@ -1403,7 +1412,7 @@ Given G, the set of Disease-Genes, T, the set of drug targets, and d(g,t), the s
 d(g,t)  = \frac{1}{|\left|T\right||}\sum_{t\in T}\underset{v\in V}\min{d(g,t)}
 \]
 
-A visual represenattion of the method can be seen in Figure \ref{fig:proximity}.
+A visual representation of the method can be seen in Figure \ref{fig:proximity}.
 
 The proximity for drug 2 to the disease is calculated by the average of the shortest path from its targets to the disease genes. The shortest path from N to D is 1, from F to D is 3, the average is 2.
 
@@ -1528,8 +1537,8 @@ Now, let's do the same, but also calculating the significance of the proximity.
 ##   |                                                                              |                                                                      |   0%  |                                                                              |==============                                                        |  20%  |                                                                              |============================                                          |  40%  |                                                                              |==========================================                            |  60%  |                                                                              |========================================================              |  80%  |                                                                              |======================================================================| 100%
 \end{verbatim}
 
-\hypertarget{exercises-4}{%
-\section{Exercises}\label{exercises-4}}
+\hypertarget{exercises-5}{%
+\section{Exercises}\label{exercises-5}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1543,7 +1552,7 @@ Now, let's do the same, but also calculating the significance of the proximity.
   \item
     Obesity;
   \item
-    hyperlipidemia;
+    Hyperlipidemia;
   \item
     Rheumatoid Arthritis.
   \end{itemize}

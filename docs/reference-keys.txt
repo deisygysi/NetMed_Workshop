@@ -30,14 +30,15 @@ understanding-a-drug-target-dataset
 exercises-2
 methods
 diseasemodule
+largest-connected-component
 example-in-real-data
 exercises-3
 gene-overlap
 dissep
 example-in-real-data-1
-exercise
+exercises-4
 method-for-drug-repurpusing
 proximity
 example-in-real-data-2
-exercises-4
+exercises-5
 summary

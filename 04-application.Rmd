@@ -2,7 +2,7 @@
 
 In this Chapter we will learn how to calculate the proximity of a drug to a disease - and infer drug repurpusing (Session \@ref(proximity))- based on network methodologies.
 
-There are different methods that are used for drug-repurpusing based on networks, such as the diffusion state distance (DSD) [@Cao2013], that uses a graph diffusion property to derive a similarity metric for pairs of nodes that takes into account how similarly they affect the rest of the network and AI-based methods, where a heterogeneous graph $G = (V,R)$ with N nodes $v_i \in V$ representing distinct types of biomedical entities and labeled edges representing semantically distinct types of edges between the entities (i.e., protein-protein interactions, drug-target associations, disease-protein associations, and drug-disease indications) and are tasked to predict drugs for a particular disease [@Zitnik2018]. Due to the limited time, we will focus only on the proximity based method.
+There are different methods that are used for drug-repurpusing based on networks, such as the **diffusion state distance (DSD)** [@Cao2013], that uses a **graph diffusion property** to derive a similarity metric for pairs of nodes that takes into account how similarly they affect the rest of the network; and **AI-based methods**, where a heterogeneous graph $G = (V,R)$ with N nodes $v_i \in V$ representing distinct types of biomedical entities and labeled edges representing semantically distinct types of edges between the entities (i.e., protein-protein interactions, drug-target associations, disease-protein associations, and drug-disease indications) and are tasked to predict drugs for a particular disease [@Zitnik2018]. Due to the limited time, we will focus only on the proximity based method.
 
 For this, we will be using the `R` package `NetSci` and to make the appropriate visualizations we will use `igraph`.
 
@@ -14,7 +14,7 @@ $$
 d(g,t)  = \frac{1}{|\left|T\right||}\sum_{t\in T}\underset{v\in V}\min{d(g,t)}
 $$
 
-A visual represenattion of the method can be seen in Figure \@ref(fig:proximity).
+A visual representation of the method can be seen in Figure \@ref(fig:proximity).
 
 The proximity for drug 2 to the disease is calculated by the average of the shortest path from its targets to the disease genes. The shortest path from N to D is 1, from F to D is 3, the average is 2.
 
@@ -155,11 +155,12 @@ proximity_significance = avr_proximity_multiple_target_sets(
 ```
 
 ## Exercises
-1. Test the same drugs for all the 5 other diseases we are interested in. How those values compare?
+
+1.  Test the same drugs for all the 5 other diseases we are interested in. How those values compare?
 
     -   Autistic Disorder;
     -   Obesity;
-    -   hyperlipidemia;
+    -   Hyperlipidemia;
     -   Rheumatoid Arthritis.
-    
-2. Choose one disease and visualize the disease module along with each of the drugs we tested. 
+
+2.  Choose one disease and visualize the disease module along with each of the drugs we tested.

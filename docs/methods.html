@@ -169,21 +169,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="methods.html"><a href="methods.html#diseasemodule"><i class="fa fa-check"></i><b>3.1</b> Disease Module</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="methods.html"><a href="methods.html#example-in-real-data"><i class="fa fa-check"></i><b>3.1.1</b> Example in real data</a></li>
-<li class="chapter" data-level="3.1.2" data-path="methods.html"><a href="methods.html#exercises-3"><i class="fa fa-check"></i><b>3.1.2</b> Exercises</a></li>
+<li class="chapter" data-level="3.1.1" data-path="methods.html"><a href="methods.html#largest-connected-component"><i class="fa fa-check"></i><b>3.1.1</b> Largest connected component</a></li>
+<li class="chapter" data-level="3.1.2" data-path="methods.html"><a href="methods.html#example-in-real-data"><i class="fa fa-check"></i><b>3.1.2</b> Example in real data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="methods.html"><a href="methods.html#exercises-3"><i class="fa fa-check"></i><b>3.1.3</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="methods.html"><a href="methods.html#gene-overlap"><i class="fa fa-check"></i><b>3.2</b> Gene Overlap</a></li>
 <li class="chapter" data-level="3.3" data-path="methods.html"><a href="methods.html#dissep"><i class="fa fa-check"></i><b>3.3</b> Disease Separation</a>
 <ul>
 <li class="chapter" data-level="3.3.1" data-path="methods.html"><a href="methods.html#example-in-real-data-1"><i class="fa fa-check"></i><b>3.3.1</b> Example in real data</a></li>
-<li class="chapter" data-level="3.3.2" data-path="methods.html"><a href="methods.html#exercise"><i class="fa fa-check"></i><b>3.3.2</b> Exercise</a></li>
 </ul></li>
+<li class="chapter" data-level="3.4" data-path="methods.html"><a href="methods.html#exercises-4"><i class="fa fa-check"></i><b>3.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="method-for-drug-repurpusing.html"><a href="method-for-drug-repurpusing.html"><i class="fa fa-check"></i><b>4</b> Method for drug-repurpusing</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="method-for-drug-repurpusing.html"><a href="method-for-drug-repurpusing.html#proximity"><i class="fa fa-check"></i><b>4.1</b> Proximity</a></li>
 <li class="chapter" data-level="4.2" data-path="method-for-drug-repurpusing.html"><a href="method-for-drug-repurpusing.html#example-in-real-data-2"><i class="fa fa-check"></i><b>4.2</b> Example in real data</a></li>
-<li class="chapter" data-level="4.3" data-path="method-for-drug-repurpusing.html"><a href="method-for-drug-repurpusing.html#exercises-4"><i class="fa fa-check"></i><b>4.3</b> Exercises</a></li>
+<li class="chapter" data-level="4.3" data-path="method-for-drug-repurpusing.html"><a href="method-for-drug-repurpusing.html#exercises-5"><i class="fa fa-check"></i><b>4.3</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>5</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -212,20 +213,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this chapter, I will introduce the main methods used in Network Medicine. We will start by understanding what a Disease Module is (Session <a href="methods.html#diseasemodule">3.1</a>), how can we calculate its significance and also understand its importance. We next will explore the disease separation (Session <a href="methods.html#dissep">3.3</a>), how to calculate, make interpretations.</p>
 <div id="diseasemodule" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Disease Module</h2>
-<p>In biological networks often genes involved in the same topological communities are also associated with similar biological processes <span class="citation">(<a href="references.html#ref-Ahn2010" role="doc-biblioref">Ahn, Bagrow, and Lehmann 2010</a>)</span>. It also reflects on how diseases localized themselves in the interaction; meaning that disease modules are highly localized in specific network neighborhoods <span class="citation">(<a href="references.html#ref-Menche2015" role="doc-biblioref">Menche et al. 2015</a>)</span> (Figure <a href="methods.html#fig:diseasemodule">3.1</a>).</p>
-<p><strong>Size of the largest connected component (LCC)</strong>: this is the number of nodes that form a connected sub graph. Many properties of this quantity can Help us understand how a particular disease interacts with the interactome. It is important to note here that this measure is highly dependent on the completeness of an interactome. If a link between a protein and their counterparts is unknown – therefore missing – we might say that that particular node is not involved in a disease module (or that the LCC is not significant). We often calculate the significance of the LCC by selecting proteins in the interactome with similar degrees (aka degree preserving normalization).</p>
+<p>In biological networks often genes involved in the same topological communities are also associated with similar biological processes <span class="citation">(<a href="references.html#ref-Ahn2010" role="doc-biblioref">Ahn, Bagrow, and Lehmann 2010</a>)</span>. It also reflects on <em>how diseases localized themselves in the interaction</em>; meaning that disease modules are highly localized in specific network neighborhoods <span class="citation">(<a href="references.html#ref-Menche2015" role="doc-biblioref">Menche et al. 2015</a>)</span> (Figure <a href="methods.html#fig:diseasemodule">3.1</a>).</p>
+<div id="largest-connected-component" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Largest connected component</h3>
+<p>The size of the largest connected component (LCC) is the number of nodes that form a connected subgraph (in our case, it is the number of proteins that are interconnected in the PPI). Many properties of this quantity allow us to understand how a particular disease interacts with the interactome. It is important to note here that this measure is highly dependent on the completeness of an interactome. If a link between a protein and their counterparts is unknown – therefore missing – we might say that that particular node is not involved in a disease module (or that the LCC is not significant).</p>
 <div class="figure"><span id="fig:diseasemodule"></span>
 <img src="NetMed_files/figure-html/diseasemodule-1.png" alt="Disease-Module. A schematic of a PPI, in pink we see genes associated with a disease, forming a connected component of size 4." width="672" />
 <p class="caption">
 Figure 3.1: Disease-Module. A schematic of a PPI, in pink we see genes associated with a disease, forming a connected component of size 4.
 </p>
 </div>
+<p>However, just computing this number might not be informative, and it is expected a randomness. To calculate this randomness, we often calculate the significance of the LCC by selecting proteins in the interactome with similar degrees (aka degree preserving randomization).</p>
 <p>To calculate the significance of the LCC one can calculate its Z-Score or simply calculate the empirical probability under the curve from the empirical distribution. The Z-score is given by:</p>
 <p><span class="math display">\[
 Z-Score_{LCC} = \frac{LCC - \mu_{LCC}}{\sigma_{LCC}}
 \]</span></p>
-<div id="example-in-real-data" class="section level3" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Example in real data</h3>
+</div>
+<div id="example-in-real-data" class="section level3" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Example in real data</h3>
 <p>Our first task now, is to understand if some diseases, from our <code>Cleaned_GDA</code> are able to form a Disease-Module. Let’s start doing it for Schizophrenia and later we will add some more diseases.</p>
 <p>The idea now is: Gather the genes associated to our disease in the data, find them in the PPI, check if they form a connected component, check the significance of the component and visualize the Disease-Module.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="methods.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, let&#39;s attach all packages we will need.</span></span>
@@ -259,9 +264,9 @@ Z-Score_{LCC} = \frac{LCC - \mu_{LCC}}{\sigma_{LCC}}
 <span id="cb34-5"><a href="methods.html#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Histogram_LCC</span>(LCC_scz)</span></code></pre></div>
 <p><img src="NetMed_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="methods.html#cb35-1" aria-hidden="true" tabindex="-1"></a>gScz </span></code></pre></div>
-<pre><code>## IGRAPH 055988f UN-- 846 2564 -- 
+<pre><code>## IGRAPH a00367b UN-- 846 2564 -- 
 ## + attr: name (v/c)
-## + edges from 055988f (vertex names):
+## + edges from a00367b (vertex names):
 ##  [1] PI4KA  --SP1    F2     --SP1    DNM1   --CTCF   GSK3B  --HSPA1A
 ##  [5] DNM1   --GRB2   SP1    --GRB2   MET    --GRB2   GSK3B  --MAPK14
 ##  [9] SP1    --MAPK14 CTCF   --MAPK14 GRB2   --MAPK14 MET    --ACTB  
@@ -300,22 +305,23 @@ Z-Score_{LCC} = \frac{LCC - \mu_{LCC}}{\sigma_{LCC}}
 <span id="cb38-14"><a href="methods.html#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gScz)</span></code></pre></div>
 <p><img src="NetMed_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
-<div id="exercises-3" class="section level3" number="3.1.2">
-<h3><span class="header-section-number">3.1.2</span> Exercises</h3>
+<div id="exercises-3" class="section level3" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> Exercises</h3>
 <ol style="list-style-type: decimal">
 <li><p>Calculate the LCC, and visualize the modules for the following diseases:</p>
 <ul>
 <li>Autistic Disorder;</li>
 <li>Obesity;</li>
-<li>hyperlipidemia;</li>
+<li>Hyperlipidemia;</li>
 <li>Rheumatoid Arthritis.</li>
 </ul></li>
+<li><p>Now choose any disease you are interested in and do the same thing.</p></li>
 </ol>
 </div>
 </div>
 <div id="gene-overlap" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Gene Overlap</h2>
-<p>A first intuitive way to measure the overlap of two gene sets is by calculating its Jaccard Index. The Jaccard index is calculated by taking the ratio of <strong>Intersection over Union</strong>. The Jaccard coefficient measures similarity between finite sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets:</p>
+<p>A first intuitive way to measure the overlap of two gene sets is by calculating its overlap, or its normalized overlap, the <strong>Jaccard Index</strong>. The Jaccard index is calculated by taking the ratio of <strong>Intersection of two sets over Union of those sets</strong>. The Jaccard coefficient measures similarity between finite sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets:</p>
 <p><span class="math display">\[
 J(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{|A \cap B|}{|A| + |B| - |A \cap B|}
 \]</span></p>
@@ -378,9 +384,8 @@ J(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{|A \cap B|}{|A| + |B| - |A \cap B
 </div>
 <div id="dissep" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Disease Separation</h2>
-<p>When looking into the Jaccard Index, we have a sense of how similar two diseases are based on genes that are <strong>known</strong> to be associated to both diseases.
-The main problem with this, is that we assume that all genes associated with a disease is known, and we do not take the topology of the underliying network into account.</p>
-<p>The <strong>separation</strong> as a complementary quantity that is a bit less sensitive to the incompleteness of the PPI, we can measure the distances <span class="math inline">\(d_s\)</span> of each disease associated node to all other disease associated nodes. Taking into account only the shortest distance among the result among them results in a distribution <span class="math inline">\(P(d_s)\)</span>. The mean value <span class="math inline">\(&lt;d_s&gt;\)</span> can be interpreted as the diameter of the disease model. <strong>Note</strong> the diameter here is the average distance instead of the maximal distance.</p>
+<p>When looking into the Jaccard Index, we have a sense of how similar two diseases are based on genes that are <strong>known</strong> to be associated to both diseases. The main problem with this is that we assume that all genes associated with a disease is known, and we do not take the topology of the underlying network into account.</p>
+<p>The <strong>separation</strong> is a complementary quantity that is a bit less sensitive to the incompleteness of the PPI, we can measure the distances <span class="math inline">\(d_s\)</span> of each disease associated node to all other disease associated nodes. Taking into account only the shortest distance among the result among them results in a distribution <span class="math inline">\(P(d_s)\)</span>. The mean value <span class="math inline">\(&lt;d_s&gt;\)</span> can be interpreted as the diameter of the disease model. <strong>Note</strong> the diameter here is the average distance instead of the maximal distance.</p>
 <p>The <strong>concept of network localization</strong> can be further generalized to exam the relationship between any different sets of nodes, for example, proteins associated with two different diseases.</p>
 <p>The network serves as a <strong>map</strong>, where diseases are represented by different neighborhoods.</p>
 <p>How close and degree of overlap of two network neighborhoods can be found to be highly predictive of the pathological similarity of those diseases <span class="citation">(<a href="references.html#ref-Menche2015" role="doc-biblioref">Menche et al. 2015</a>)</span> (Figure <a href="methods.html#fig:separation">3.2</a>).</p>
@@ -397,8 +402,7 @@ S_{AB} = &lt;d_{AB}&gt; - \frac{&lt;d_{AA}&gt; + &lt;d_BB&gt;}{2}
 Figure 3.2: Disease-Separation. A schematic of a PPI, in pink we see genes associated with a disease A, and in green genes associated to disease B.
 </p>
 </div>
-<p>The separation of diseases A and B is given by:
-<span class="math display">\[
+<p>The separation of diseases A and B is given by: <span class="math display">\[
 &lt;d_{AA}&gt; = 1.5
 \]</span></p>
 <p><span class="math display">\[
@@ -406,8 +410,7 @@ Figure 3.2: Disease-Separation. A schematic of a PPI, in pink we see genes assoc
 \]</span></p>
 <p><span class="math display">\[
 &lt;d_{AB}&gt; = 2.7
-\]</span>
-<span class="math display">\[
+\]</span> <span class="math display">\[
 S_{AB} = 2.7 - \frac{1.5+ 1.5}2 = 1.2
 \]</span></p>
 <div id="example-in-real-data-1" class="section level3" number="3.3.1">
@@ -448,8 +451,9 @@ S_{AB} = 2.7 - \frac{1.5+ 1.5}2 = 1.2
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="methods.html#cb52-1" aria-hidden="true" tabindex="-1"></a>Sep_ex2 <span class="sc">%&gt;%</span> <span class="fu">heatmap</span>(., <span class="at">symm =</span> T)</span></code></pre></div>
 <p><img src="NetMed_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 </div>
-<div id="exercise" class="section level3" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> Exercise</h3>
+</div>
+<div id="exercises-4" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Exercises</h2>
 <ol style="list-style-type: decimal">
 <li><p>If we go back to our PPI, can we identify that the modules are indeed close or separated? Plot the network for those diseases.</p></li>
 <li><p>Calculate the <strong>Jaccard Index</strong> and the <strong>Separation</strong> for the following diseases:</p>
@@ -460,7 +464,6 @@ S_{AB} = 2.7 - \frac{1.5+ 1.5}2 = 1.2
 <li><p>Optional: Plot the PPI with genes selected in <code>GDA_Interest</code> where each node is a piechart representing which diseases are associated to that particular gene. Tip: Check <code>vertex.shape.pie</code> for help.</p></li>
 </ol>
 
-</div>
 </div>
 </div>
             </section>
