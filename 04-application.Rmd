@@ -1,0 +1,165 @@
+# Method for drug-repurpusing
+
+In this Chapter we will learn how to calculate the proximity of a drug to a disease - and infer drug repurpusing (Session \@ref(proximity))- based on network methodologies.
+
+There are different methods that are used for drug-repurpusing based on networks, such as the diffusion state distance (DSD) [@Cao2013], that uses a graph diffusion property to derive a similarity metric for pairs of nodes that takes into account how similarly they affect the rest of the network and AI-based methods, where a heterogeneous graph $G = (V,R)$ with N nodes $v_i \in V$ representing distinct types of biomedical entities and labeled edges representing semantically distinct types of edges between the entities (i.e., protein-protein interactions, drug-target associations, disease-protein associations, and drug-disease indications) and are tasked to predict drugs for a particular disease [@Zitnik2018]. Due to the limited time, we will focus only on the proximity based method.
+
+For this, we will be using the `R` package `NetSci` and to make the appropriate visualizations we will use `igraph`.
+
+## Proximity
+
+Given G, the set of Disease-Genes, T, the set of drug targets, and d(g,t), the shortest path length between nodes $g \in G$ and $t \in T$ in the network, the proximity can be defined as [@Guney2016]:
+
+$$ 
+d(g,t)  = \frac{1}{|\left|T\right||}\sum_{t\in T}\underset{v\in V}\min{d(g,t)}
+$$
+
+A visual represenattion of the method can be seen in Figure \@ref(fig:proximity).
+
+The proximity for drug 2 to the disease is calculated by the average of the shortest path from its targets to the disease genes. The shortest path from N to D is 1, from F to D is 3, the average is 2.
+
+For Drug 1 we have: $$d(Drug_1, disease) = \frac{2 + 2 + 1}{3} = 1.66$$
+
+```{r, results='hide', echo=FALSE}
+require(igraph)
+mytriangle <- function(coords, v=NULL, params) {
+  vertex.color <- params("vertex", "color")
+  if (length(vertex.color) != 1 && !is.null(v)) {
+    vertex.color <- vertex.color[v]
+  }
+  vertex.size <- 1/200 * params("vertex", "size")
+  if (length(vertex.size) != 1 && !is.null(v)) {
+    vertex.size <- vertex.size[v]
+  }
+  
+  symbols(x=coords[,1], y=coords[,2], bg=vertex.color,
+          stars=cbind(vertex.size, vertex.size, vertex.size),
+          add=TRUE, inches=FALSE)
+}
+# clips as a circle
+igraph::add_shape("triangle", clip=shapes("circle")$clip,
+                  plot=mytriangle)
+```
+
+```{r proximity,fig.cap='Drug-Target & Disease-Module Proximity. Triangles represents Disease Associated Genes, while circles represent non-associated genes. In dark purple, we see the drugs and light purple, its targets.', results='hide', echo=FALSE}
+set.seed(124)
+N = 20
+DTs = c("M", "C", "H", "F", "N")
+A = data.frame(source = sample(LETTERS[1:5], size = N, replace = T), 
+               target = sample(LETTERS[1:15], replace = T, size = N), type = "PPI")
+Drug = data.frame(source = c('Drug 1', 'Drug 1','Drug 1','Drug 2', 'Drug 2'), 
+                  target = DTs, type = "DT" )
+A = unique(A)
+A %<>% filter(source != target)
+g = igraph::graph_from_data_frame(rbind(A, Drug), directed = F) 
+
+
+V(g)$color = "#FFCDB2"
+V(g)$size = (degree(g)+1)*5
+V(g)$label.color = '#B5838D'
+V(g)$color = ifelse(V(g)$name %in% DTs, '#B65064', V(g)$color )
+
+V(g)$color = ifelse(V(g)$name %in% c("Drug 1", "Drug 2"), '#574474', V(g)$color )
+
+DG = c("D", "B", "K")
+V(g)$shape = ifelse(V(g)$name %in% DG, "triangle", "circle")
+
+E(g)$color = '#E5989B'
+E(g)$color = ifelse(E(g)$type == "DT", "gray70", E(g)$color)
+E(g)$color[c(4,5,9, 8, 16, 18)]<- "#e63946"
+E(g)$width = 0.6
+E(g)$width[c(4,5,9, 8, 16, 18)]<- 1.5
+E(g)$curved = 0.1
+V(g)$frame.color = V(g)$color
+
+plot(g)
+```
+
+Similarly to the LCC (\@ref(diseasemodule)) it is important to calculate a measure of randomness associate to the proximity. In the same sense, it is important that the nodes being randomized, they are not simply randomly selected from the pool of proteins in the PPI, but rather selected from matching degree proteins. To calculate the significance of the proximity one can calculate its Z-Score or simply calculate the empirical probability under the curve from the empirical distribution. Similartly as before, the Z-score is given by:
+
+$$
+Z-Score_{d(g,t)} = \frac{d(g,t) - \mu_{d(g,t)}}{\sigma_{d(g,t)}}
+$$
+
+## Example in real data
+
+Let's try it to identify drugs that could work for our disease sets. Let's focus on hyperlipidemia and focus on 5 drugs at first.
+
+-   Asenapine,
+-   Phentermine,
+-   Simvastatin,
+-   Pizotifen,
+-   Eprotirome.
+
+```{r}
+hyperlipidemia_genes = Cleaned_GDA %>% filter(diseaseName == 'hyperlipidemia') %>% pull(geneSymbol) %>% unique()
+
+Asenapine_t = DT %>% 
+  filter(Name == 'Asenapine') %>%
+  pull(Gene_Target)
+
+Asenapine_t
+
+proximity_average(gPPI, 
+                  source = hyperlipidemia_genes, 
+                  targets = Asenapine_t)
+```
+
+Let's do it in a loop:
+
+```{r}
+drugs = c("Asenapine", 
+          'Phentermine', 
+          'Simvastatin', 
+          'Pizotifen',
+          'Eprotirome')
+
+p = list()
+for(i in 1:length(drugs)){
+  d = drugs[i]
+  Drug_targets = DT %>% 
+    filter(Name %in% d) %>%
+    pull(Gene_Target)
+  
+  prox = proximity_average(gPPI, 
+                           source = hyperlipidemia_genes, 
+                           targets = Drug_targets)
+  
+  p[[i]] = data.frame(prox = prox, 
+                      ntargets = length(Drug_targets), 
+                      drug = d)
+}
+
+p %<>% bind_rows()
+```
+
+Now, let's do the same, but also calculating the significance of the proximity.
+
+```{r}
+Drug_Target = DT %>% 
+  filter(Name %in% drugs) %>% 
+  select(Name, Gene_Target) %>% 
+  unique()
+
+names(Drug_Target) = c('ID', "Target" )
+
+proximity_significance = avr_proximity_multiple_target_sets(
+  set = drugs,
+  G = gPPI,
+  ST = Drug_Target,
+  source = hyperlipidemia_genes,
+  N = 10,
+  bins = 100,
+  min_per_bin = 20
+)
+```
+
+## Exercises
+1. Test the same drugs for all the 5 other diseases we are interested in. How those values compare?
+
+    -   Autistic Disorder;
+    -   Obesity;
+    -   hyperlipidemia;
+    -   Rheumatoid Arthritis.
+    
+2. Choose one disease and visualize the disease module along with each of the drugs we tested. 

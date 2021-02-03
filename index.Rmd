@@ -1,0 +1,21 @@
+--- 
+title: "Network Medicine"
+author: "Deisy Morselli Gysi"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "Workshop in Advanced Bioinformatics: Network Medicine."
+---
+
+# Workshop on Network Medicine
+
+Network medicine (**NetMed**) is a field of Network Science that combines Systems Biology to understand its impact on medicine, and it is mostly focused on network topology. In NetMed we often use biological networks to represent the topological space and can be used to identify disease modules, their relationship to other diseases, drug repurpusing, and drug combinations. The biological networks often used for it are based on protein-protein interactions (PPI), Gene-Disease-Associations (GDA), and Drug-Targets.
+
+In this workshop, we will learn:
+
+-   how to identify disease modules
+-   how to predict disease comorbidities
+-   how to repurpuse drugs using a network approach.

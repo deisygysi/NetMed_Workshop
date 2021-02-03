@@ -1,0 +1,3 @@
+# Summary
+
+In this course we learned how to identify disease modules, disease separation and how to repurpuse drugs using a network medicine approach. 

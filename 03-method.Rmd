@@ -1,0 +1,290 @@
+# Methods fo Disease Module Identification and Disease Similarity {#methods}
+
+In this chapter, I will introduce the main methods used in Network Medicine. We will start by understanding what a Disease Module is (Session \@ref(diseasemodule)), how can we calculate its significance and also understand its importance. We next will explore the disease separation (Session \@ref(dissep)), how to calculate, make interpretations.
+
+## Disease Module {#diseasemodule}
+
+In biological networks often genes involved in the same topological communities are also associated with similar biological processes [@Ahn2010]. It also reflects on how diseases localized themselves in the interaction; meaning that disease modules are highly localized in specific network neighborhoods [@Menche2015] (Figure \@ref(fig:diseasemodule)).
+
+**Size of the largest connected component (LCC)**: this is the number of nodes that form a connected sub graph. Many properties of this quantity can Help us understand how a particular disease interacts with the interactome. It is important to note here that this measure is highly dependent on the completeness of an interactome. If a link between a protein and their counterparts is unknown -- therefore missing -- we might say that that particular node is not involved in a disease module (or that the LCC is not significant). We often calculate the significance of the LCC by selecting proteins in the interactome with similar degrees (aka degree preserving normalization).
+
+
+```{r diseasemodule,fig.cap='Disease-Module. A schematic of a PPI, in pink we see genes associated with a disease, forming a connected component of size 4.', results='hide', echo=FALSE, warning=FALSE, message=FALSE}
+
+require(NetSci)
+require(magrittr)
+require(dplyr)
+require(igraph)
+
+set.seed(124)
+N = 25
+DM = c("C",  "F", "N", "B", "K")
+A = data.frame(source = sample(LETTERS[1:5], size = N, replace = T), 
+               target = sample(LETTERS[1:15], replace = T, size = N), type = "PPI")
+A$type = ifelse(A$source %in% DM & A$target %in% DM, "DM", "no")
+A = unique(A)
+A %<>% filter(source != target)
+g = igraph::graph_from_data_frame(A, directed = F) 
+
+
+V(g)$color = "#FFCDB2"
+V(g)$size = (degree(g)+1)*5
+V(g)$label.color = '#B5838D'
+V(g)$color = ifelse(V(g)$name %in% DM, '#B65064', V(g)$color )
+
+E(g)$color = '#E5989B'
+E(g)$color = ifelse(E(g)$type == "DM", E(g)$color, "gray70")
+E(g)$width = 0.6
+E(g)$width = ifelse(E(g)$type == "DM", 0.6, E(g)$width)
+E(g)$curved = 0.1
+V(g)$frame.color = V(g)$color
+
+plot(g)
+```
+
+To calculate the significance of the LCC one can calculate its Z-Score or simply calculate the empirical probability under the curve from the empirical distribution. The Z-score is given by:
+
+$$
+Z-Score_{LCC} = \frac{LCC - \mu_{LCC}}{\sigma_{LCC}}
+$$
+
+### Example in real data
+
+Our first task now, is to understand if some diseases, from our `Cleaned_GDA` are able to form a Disease-Module. Let's start doing it for Schizophrenia and later we will add some more diseases.
+
+The idea now is: Gather the genes associated to our disease in the data, find them in the PPI, check if they form a connected component, check the significance of the component and visualize the Disease-Module. 
+
+```{r, echo=TRUE, results='hide', warning=FALSE, message=FALSE}
+# First, let's attach all packages we will need.
+require(NetSci)
+require(magrittr)
+require(dplyr)
+require(igraph)
+```
+
+
+```{r, results='hide'}
+#First, let's select genes that are associated with Schizophrenia.
+
+SCZ_Genes = 
+  Cleaned_GDA %>% 
+  filter(diseaseName %in% 'schizophrenia') %>%
+  pull(geneSymbol) %>% 
+  unique()
+
+# Next, let's see how they are localized in the PPI.
+# Fist, we have to make sure all genes are in the PPI.
+# Later, we calculate the LCC.
+# And lastly, let's visualize it.
+
+SCZ_PPI = SCZ_Genes[SCZ_Genes %in% V(gPPI)$name]
+gScz = gPPI %>% induced.subgraph(., SCZ_PPI)
+
+components(gScz)
+```
+
+```{r}
+components(gScz)$csize %>% max
+```
+
+```{r}
+# The size of the LCC is 683. But... How does it compare to a random selection genes?
+
+LCC_scz = LCC_Significance(N = 10, Targets = SCZ_PPI,
+                           G = gPPI)
+Histogram_LCC(LCC_scz)
+```
+
+```{r}
+gScz 
+
+V(gScz)$size = degree(gScz) %>% 
+  CoDiNA::normalize()
+V(gScz)$size = (V(gScz)$size + 0.1)*5
+V(gScz)$color = '#83c5be'
+V(gScz)$frame.color = '#006d77'
+V(gScz)$label = ifelse(V(gScz)$size  > 4, V(gScz)$name, NA )
+V(gScz)$label.color = '#e29578'
+
+E(gScz)$width = edge.betweenness(gScz, directed = F) %>% CoDiNA::normalize()
+E(gScz)$width = E(gScz)$width + 0.01
+E(gScz)$weight = E(gScz)$width
+plot(gScz)
+```
+
+```{r}
+gScz %<>% delete.vertices(., degree(.) == 0)
+
+V(gScz)$size = degree(gScz) %>% 
+  CoDiNA::normalize()
+V(gScz)$size = (V(gScz)$size + 0.1)*5
+V(gScz)$color = '#83c5be'
+V(gScz)$frame.color = '#006d77'
+V(gScz)$label = ifelse(V(gScz)$size  > 4, V(gScz)$name, NA )
+V(gScz)$label.color = '#e29578'
+
+E(gScz)$width = edge.betweenness(gScz, directed = F) %>% CoDiNA::normalize()
+E(gScz)$width = E(gScz)$width + 0.01
+E(gScz)$weight = E(gScz)$width
+plot(gScz)
+```
+
+### Exercises
+
+1.  Calculate the LCC, and visualize the modules for the following diseases:
+
+    -   Autistic Disorder;
+    -   Obesity;
+    -   hyperlipidemia;
+    -   Rheumatoid Arthritis.
+
+## Gene Overlap
+
+A first intuitive way to measure the overlap of two gene sets is by calculating its Jaccard Index. The Jaccard index is calculated by taking the ratio of **Intersection over Union**. The Jaccard coefficient measures similarity between finite sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets:
+
+$$
+J(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{|A \cap B|}{|A| + |B| - |A \cap B|}
+$$
+
+Note that by design, $0 \leq J(A,B) \leq 1$. If A and B are both empty, define $J(A,B) = 1$
+
+Let's calculate the Jaccard Index for the 5 diseases we calculated its LCCs.
+
+```{r}
+Dis_Ex1 = c('schizophrenia',
+            "autistic disorder", 
+            'obesity',
+            'hyperlipidemia',
+            'rheumatoid arthritis')
+GDA_Interest = Cleaned_GDA %>% 
+  filter(diseaseName %in% Dis_Ex1) %>%
+  select(diseaseName, geneSymbol) %>%
+  unique()
+
+Jaccard_Ex2 = Jaccard(GDA_Interest)
+
+Jaccard_Ex2
+```
+
+```{r}
+# Let's visualize the Venn diagram (Euler Diagram) of those overlaps. 
+
+require(eulerr)
+Euler_List = list (
+  SCZ = GDA_Interest$geneSymbol[GDA_Interest$diseaseName == 'schizophrenia'],
+                   
+  ASD = GDA_Interest$geneSymbol[GDA_Interest$diseaseName == 'autistic disorder'],
+                   
+  OB = GDA_Interest$geneSymbol[GDA_Interest$diseaseName == 'obesity'],
+                   
+  HD = GDA_Interest$geneSymbol[GDA_Interest$diseaseName == 'hyperlipidemia'],
+                   
+  RA = GDA_Interest$geneSymbol[GDA_Interest$diseaseName == 'rheumatoid arthritis'])
+
+EULER = euler(Euler_List)
+plot(EULER, quantities = TRUE)
+```
+
+## Disease Separation {#dissep}
+
+When looking into the Jaccard Index, we have a sense of how similar two diseases are based on genes that are **known** to be associated to both diseases.
+The main problem with this, is that we assume that all genes associated with a disease is known, and we do not take the topology of the underliying network into account.
+
+The **separation** as a complementary quantity that is a bit less sensitive to the incompleteness of the PPI, we can measure the distances $d_s$ of each disease associated node to all other disease associated nodes. Taking into account only the shortest distance among the result among them results in a distribution $P(d_s)$. The mean value $<d_s>$ can be interpreted as the diameter of the disease model. **Note** the diameter here is the average distance instead of the maximal distance.
+
+The **concept of network localization** can be further generalized to exam the relationship between any different sets of nodes, for example, proteins associated with two different diseases.
+
+The network serves as a **map**, where diseases are represented by different neighborhoods.
+
+How close and degree of overlap of two network neighborhoods can be found to be highly predictive of the pathological similarity of those diseases [@Menche2015] (Figure  \@ref(fig:separation)).
+
+To quantify the distance of two sets of nodes A and B we first compute the distribution $P(d_{AB})$ of all shortest distances $d_{AB}$ between nodes A and B and the respective mean distance $<d_{AB}>$.
+
+The network based separation $S_{AB}$ can be obtained by comparing the mean shortest distance **within** the respective node sets and the mean shortest distance **between** them.
+
+$$
+S_{AB} = <d_{AB}> - \frac{<d_{AA}> + <d_BB>}{2}
+$$
+
+**Note**: negative $S_{AB}$ indicates topological overlap of the two node sets, while a positive $S_{AB}$ indicates topological separation of the two node sets.
+
+The size of the overlap is highly predictive of pathological and functional similarity, elevated co-expression, symptoms similarity and high comorbidity diseases.
+
+```{r separation,fig.cap='Disease-Separation. A schematic of a PPI, in pink we see genes associated with a disease A, and in green genes associated to disease B.', results='hide', echo=FALSE}
+
+set.seed(124)
+N = 35
+DM = c("C",  "K", "N", "E", "O")
+DM2 = c("A",  "G", "L", "M")
+A = data.frame(source = sample(LETTERS[1:6], size = N, replace = T), 
+               target = sample(LETTERS[1:15], replace = T, size = N), type = "PPI")
+A$type = ifelse(A$source %in% DM & A$target %in% DM, "DM1", "no")
+A$type = ifelse(A$source %in% DM2 & A$target %in% DM2, "DM2", A$type)
+A = unique(A)
+A %<>% filter(source != target)
+g = igraph::graph_from_data_frame(A, directed = F)  %>% 
+  simplify(remove.multiple = F)
+
+
+V(g)$color = "#FFCDB2"
+V(g)$size = (degree(g)+1)*5
+V(g)$label.color = '#B5838D'
+V(g)$color = ifelse(V(g)$name %in% DM, '#B65064', V(g)$color )
+V(g)$color = ifelse(V(g)$name %in% DM2, '#74c69d', V(g)$color )
+V(g)$label.color = ifelse(V(g)$name %in% DM, 'gray90', V(g)$label.color )
+V(g)$label.color = ifelse(V(g)$name %in% DM2, '#2d6a4f', V(g)$label.color )
+
+E(g)$color = 'gray70'
+E(g)$color = ifelse(E(g)$type == "DM1", "#FFB4A2", E(g)$color)
+E(g)$color = ifelse(E(g)$type == "DM2", "#95d5b2", E(g)$color)
+
+E(g)$width = 0.6
+E(g)$width = ifelse(E(g)$type == "DM1" |E(g)$type == "DM2" , 1.5, E(g)$width)
+E(g)$curved = 0.1
+V(g)$frame.color = V(g)$color
+
+plot(g)
+```
+The separation of diseases A and B is given by:
+$$
+<d_{AA}> = 1.5
+$$
+
+$$
+<d_{BB}> = 1.5
+$$
+
+$$
+<d_{AB}> = 2.7
+$$
+$$
+S_{AB} = 2.7 - \frac{1.5+ 1.5}2 = 1.2
+$$
+
+### Example in real data
+
+```{r}
+sab = separation(gPPI, GDA_Interest)
+
+Sep_ex2 = sab$Sab %>% as.matrix()
+
+Sep_ex2[lower.tri(Sep_ex2)] = t(Sep_ex2)[lower.tri(Sep_ex2)]
+```
+
+We can visualize the network separation of the diseases using a heatmap.
+
+```{r, }
+Sep_ex2 %>% heatmap(., symm = T)
+```
+
+### Exercise
+
+1.  If we go back to our PPI, can we identify that the modules are indeed close or separated? Plot the network for those diseases.
+
+2.  Calculate the **Jaccard Index** and the **Separation** for the following diseases:
+
+    -   Schizophrenia, Bipolar Disorder, Intellectual Disability, Depressive disorder, Autistic Disorder, Unipolar Depression, Mental Depression, Major Depressive Disorder, Mood Disorders, Cocaine Dependence, Cocaine Abuse, Cocaine-Related Disorders, Substance abuse problem, Drug abuse, Drug Dependence, Drug habituation, Drug Use Disorders, Substance-Related Disorders, Psychotic Disorders, Obesity, hyperlipidemia, Rheumatoid Arthritis, Prostatic Neoplasms, Mammary Neoplasms, Mammary Neoplasms, Human Malignant neoplasm of stomach, Stomach Neoplasms, Colorectal Neoplasms, Malignant neoplasm of lung, Lung Neoplasms, Malignant neoplasm of prostate.
+
+3.  Optional: Try to make the network visualization for the heatmap of `Sep_ex2`. Use diseases as nodes, and their weight as links.
+
+4.  Optional: Plot the PPI with genes selected in `GDA_Interest` where each node is a piechart representing which diseases are associated to that particular gene. Tip: Check `vertex.shape.pie` for help.

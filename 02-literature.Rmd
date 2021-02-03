@@ -1,0 +1,326 @@
+---
+output: 
+  html_document: 
+    df_print: tibble
+---
+
+# The Interactome {#PPI}
+
+## Protein Protein Interaction Networks
+
+In PPI networks, the nodes represent proteins and they are connected by a link if they physically interact with each other [82]. Typically, these interactions are measured experimentally, for instance with the Yeast-Two-Hybrid (Y2H) system [83], or by protein complex immunoprecipitation followed by high-throughput Mass Spectrometry [84,85], or inferred computationally based on sequence similarity [86]. PPI can be used to infer gene functions and the association of sub-networks to diseases [47]. In this type of network, a highly connected protein tends to interact with proteins that are less connected, probably to prevent unwanted cross-talk of functional modules [87]. Many methods in network medicine are based on PPI.
+
+### Measuring PPIs
+
+Protein Protein Interactions can be measured mainly using three different techniques: 1. By the creation of protein protein interaction maps derived from existing scientific literature; 2. Using computational predictions of PPIs based on available orthogonal information; and 3. By systematic experimental mapping of proteins identify complex association and/or binary interactions. We will focus here only in the third.
+
+Co-complex associations interrogate a protein composition of protein complex in one or several cell lines. The most common approach uses affinity purification to extract the proteins that associate with the *bait* proteins followed by mass expectometry in order to identify proteins that associate with the *bait.*
+
+This approach is often used for simple organisms, however similar approaches have been reported for humans. Unfortunately, achieving stable expression of bait proteins is challenging.
+
+Co-complex map associations are composed by indirect and some direct binary associations. However, raw association data cannot distinguish the indirect from direct association and therefore, co-complex datasets have to be filtered and needs to have incorporated prior knowledge that might lead to bias towards super-start genes.
+
+On the other side, for experimental determination of binary interactions between proteins, all possible pair of proteins are systematically tested to generate a data set of all possible biophysical interactions.
+
+Because the human genome is composed by \~20,000 unique genes - not even considering its isophorms - we would have \~200 million possible combinations in order to robust systematically identify interactions. To meet this requirement Yeast-to-Hybrid (Y2H) technology is the only one that can meet this requirement. This technology is able to interrogate hundreds of millions of human proteins pairs for binary interactions. In short the method works as follows: Protein of interest X and a DNA binding domain (DBD-X) fuse to form *bait*. Fusion of transcriptional activation domain (AD-Y) and a cDNA library Y results in *prey*. Those two form the basis of the protein--protein interaction detection system. Without bait--prey interaction, the activation domain is unable to restrict the gene-to-gene expression drive.
+
+### Data Sets
+
+PPIs can be found from different sources. I list here some well known databases for that.
+
+1.  Binary PPIs derived from high-throughput yeast-two hybrid (Y2H) experiments:
+
+-   HI-Union [@Luck2020]
+
+2.  Binary PPIs three-dimensional (3D) protein structures:
+
+-   Interactome3D [@Mosca2013]
+-   Instruct [@Meyer2013]
+-   Insider [@Meyer2018]
+
+3.  Binary PPIs literature curation:
+
+-   PINA [@Cowley2012]
+-   MINT [@Licata2012]
+-   LitBM17 [@Luck2020]
+-   Interactome3D
+-   Instruct
+-   Insider
+-   BioGrid [@Chatr-Aryamontri2017]
+-   HINT [@Das2012]
+-   HIPPIE [@Alanis-Lobato2017]
+-   APID [@Alonso-Lopez2019a]
+-   InWeb [@li2016]
+
+4.  PPIs identified by affinity purification followed by mass spectrometry:
+
+-   BioPlex [@Huttlin2017]
+-   QUBIC [@Hein2015]
+-   CoFrac [@wan2015]
+-   HINT
+-   HIPPIE
+-   APID
+-   LitBM17
+-   InWeb
+
+5.  Kinase substrate interactions:
+
+-   KinomeNetworkX [@cheng2014]
+-   PhosphoSitePlus [@Hornbeck2015]
+
+6.  Signaling interactions:
+
+-   SignaLink [@Fazekas2013]
+-   InnateDB [@Breuer2013]
+
+7.  Regulatory interactions:
+
+-   ENCODE consortium.
+
+### Our PPI
+
+The PPI we will be using for this workshop is a combination of all previous data sets - and manually curated. The data can be found here: LINK. Data was published in @Gysi2020a.
+
+#### Understanding the data
+
+```{r prepare_enviroment, warning=FALSE, results='hide', message=FALSE}
+require(data.table)
+require(tidyr)
+require(igraph)
+require(dplyr)
+require(magrittr)
+require(ggplot2)
+```
+
+Let's read in our data, and check basic statistics of it.
+
+```{r}
+PPI = fread("./data/PPI_Symbol_Entrez.csv")
+```
+
+```{r, results='hide'}
+head(PPI)
+```
+
+```{r, results='markup', echo=FALSE}
+head(PPI) %>% knitr::kable()
+```
+
+Let's transform our edge-list into a network.
+
+```{r}
+gPPI = PPI %>% 
+  select(starts_with("Symbol")) %>%
+  filter(Symbol_A != "") %>%
+  filter(Symbol_B != "") %>%
+  graph_from_data_frame(., directed = F) %>%
+  simplify()
+
+gPPI
+```
+
+Let's check the degree distribution:
+
+```{r degree-distribution, fig.cap="PPI Degree Distribution"}
+dd = degree(gPPI) %>% table() %>% as.data.frame()
+names(dd) = c('Degree', "Nodes")
+dd$Degree %<>% as.character %>% as.numeric()
+dd$Nodes  %<>% as.character %>% as.numeric()
+
+ggplot(dd) +
+  aes(x = Degree, y = Nodes) +
+  geom_point(colour = "#1d3557") +
+  scale_x_continuous(trans = "log10") +
+  scale_y_continuous(trans = "log10") +
+  theme_minimal()
+```
+
+Most of the proteins have few connections, and very few proteins have lots of connections. Who's that protein?
+
+```{r, results='markup'}
+degree(gPPI) %>% 
+  as.data.frame() %>% 
+  arrange(desc(.)) %>%
+  filter(. > 1000) %>% 
+  knitr::kable()
+```
+
+## Gene Disease Association
+
+A Gene Disease Association Database is a systematic data base, typically used to understand the association of genes to diseases, and model the underlying mechanisms of complex diseases.
+
+### Data Sets
+
+-   CTD -- Curated scientific literature
+
+-   OMIM -- Curated scientific literature
+
+-   DisGeNet -- Based on OMIM, ClinVar and other data bases
+
+-   Orphanet -- Validated - and non validated - GDAs
+
+-   ClinGen -- Validated - and non validated - GDAs
+
+-   ClinVar -- Different levels of evidence
+
+-   GWAS catalogue -- GWAS associations to diseases
+
+-   PheGenI -- GWAS associations to diseases
+
+-   lncRNADisease -- Experimental validated lncRNAs in diseases
+
+-   HMDD -- Experimental validated miRNAs in diseases
+
+### Our GDA
+
+We will use in this workshop Gene-Disease-Association from DisGeNet.
+
+#### Understanding the data
+
+Let's read in the data and again, do some basic statistics.
+
+```{r, results='hide'}
+GDA = fread(file = 'data/curated_gene_disease_associations.tsv', sep = '\t')
+
+head(GDA)
+```
+
+```{r, results='markup', echo=FALSE}
+head(GDA) %>% knitr::kable()
+```
+
+```{r}
+Cleaned_GDA = GDA %>% filter(diseaseType == 'disease') %>%
+  mutate(diseaseName = tolower(diseaseName)) %>%
+  select(geneSymbol, diseaseName, diseaseSemanticType) %>%
+  unique() 
+
+dim(Cleaned_GDA)
+dim(GDA)
+
+numGenes = Cleaned_GDA %>% 
+  group_by(diseaseName) %>%
+  summarise(numGenes = n()) %>%
+  ungroup() %>%
+  group_by(numGenes) %>%
+  summarise(numDiseases = n())
+
+```
+
+```{r, fig.cap= "Gene-Disease degree distribution"}
+ggplot(numGenes) +
+  aes(x = numGenes, y = numDiseases) +
+  geom_point(colour = "#1d3557") +
+  scale_x_continuous(trans = "log10") +
+  scale_y_continuous(trans = "log10") +
+  labs(x = "Genes", y = "Diseases")+
+  theme_minimal()
+
+```
+
+Importantly is to filter for diseases with at least 10 genes.
+
+```{r}
+Cleaned_GDA %<>% 
+  group_by(diseaseName) %>%
+  mutate(numGenes = n()) %>%
+  filter(numGenes > 10)
+
+Cleaned_GDA$diseaseName %>% unique() %>%  length()
+```
+
+## Drug-Targets
+
+A *druggable* target is a protein, peptide or nucleic acid that has activity which can be modulated by a drug. A *drug* can be any small molecular weight chemical compound (SMOL) or a biologic (BIOL), such as an antibody or a recombinant protein that can treat a disease or a sympthom.
+
+### Properties of an ideal drug target:
+
+A drug-target has a couple of proprieties that are highly desired when constructing the drug [@Gashaw2011]:
+
+-   Target is disease-modifying and/or has a proven function in the pathophysiology of a disease.
+
+-   Modulation of the target is less important under physiological conditions or in other diseases.
+
+-   If the druggability is not obvious (e.g. as for kinases) a 3D-structure for the target protein or a close homolog should be available for a druggability assessment.
+
+-   Target has a favorable 'assayability' enabling high throughput screening.
+
+-   Target expression is not uniformly distributed throughout the body.
+
+-   A target/disease-specific biomarker exists to monitor therapeutic efficacy.
+
+-   Favorable prediction of potential side effects according to phenotype data (e.g. in k.o. mice or genetic mutation databases).
+
+-   Target has a favorable IP situation (no competitors on target, freedom to operate).
+
+### Data Sets
+
+There are a couple of really good data sets that report drug-target interactions:
+
+1.  DrugBank [@Wishart2006; @wishart2017]
+
+2.  CTD [@davis2020]
+
+3.  Broad Institute Drug Repositioning Hub [@corsello2017]
+
+### Our DT
+
+For this workshop we will use the drug bank drug-target dataset. This dataset has been previously parsed for your convenience.
+
+#### Understanding the data
+
+```{r, results='hide'}
+DT = fread(file = 'data/DB_DrugTargets_1201.csv')
+
+head(DT)
+```
+
+```{r, results='markup', echo=FALSE}
+head(DT[,-c(4,10)]) %>% knitr::kable()
+```
+
+```{r}
+Cleaned_DT = DT %>% 
+  filter(organism == 'Humans') %>%
+  select(Gene_Target, Name,ID, Type, known_action) %>%
+  unique() 
+
+dim(Cleaned_DT)
+dim(DT)
+head(Cleaned_DT)
+```
+
+
+```{r}
+TargetDist = Cleaned_DT %>% 
+  group_by(Gene_Target) %>%
+  summarise(numDrugs = n()) 
+
+DrugDist = Cleaned_DT %>% 
+  group_by(ID) %>%
+  summarise(numTargets = n()) 
+```
+
+```{r, fig.cap= "Target distribution", warning=FALSE, message=FALSE}
+ggplot(TargetDist) +
+  aes(x = numDrugs) +
+  geom_histogram(colour = "#1d3557", fill = "#a8dadc" ) +
+  labs(x = "Targets", y = "Drugs")+
+  theme_minimal()
+```
+
+Which Target is the most targetted gene?
+
+```{r, results='markup'}
+TargetDist %>%
+  arrange(desc(numDrugs)) %>%
+  filter(numDrugs > 400)
+```
+
+```{r, fig.cap= "Drug distribution", warning=FALSE, message=FALSE}
+ggplot(DrugDist) +
+  aes(x = numTargets) +
+  geom_histogram(colour = "#1d3557", fill = "#a8dadc" ) +
+  labs(y = "Targets", x = "Drugs")+
+  theme_minimal()
+```
