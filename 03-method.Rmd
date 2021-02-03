@@ -6,7 +6,7 @@ In this chapter, I will introduce the main methods used in Network Medicine. We 
 
 In biological networks often genes involved in the same topological communities are also associated with similar biological processes [@Ahn2010]. It also reflects on *how diseases localized themselves in the interaction*; meaning that disease modules are highly localized in specific network neighborhoods [@Menche2015] (Figure \@ref(fig:diseasemodule)).
 
-### Largest connected component 
+### Largest connected component
 
 The size of the largest connected component (LCC) is the number of nodes that form a connected subgraph (in our case, it is the number of proteins that are interconnected in the PPI). Many properties of this quantity allow us to understand how a particular disease interacts with the interactome. It is important to note here that this measure is highly dependent on the completeness of an interactome. If a link between a protein and their counterparts is unknown -- therefore missing -- we might say that that particular node is not involved in a disease module (or that the LCC is not significant).
 

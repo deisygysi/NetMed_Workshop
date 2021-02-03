@@ -154,6 +154,23 @@ proximity_significance = avr_proximity_multiple_target_sets(
 )
 ```
 
+Which are the drugs that we can use for hyperlipidemia? 
+
+```{r}
+proximity_significance
+```
+
+Now, let us check those drug indications:
+
+```{r}
+Indication = DT %>% 
+  filter(Name %in% drugs) %>% 
+  select(Name, Indication) %>% 
+  unique()
+
+Indication
+```
+
 ## Exercises
 
 1.  Test the same drugs for all the 5 other diseases we are interested in. How those values compare?
