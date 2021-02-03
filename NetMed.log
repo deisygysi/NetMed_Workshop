@@ -1,12 +1,12 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.2.2)  2 FEB 2021 20:50
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.2.3)  3 FEB 2021 10:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **NetMed.tex
 (./NetMed.tex
 LaTeX2e <2020-10-01> patch level 4
-L3 programming layer <2021-01-09> xparse <2020-03-03> (/Users/deisygysi/Library
-/TinyTeX/texmf-dist/tex/latex/base/book.cls
+L3 programming layer <2021-02-02> (/Users/deisygysi/Library/TinyTeX/texmf-dist/
+tex/latex/base/book.cls
 Document Class: book 2020/04/10 v1.4m Standard LaTeX document class
 (/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/base/bk10.clo
 File: bk10.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
@@ -119,7 +119,7 @@ Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 )
 (/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-mat
 h.sty (/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2021-01-09 L3 programming layer (loader) 
+Package: expl3 2021-02-02 L3 programming layer (loader) 
 
 (/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xete
 x.def
@@ -142,13 +142,13 @@ TeX
 
 (/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse
 .sty
-Package: xparse 2020-10-27 L3 Experimental document command parser
-
 (/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse
--generic.tex))
+-2020-10-01.sty
+(/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse
+-generic.tex)))
 (/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3ke
 ys2e.sty
-Package: l3keys2e 2020-10-27 LaTeX2e option processing using LaTeX3 keys
+Package: l3keys2e 2021-02-02 LaTeX2e option processing using LaTeX3 keys
 ) (/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty
 Package: fontspec 2020/02/21 v2.7i Font selection for XeLaTeX and LuaLaTeX
 
@@ -441,49 +441,67 @@ Package graphics Info: Driver file: xetex.def on input line 105.
 )
 \Gin@req@height=\dimen176
 \Gin@req@width=\dimen177
+) (/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/dejavu/DejaVuSans.sty
+Package: DejaVuSans 2011/06/01 Style file for DejaVuSans.
+) (/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+\Gm@cnth=\count309
+\Gm@cntv=\count310
+\c@Gm@tempcnt=\count311
+\Gm@bindingoffset=\dimen178
+\Gm@wd@mp=\dimen179
+\Gm@odd@mp=\dimen180
+\Gm@even@mp=\dimen181
+\Gm@layoutwidth=\dimen182
+\Gm@layoutheight=\dimen183
+\Gm@layouthoffset=\dimen184
+\Gm@layoutvoffset=\dimen185
+\Gm@dimlist=\toks22
 ) (/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip61
 \bibsep=\skip62
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count309
+\c@NAT@ctr=\count312
 ) (./NetMed.aux)
 \openout1 = `NetMed.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 125.
+LaTeX Font Info:    ... okay on input line 125.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 123.
+(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 125.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 123.
+(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 125.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 123.
+(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 125.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 123.
+(Font)                  OT1/lmss/m/n --> TU/DejaVuSans-TLF/m/n on input line 12
+5.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 123.
+(Font)                  OT1/lmss/bx/n --> TU/DejaVuSans-TLF/bx/n on input line 
+125.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 123.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 125.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 123.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 125.
 
 Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
 
@@ -512,7 +530,7 @@ pt=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 123.
+(Font)              scaled to size 10.0pt on input line 125.
 
 Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
 
@@ -551,18 +569,18 @@ pt=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 123.
+(Font)              scaled to size 10.0pt on input line 125.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 123.
+(Font)              `operators' in the math version `normal' on input line 125.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input
- line 123.
+ line 125.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 123.
+(Font)              `operators' in the math version `bold' on input line 125.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on inpu
-t line 123.
+t line 125.
 
 Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
 
@@ -649,15 +667,15 @@ t=math;language=dflt;"
 (fontspec)             \fontdimen 21\font =0pt\relax 
 
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 123.
+(Font)              `symbols' in the math version `normal' on input line 125.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
 (Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on inpu
-t line 123.
+t line 125.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 123.
+(Font)              `symbols' in the math version `bold' on input line 125.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
 (Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on inpu
-t line 123.
+t line 125.
 
 Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
 
@@ -727,17 +745,17 @@ pt=math;language=dflt;"
 
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
 (Font)              `largesymbols' in the math version `normal' on input line 1
-23.
+25.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on inpu
-t line 123.
+t line 125.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 123
+(Font)              `largesymbols' in the math version `bold' on input line 125
 .
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on inpu
-t line 123.
-Package hyperref Info: Link coloring OFF on input line 123.
+t line 125.
+Package hyperref Info: Link coloring OFF on input line 125.
 (/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/oberdiek/refcount.sty
@@ -747,34 +765,68 @@ Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
 estring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count310
+\c@section@level=\count313
 )
-LaTeX Info: Redefining \ref on input line 123.
-LaTeX Info: Redefining \pageref on input line 123.
-LaTeX Info: Redefining \nameref on input line 123.
+LaTeX Info: Redefining \ref on input line 125.
+LaTeX Info: Redefining \pageref on input line 125.
+LaTeX Info: Redefining \nameref on input line 125.
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+*geometry* verbose mode - [ preamble ] result:
+* driver: xetex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: twoside 
+* h-part:(L,W,R)=(72.26999pt, 469.75502pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43001pt, 72.26999pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=469.75502pt
+* \textheight=650.43001pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-30.06749pt
+* \headheight=12.0pt
+* \headsep=18.06749pt
+* \topskip=10.0pt
+* \footskip=25.29494pt
+* \marginparwidth=125.0pt
+* \marginparsep=7.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 125.
+(Font)              scaled to size 12.0pt on input line 127.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 125.
+(Font)              scaled to size 8.0pt on input line 127.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 125.
+(Font)              scaled to size 6.0pt on input line 127.
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-25.
+27.
 (/Users/deisygysi/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 12.0011pt on input line 125.
+(Font)              scaled to size 12.0011pt on input line 127.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.00073pt on input line 125.
+(Font)              scaled to size 8.00073pt on input line 127.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00055pt on input line 125.
+(Font)              scaled to size 6.00055pt on input line 127.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 11.99872pt on input line 125.
+(Font)              scaled to size 11.99872pt on input line 127.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.99915pt on input line 125.
+(Font)              scaled to size 7.99915pt on input line 127.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 125.
+(Font)              scaled to size 5.99936pt on input line 127.
 [1
 
 
@@ -809,197 +861,60 @@ Chapter 1.
 
 ]
 Chapter 2.
-[7]
 File: NetMed_files/figure-latex/GRAPH-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/GRAPH-1.pdf>
-[8]
-Overfull \hbox (1040.06012pt too wide) in alignment at lines 246--248
- [] 
+[7] [8] [9] [10]
+Underfull \hbox (badness 10000) in paragraph at lines 333--335
+
  []
 
-
-Overfull \hbox (1040.06012pt too wide) in alignment at lines 248--269
- [] 
- []
-
-
-Overfull \hbox (1040.06012pt too wide) in alignment at lines 269--274
- [] 
- []
-
-[9]
-Overfull \hbox (1574.83011pt too wide) in alignment at lines 279--281
- [] 
- []
-
-
-Overfull \hbox (1574.83011pt too wide) in alignment at lines 281--302
- [] 
- []
-
-
-Overfull \hbox (1574.83011pt too wide) in alignment at lines 302--303
- [] 
- []
-
-[10] [11] [12
+[11] [12
 
 ]
 Chapter 3.
 [13] [14] [15]
-Overfull \hbox (43.5pt too wide) in paragraph at lines 556--556
-[]\TU/lmtt/m/n/10 ##  [1] PHYHIP--TTR      PHYHIP--NFE2     PHYHIP--DYRK1A   PH
-YHIP--HNRNPA1[] 
- []
-
-
-Overfull \hbox (38.25pt too wide) in paragraph at lines 556--556
-[]\TU/lmtt/m/n/10 ##  [5] PHYHIP--COPS6    PHYHIP--SUPT5H   PHYHIP--SMARCC2  PH
-YHIP--EEF1A1[] 
- []
-
-
-Overfull \hbox (33.0pt too wide) in paragraph at lines 556--556
-[]\TU/lmtt/m/n/10 ##  [9] PHYHIP--TRIP6    PHYHIP--NDUFV3   PHYHIP--CA10     PH
-YHIP--ERG28[] 
- []
-
-
-Overfull \hbox (43.5pt too wide) in paragraph at lines 556--556
-[]\TU/lmtt/m/n/10 ## [13] PHYHIP--S100A13  PHYHIP--PPIE     PHYHIP--LIMD1    PH
-YHIP--ANKRD12[] 
- []
-
-
-Overfull \hbox (27.75pt too wide) in paragraph at lines 556--556
-[]\TU/lmtt/m/n/10 ## [17] PHYHIP--ZZEF1    PHYHIP--PRMT5    PHYHIP--KIF15    PH
-YHIP--MED8[] 
- []
-
-
-Overfull \hbox (33.0pt too wide) in paragraph at lines 556--556
-[]\TU/lmtt/m/n/10 ## [21] PHYHIP--PRKD2    PHYHIP--PAQR5    PHYHIP--MAGED4B  PH
-YHIP--NDRG1[] 
- []
-
-
-Overfull \hbox (38.25pt too wide) in paragraph at lines 556--556
-[]\TU/lmtt/m/n/10 ## [25] PHYHIP--PTRH2    PHYHIP--HDAC11   PHYHIP--METTL18  PH
-YHIP--PNPLA2[] 
- []
-
-
-Overfull \hbox (27.75pt too wide) in paragraph at lines 556--556
-[]\TU/lmtt/m/n/10 ## [29] PHYHIP--TMEM255B PHYHIP--WDR89    PHYHIP--FAM131A  GP
-ANK1--TAF1[] 
- []
-
-[16]
-Overfull \hbox (43.5pt too wide) in paragraph at lines 578--578
-[]\TU/lmtt/m/n/10 ## Warning: Transformation introduced infinite values in cont
-inuous x-axis[] 
- []
-
 File: NetMed_files/figure-latex/degree-distribution-1.pdf Graphic file (type pd
 f)
 <use NetMed_files/figure-latex/degree-distribution-1.pdf>
-[17] [18]
-Overfull \hbox (653.75027pt too wide) in paragraph at lines 667--684
+[16] [17]
+Overfull \hbox (528.99525pt too wide) in paragraph at lines 714--731
 [][] 
  []
 
+[18]
 File: NetMed_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-11-1.pdf>
 [19]
-Underfull \vbox (badness 1117) has occurred while \output is active []
-
-[20] [21]
-Overfull \hbox (682.04024pt too wide) in paragraph at lines 816--833
+Overfull \hbox (557.28522pt too wide) in paragraph at lines 863--880
 [][] 
  []
 
-[22]
+[20]
 File: NetMed_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-17-1.pdf>
-[23]
+[21] [22]
 File: NetMed_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-19-1.pdf>
-[24]
+[23] [24
+
+]
 Chapter 4.
 File: NetMed_files/figure-latex/diseasemodule-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/diseasemodule-1.pdf>
-[25
-
-]
-Overfull \hbox (115.64235pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 26 \TU/lmr/m/sl/10 CHAPTER 4.  METHODS FO DISEASE MODULE IDENTIF
-ICATION AND DISEASE SIMILARITY
- []
-
-[26]
+[25]
 File: NetMed_files/figure-latex/unnamed-chunk-23-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-23-1.pdf>
-[27]
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1041--1041
-[]\TU/lmtt/m/n/10 ##  [1] PI4KA  --SP1    F2     --SP1    DNM1   --CTCF   GSK3B
-  --HSPA1A[] 
- []
-
-
-Overfull \hbox (27.75pt too wide) in paragraph at lines 1041--1041
-[]\TU/lmtt/m/n/10 ##  [5] DNM1   --GRB2   SP1    --GRB2   MET    --GRB2   GSK3B
-  --MAPK14[] 
- []
-
-
-Overfull \hbox (17.25pt too wide) in paragraph at lines 1041--1041
-[]\TU/lmtt/m/n/10 ##  [9] SP1    --MAPK14 CTCF   --MAPK14 GRB2   --MAPK14 MET  
-  --ACTB[] 
- []
-
-
-Overfull \hbox (22.5pt too wide) in paragraph at lines 1041--1041
-[]\TU/lmtt/m/n/10 ## [13] GRB2   --ACTB   MAPK14 --ACTB   GSK3B  --SOX10  SP1  
-  --SOX10[] 
- []
-
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 1041--1041
-[]\TU/lmtt/m/n/10 ## [17] PAX6   --SOX10  SP1    --CCNA2  ACTB   --MTNR1A ACTB 
-  --GSN[] 
- []
-
-
-Overfull \hbox (12.0pt too wide) in paragraph at lines 1041--1041
-[]\TU/lmtt/m/n/10 ## [21] PI4KA  --JUN    GSK3B  --JUN    SMARCA2--JUN    SP1  
-  --JUN[] 
- []
-
-
-Overfull \hbox (17.25pt too wide) in paragraph at lines 1041--1041
-[]\TU/lmtt/m/n/10 ## [25] MAPK14 --JUN    SOX10  --JUN    GSK3B  --ESR1   SMARC
-A2--ESR1[] 
- []
-
-
-Overfull \hbox (17.25pt too wide) in paragraph at lines 1041--1041
-[]\TU/lmtt/m/n/10 ## [29] SP1    --ESR1   HSPA1A --ESR1   FMR1   --ESR1   MAPK1
-4 --ESR1[] 
- []
-
+[26]
 File: NetMed_files/figure-latex/unnamed-chunk-24-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-24-1.pdf>
 
-Overfull \hbox (115.64235pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 28 \TU/lmr/m/sl/10 CHAPTER 4.  METHODS FO DISEASE MODULE IDENTIF
-ICATION AND DISEASE SIMILARITY
- []
+Underfull \vbox (badness 3482) has occurred while \output is active []
 
-[28]
+[27]
 File: NetMed_files/figure-latex/unnamed-chunk-25-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-25-1.pdf>
-[29]
-Overfull \hbox (4647.75pt too wide) in paragraph at lines 1135--1135
+[28]
+Overfull \hbox (4522.99498pt too wide) in paragraph at lines 1182--1182
 []\TU/lmtt/m/n/10 ##   |                                                       
                        |                                                       
                |   0%  |                                                       
@@ -1015,36 +930,18 @@ Overfull \hbox (4647.75pt too wide) in paragraph at lines 1135--1135
 ===============| 100%[] 
  []
 
-
-Overfull \hbox (115.64235pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 30 \TU/lmr/m/sl/10 CHAPTER 4.  METHODS FO DISEASE MODULE IDENTIF
-ICATION AND DISEASE SIMILARITY
- []
-
-[30]
+[29]
 File: NetMed_files/figure-latex/unnamed-chunk-27-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-27-1.pdf>
+[30]
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[31]
-
-LaTeX Warning: Reference `fig:separation' on page 32 undefined on input line 12
-01.
+LaTeX Warning: Reference `fig:separation' on page 31 undefined on input line 12
+48.
 
 File: NetMed_files/figure-latex/separation-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/separation-1.pdf>
 
-Underfull \vbox (badness 3323) has occurred while \output is active []
-
-
-Overfull \hbox (115.64235pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 32 \TU/lmr/m/sl/10 CHAPTER 4.  METHODS FO DISEASE MODULE IDENTIF
-ICATION AND DISEASE SIMILARITY
- []
-
-[32]
-Overfull \hbox (4647.75pt too wide) in paragraph at lines 1243--1243
+Overfull \hbox (4522.99498pt too wide) in paragraph at lines 1290--1290
 []\TU/lmtt/m/n/10 ##   |                                                       
                        |                                                       
                |   0%  |                                                       
@@ -1061,7 +958,7 @@ Overfull \hbox (4647.75pt too wide) in paragraph at lines 1243--1243
  []
 
 
-Overfull \hbox (4647.75pt too wide) in paragraph at lines 1251--1251
+Overfull \hbox (4522.99498pt too wide) in paragraph at lines 1298--1298
 []\TU/lmtt/m/n/10 ##   |                                                       
                        |                                                       
                |   0%  |                                                       
@@ -1077,50 +974,20 @@ Overfull \hbox (4647.75pt too wide) in paragraph at lines 1251--1251
 ===============| 100%[] 
  []
 
-[33]
+[31]
 File: NetMed_files/figure-latex/unnamed-chunk-29-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-29-1.pdf>
-
-Overfull \hbox (115.64235pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 34 \TU/lmr/m/sl/10 CHAPTER 4.  METHODS FO DISEASE MODULE IDENTIF
-ICATION AND DISEASE SIMILARITY
- []
-
-[34] [35]
-Overfull \hbox (115.64235pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 36 \TU/lmr/m/sl/10 CHAPTER 4.  METHODS FO DISEASE MODULE IDENTIF
-ICATION AND DISEASE SIMILARITY
- []
-
-[36
+[32] [33] [34
 
 ]
 Chapter 5.
-[37]
 File: NetMed_files/figure-latex/proximity-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/proximity-1.pdf>
-[38]
-Overfull \hbox (59.25pt too wide) in paragraph at lines 1368--1368
-[]\TU/lmtt/m/n/10 ##  [1] "HTR1A"  "HTR1B"  "HTR2A"  "HTR2B"  "HTR2C"  "HTR5A" 
- "HTR6"   "HTR7"[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1368--1368
-[]\TU/lmtt/m/n/10 ##  [9] "DRD2"   "DRD3"   "DRD4"   "DRD1"   "ADRA1A" "ADRA2A"
- "ADRA2B" "ADRA2C"[] 
- []
-
-
-Overfull \hbox (69.75pt too wide) in paragraph at lines 1368--1368
-[]\TU/lmtt/m/n/10 ## [17] "HRH1"   "HRH2"   "ADRB1"  "ADRB2"  "UGT1A4" "CYP1A2"
- "CYP2D6" "CYP3A4"[] 
- []
-
+[35] [36]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1393.
-[39]
-Overfull \hbox (4647.75pt too wide) in paragraph at lines 1437--1437
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1440.
+
+Overfull \hbox (4522.99498pt too wide) in paragraph at lines 1484--1484
 []\TU/lmtt/m/n/10 ##   |                                                       
                        |                                                       
                |   0%  |                                                       
@@ -1136,24 +1003,24 @@ Overfull \hbox (4647.75pt too wide) in paragraph at lines 1437--1437
 ===============| 100%[] 
  []
 
-[40]
+[37] [38]
 Chapter 6.
-(./NetMed.bbl [41
+(./NetMed.bbl [39
 
-] [42
+] [40
 
-] [43] [44] [45] [46]) [47] (./NetMed.aux)
+] [41] [42] [43]) [44] (./NetMed.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 17368 strings out of 479212
- 307744 string characters out of 5873890
- 777896 words of memory out of 5000000
- 36696 multiletter control sequences out of 15000+600000
+ 17854 strings out of 479211
+ 315184 string characters out of 5873802
+ 787964 words of memory out of 5000000
+ 37176 multiletter control sequences out of 15000+600000
  407441 words of font info for 73 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 98i,8n,122p,1586b,525s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 98i,8n,122p,1586b,529s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on NetMed.pdf (47 pages).
+Output written on NetMed.pdf (44 pages).

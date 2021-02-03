@@ -8,11 +8,17 @@ output:
 
 ## Protein Protein Interaction Networks
 
-In PPI networks, the nodes represent proteins and they are connected by a link if they physically interact with each other [82]. Typically, these interactions are measured experimentally, for instance with the Yeast-Two-Hybrid (Y2H) system [83], or by protein complex immunoprecipitation followed by high-throughput Mass Spectrometry [84,85], or inferred computationally based on sequence similarity [86]. PPI can be used to infer gene functions and the association of sub-networks to diseases [47]. In this type of network, a highly connected protein tends to interact with proteins that are less connected, probably to prevent unwanted cross-talk of functional modules [87]. Many methods in network medicine are based on PPI.
+In PPI networks, the nodes represent proteins and they are connected by a link if they physically interact with each other [@rual2005]. Typically, these interactions are measured experimentally, for instance with the Yeast-Two-Hybrid (Y2H) system [@uetz2000], or by protein complex immunoprecipitation followed by high-throughput Mass Spectrometry [@zhang2008; @koh2012], or inferred computationally based on sequence similarity [@fong2004]. PPI can be used to infer gene functions and the association of sub-networks to diseases [@Menche2015]. In this type of network, a highly connected protein tends to interact with proteins that are less connected, probably to prevent unwanted cross-talk of functional modules. As mentioned, most of the methods in network medicine are based on PPI.
 
 ### Measuring PPIs
 
-Protein Protein Interactions can be measured mainly using three different techniques: 1. By the creation of protein protein interaction maps derived from existing scientific literature; 2. Using computational predictions of PPIs based on available orthogonal information; and 3. By systematic experimental mapping of proteins identify complex association and/or binary interactions. We will focus here only in the third.
+Protein Protein Interactions can be measured mainly using three different techniques:
+
+1.  By the creation of protein protein interaction maps derived from existing scientific literature;
+
+2.  Using computational predictions of PPIs based on available orthogonal information; and
+
+3.  By systematic experimental mapping of proteins identify complex association and/or binary interactions. We will focus here only in the third.
 
 Co-complex associations interrogate a protein composition of protein complex in one or several cell lines. The most common approach uses affinity purification to extract the proteins that associate with the *bait* proteins followed by mass expectometry in order to identify proteins that associate with the *bait.*
 
@@ -289,7 +295,6 @@ dim(Cleaned_DT)
 dim(DT)
 head(Cleaned_DT)
 ```
-
 
 ```{r}
 TargetDist = Cleaned_DT %>% 

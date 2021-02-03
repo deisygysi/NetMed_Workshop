@@ -54,57 +54,89 @@ Links of a network can possess a direction (normally depicted by an arrow), whic
 
 ### Network Terminology
 
----
-A **network** is a pair **G = (N, L)** of a set **N** of nodes connected by a set **L** of links.
-Two nodes are **neighbours** if they are **connected**.
-The **degree** (d) of a node is the **number of nodes** it interacts with (@Bondy2008GraphTheory).
-The **weight** is a measure of how strong a particular interaction is (@Bondy2008GraphTheory).
-The **strength** of a node is the **sum of the weights** attached to links belonging to a node (@Barrat2003TheNetworks).
-The **direction** of a link specifies the source (starting point) and a target (endpoint) where the interaction occurs (@Barabasi2016) .
-**Hubs** are nodes with a **much larger degree** compared to the average degree value (@Barrat2003TheNetworks).
-A set of highly interconnected nodes is a **module** or **cluster** (@Li2009).
-Two nodes are connected in a network, if a sequence of adjacent nodes, a **path**, connects them (@barabasi2004network).
-The **shortest path length** is the number of links along the shortest path connecting two nodes (@barabasi2004network).
-The **average path length** is the average of the shortest paths between all pairs of nodes (@barabasi2004network).
-The **diameter** is the maximum distance between two nodes (@Bondy2008GraphTheory).
-The **modularity index** is a measure of the strength of the network division into modules when this measure is maximized; it can be used for identifying nodes communities ( @Newman2018).
-**Preferential attachment** is the tendency of nodes to form new links preferentially to nodes with a high number of links (@barabasi1999emergence; @Vazquez2003GrowingCorrelations).
-The probability that a random node in the network has a particular degree is given by the **degree distribution** (@barabasi2004network).
-A **bipartide graph** is a network in which the nodes can be divided into two disjoint sets of nodes such that links connect nodes from the two sets to each other, but never inside the same set (@Barabasi2016). In those networks, most of the network measures are calculated differently than in a unipartide network.
-The **clustering coefficient** describes the degree with which a node is connected to all its neighbours (@barabasi2004network).
-The **global clustering** coefficient measures the total number of triangles in a network (@Barabasi2016).
-The **average clustering** coefficient is the average of the clustering coefficient of all nodes in a network (@barabasi2004network).
-**Centrality** is a set of measures that have been proposed to help to define the most central nodes. It has many interpretations for autonomy, control, risk, exposure, influence and power ( @Borgatti2006ACentrality).
-**Closeness centrality** is defined as the average distance from a single vertex to all other vertices ( @Newman2018).
-**Betweenness centrality** is defined as the total number of shortest paths between pairs of nodes that pass through a particular node ( @Newman2018).
-**Global measures** are measures that describe the whole network, for example, *degree distribution; average clustering coefficient; path length; modularity index*.
-**Local measures** are characteristics of individual nodes of a network, such as their *degree* and *centrality*.
----
+-   A **network** is a pair **G = (N, L)** of a set **N** of nodes connected by a set **L** of links.
+
+-   Two nodes are **neighbours** if they are **connected**. The **degree** (d) of a node is the **number of nodes** it interacts with [@Bondy2008GraphTheory].
+
+-   The **weight** is a measure of how strong a particular interaction is [@Bondy2008GraphTheory].
+
+-   The **strength** of a node is the **sum of the weights** attached to links belonging to a node [@Barrat2003TheNetworks].
+
+-   The **direction** of a link specifies the source (starting point) and a target (endpoint) where the interaction occurs [@Barabasi2016] .
+
+-   **Hubs** are nodes with a **much larger degree** compared to the average degree value [@Barrat2003TheNetworks].
+
+-   A set of highly interconnected nodes is a **module** or **cluster** [@Li2009]. Two nodes are connected in a network, if a sequence of adjacent nodes, a **path**, connects them [@barabasi2004network].
+
+-   The **shortest path length** is the number of links along the shortest path connecting two nodes [@barabasi2004network].
+
+-   The **average path length** is the average of the shortest paths between all pairs of nodes [@barabasi2004network].
+
+-   The **diameter** is the maximum distance between two nodes [@Bondy2008GraphTheory].
+
+-   The **modularity index** is a measure of the strength of the network division into modules when this measure is maximized; it can be used for identifying nodes communities [@Newman2018].
+
+-   **Preferential attachment** is the tendency of nodes to form new links preferentially to nodes with a high number of links [@barabasi1999emergence; @Vazquez2003GrowingCorrelations].
+
+-   The probability that a random node in the network has a particular degree is given by the **degree distribution** [@barabasi2004network].
+
+-   A **bipartide graph** is a network in which the nodes can be divided into two disjoint sets of nodes such that links connect nodes from the two sets to each other, but never inside the same set [@Barabasi2016]. In those networks, most of the network measures are calculated differently than in a unipartide network.
+
+-   The **clustering coefficient** describes the degree with which a node is connected to all its neighbours [@barabasi2004network].
+
+-   The **global clustering** coefficient measures the total number of triangles in a network [@Barabasi2016].
+
+-   The **average clustering** coefficient is the average of the clustering coefficient of all nodes in a network [@barabasi2004network].
+
+-   **Centrality** is a set of measures that have been proposed to help to define the most central nodes. It has many interpretations for autonomy, control, risk, exposure, influence and power [@Borgatti2006ACentrality].
+
+    -   **Closeness centrality** is defined as the average distance from a single vertex to all other vertices[@Newman2018].
+
+    -   **Betweenness centrality** is defined as the total number of shortest paths between pairs of nodes that pass through a particular node [@Newman2018].
+
+-   **Global measures** are measures that describe the whole network, for example, *degree distribution; average clustering coefficient; path length; modularity index*.
+
+-   **Local measures** are characteristics of individual nodes of a network, such as their *degree* and *centrality*.
 
 ### Biological Terminology
 
----
-**DNA** is the hereditary material of most organisms -- usually all cells of an organism have the same DNA [@Slack2013]. 
-**Genes** are the basic physical and functional units of heredity. They are parts of the DNA and contain the information for producing functional RNAs and proteins. [@Slack2013].
-The **RNA** is synthesized from the DNA but has different properties and functions than the DNA. Some RNAs carry out biological functions in a cell, while others, messenger RNA (mRNA), are turned into proteins that fulfil biological functions [@Slack2013]. 
-A **non-coding RNA (ncRNA)** is an RNA that does not encode a protein. NcRNAs often play a role in gene regulation [@MattickNon-codingRNA]. 
-**microRNAs (miRNA)** are examples of ncRNA; they are involved in posttranscriptional regulation of protein expression [@Tanase2012MicroRNAs].
-Proteins are large, complex molecules that play many critical roles in the body. The proteins are responsible for most of the work in cells and are necessary for structure, function, and regulation of the cells. They can act as enzymes, antibodies, transporters, transcription factors etc. [@Slack2013].
-**Gene expression** is, in short, the coupled process of transcription (from DNA to RNA) and translation (from RNA to proteins) to transform the stored information inside the DNA into proteins [@Slack2013].
-**RNA-Seq** is a technique used to sequence the RNAs in a sample. The result is the snapshot abundance of all RNAs expressed in the sample at a particular time, often called the transcriptome [@Metzker2010SequencingGeneration].
-**Microarrays**, or **gene chips**, are chips with thousands of tiny spots containing a known DNA sequence. It is used to measure the abundance of mRNAs by eminence of fluorescence [@Slack2013]. 
-**Transcription Factors** are DNA binding proteins that activate or repress the transcription of particular target genes [@Latchman1997TranscriptionOverview].
-**Gene Regulatory Factors** are responsible for controlling the expression of genomic information and include transcription factors, co-factors, epigenetic modifiers, miRNAs and others [@Hobert2008GeneMicroRNAs].
-**Systems Biology** examines the structures and dynamics of cellular and organismal function, instead of isolated characteristics of a cell or organism.
-**Drug repositioning **(or drug repurposing) is the process of redeveloping a compound for use in a different disease.
-**Yeast-Two-Hybrid (Y2H)** systems is a system to measure protein-protein interaction. Two proteins to be tested for interaction are expressed in yeast; one protein is fused to a DNA-binding domain from a transcription factor while another protein (Y) is fused to a transcription activation domain. If X and Y interact, there will be a formation of a colony on media used as evidence of the interaction of X and Y [@Parrish2006YeastMapping].
-**Protein complex immunoprecipitation** is an alternative method for measuring protein interactions. It involves immunoprecipitation of the protein bait, purification of the complex, and the identification of the interacting partners.
-**High-throughput Mass Spectrometry** has the ability to detect a characteristic mass to charge ratio of different substances in a sample. It is used to identify the proteins present in a sample [@Kempa2019HighAnalysis].
-**Chromatin immunoprecipitation followed by sequencing (ChIP–Seq)** can be used to identify binding sites of transcription factors in the DNA or of histone modification in a genome-wide manner [@Park2009ChIP-seq:Technology].  
-**Chromatin Isolation by RNA Purification followed by sequencing (ChIRP-seq)** maps lncRNA interactions to the chromatin [@Park2009ChIP-seq:Technology].
-**Genome-wide association studies (GWAS)** are studies where millions of SNPs are tested for association with a particular phenotype using hundreds or thousands of individuals. Those studies shed light on the genetic basis of complex traits. 
-**Omics** is a term that refers to the study of different areas in biology, and indicates the totality of some kind, e.g. genome, transcriptome, proteome, etc.
----
+-   **DNA** is the hereditary material of most organisms -- usually all cells of an organism have the same DNA [@Slack2013].
+
+-   **Genes** are the basic physical and functional units of heredity. They are parts of the DNA and contain the information for producing functional RNAs and proteins. [@Slack2013].
+
+-   The **RNA** is synthesized from the DNA but has different properties and functions than the DNA. Some RNAs carry out biological functions in a cell, while others, messenger RNA (mRNA), are turned into proteins that fulfil biological functions [@Slack2013].
+
+-   A **non-coding RNA (ncRNA)** is an RNA that does not encode a protein. NcRNAs often play a role in gene regulation [@MattickNon-codingRNA].
+
+-   **microRNAs (miRNA)** are examples of ncRNA; they are involved in posttranscriptional regulation of protein expression [@Tanase2012MicroRNAs].
+
+-   **Proteins** are large, complex molecules that play many critical roles in the body. The proteins are responsible for most of the work in cells and are necessary for structure, function, and regulation of the cells. They can act as enzymes, antibodies, transporters, transcription factors etc. [@Slack2013].
+
+-   **Gene expression** is, in short, the coupled process of transcription (from DNA to RNA) and translation (from RNA to proteins) to transform the stored information inside the DNA into proteins [@Slack2013]. **RNA-Seq** is a technique used to sequence the RNAs in a sample. The result is the snapshot abundance of all RNAs expressed in the sample at a particular time, often called the transcriptome [@Metzker2010SequencingGeneration].
+
+-   **Microarrays**, or **gene chips**, are chips with thousands of tiny spots containing a known DNA sequence. It is used to measure the abundance of mRNAs by eminence of fluorescence [@Slack2013].
+
+-   **Transcription Factors** are DNA binding proteins that activate or repress the transcription of particular target genes [@Latchman1997TranscriptionOverview].
+
+-   **Gene Regulatory Factors** are responsible for controlling the expression of genomic information and include transcription factors, co-factors, epigenetic modifiers, miRNAs and others [@Hobert2008GeneMicroRNAs].
+
+-   **Systems Biology** examines the structures and dynamics of cellular and organismal function, instead of isolated characteristics of a cell or organism.
+
+-   **Drug repositioning** (or drug repurposing) is the process of redeveloping a compound for use in a different disease.
+
+-   **Yeast-Two-Hybrid (Y2H)** systems is a system to measure protein-protein interaction. Two proteins to be tested for interaction are expressed in yeast; one protein is fused to a DNA-binding domain from a transcription factor while another protein (Y) is fused to a transcription activation domain. If X and Y interact, there will be a formation of a colony on media used as evidence of the interaction of X and Y [@Parrish2006YeastMapping].
+
+-   **Protein complex immunoprecipitation** is an alternative method for measuring protein interactions. It involves immunoprecipitation of the protein bait, purification of the complex, and the identification of the interacting partners.
+
+-   **High-throughput Mass Spectrometry** has the ability to detect a characteristic mass to charge ratio of different substances in a sample. It is used to identify the proteins present in a sample [@Kempa2019HighAnalysis].
+
+-   **Chromatin immunoprecipitation followed by sequencing (ChIP--Seq)** can be used to identify binding sites of transcription factors in the DNA or of histone modification in a genome-wide manner [@Park2009ChIP-seq:Technology].\
+
+-   **Chromatin Isolation by RNA Purification followed by sequencing (ChIRP-seq)** maps lncRNA interactions to the chromatin [@Park2009ChIP-seq:Technology].
+
+-   **Genome-wide association studies (GWAS)** are studies where millions of SNPs are tested for association with a particular phenotype using hundreds or thousands of individuals. Those studies shed light on the genetic basis of complex traits.
+
+-   **Omics** is a term that refers to the study of different areas in biology, and indicates the totality of some kind, e.g. genome, transcriptome, proteome, etc.
 
 ## Aim of the workshop
 

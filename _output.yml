@@ -5,7 +5,7 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Network Medicine</a></li>
       after: |
-        <li><a Workshop in Advanced Bioinformatics</a></li>
+        <li><a href="./">Workshop in Advanced Bioinformatics</a></li>
     download: ["pdf", "epub"]
 bookdown::pdf_book:
   includes:
