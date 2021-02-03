@@ -10,3 +10,4 @@ link-citations: yes
 description: "Workshop in Advanced Bioinformatics: Network Medicine."
 ---
 
+2nd Workshop in Advanced Bioinformatics: Network Medicine.
