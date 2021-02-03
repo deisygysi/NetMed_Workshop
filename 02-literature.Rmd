@@ -1,12 +1,10 @@
----
-output: 
-  html_document: 
-    df_print: tibble
----
+# Data Commonly Used in Network Medicine
 
-# The Interactome {#PPI}
+In NetMed we are often interested in understanding *how genes associated to a particular disease can influence each other*, *how two diseases are similar (or different)*, *and how a drug can be used in different set-ups.*
 
-## Protein Protein Interaction Networks
+For that end, it is necessary to use data sets that are able to represent those associations: **Protein-Protein Interactions** are used as a map of the interactions inside our cells (Session \@ref(PPI)); **Gene-Disease-Associations** are used for us to identify genes that were previously associated to diseases, often using a GWAS approach (Session \@ref(GDA)); and Drug-Target interactions, often measured by identifying physical binding of a therapeutic compound (often a drug) and a protein (Session \@ref(DTs)).
+
+## Protein Protein Interaction Networks {#PPI}
 
 In PPI networks, the nodes represent proteins and they are connected by a link if they physically interact with each other [@rual2005]. Typically, these interactions are measured experimentally, for instance with the Yeast-Two-Hybrid (Y2H) system [@uetz2000], or by protein complex immunoprecipitation followed by high-throughput Mass Spectrometry [@zhang2008; @koh2012], or inferred computationally based on sequence similarity [@fong2004]. PPI can be used to infer gene functions and the association of sub-networks to diseases [@Menche2015]. In this type of network, a highly connected protein tends to interact with proteins that are less connected, probably to prevent unwanted cross-talk of functional modules. As mentioned, most of the methods in network medicine are based on PPI.
 
@@ -20,17 +18,11 @@ Protein Protein Interactions can be measured mainly using three different techni
 
 3.  By systematic experimental mapping of proteins identify complex association and/or binary interactions. We will focus here only in the third.
 
-Co-complex associations interrogate a protein composition of protein complex in one or several cell lines. The most common approach uses affinity purification to extract the proteins that associate with the *bait* proteins followed by mass expectometry in order to identify proteins that associate with the *bait.*
-
-This approach is often used for simple organisms, however similar approaches have been reported for humans. Unfortunately, achieving stable expression of bait proteins is challenging.
-
-Co-complex map associations are composed by indirect and some direct binary associations. However, raw association data cannot distinguish the indirect from direct association and therefore, co-complex datasets have to be filtered and needs to have incorporated prior knowledge that might lead to bias towards super-start genes.
-
-On the other side, for experimental determination of binary interactions between proteins, all possible pair of proteins are systematically tested to generate a data set of all possible biophysical interactions.
+Co-complex associations interrogate a protein composition of protein complex in one or several cell lines. The most common approach uses affinity purification to extract the proteins that associate with the *bait* proteins followed by mass expectometry in order to identify proteins that associate with the *bait.* This approach is often used for simple organisms, however similar approaches have been reported for humans. Unfortunately, achieving stable expression of bait proteins is challenging. Co-complex map associations are composed by indirect and some direct binary associations. However, raw association data cannot distinguish the indirect from direct association and therefore, co-complex datasets have to be filtered and needs to have incorporated prior knowledge that might lead to bias towards super-start genes. On the other side, for experimental determination of binary interactions between proteins, all possible pair of proteins are systematically tested to generate a data set of all possible biophysical interactions.
 
 Because the human genome is composed by \~20,000 unique genes - not even considering its isophorms - we would have \~200 million possible combinations in order to robust systematically identify interactions. To meet this requirement Yeast-to-Hybrid (Y2H) technology is the only one that can meet this requirement. This technology is able to interrogate hundreds of millions of human proteins pairs for binary interactions. In short the method works as follows: Protein of interest X and a DNA binding domain (DBD-X) fuse to form *bait*. Fusion of transcriptional activation domain (AD-Y) and a cDNA library Y results in *prey*. Those two form the basis of the protein--protein interaction detection system. Without bait--prey interaction, the activation domain is unable to restrict the gene-to-gene expression drive.
 
-### Data Sets
+### Commonly used data sources for PPIs
 
 PPIs can be found from different sources. I list here some well known databases for that.
 
@@ -83,11 +75,15 @@ PPIs can be found from different sources. I list here some well known databases 
 
 -   ENCODE consortium.
 
-### Our PPI
+### Understanding a PPI
 
-The PPI we will be using for this workshop is a combination of all previous data sets - and manually curated. The data can be found here: LINK. Data was published in @Gysi2020a.
+For this workshop, we will be using for this workshop is a combination of a manually curated PPI that combines all previous data sets. The data can be [found here](https://github.com/deisygysi/NetMed_Workshop/blob/master/data/PPI_Symbol_Entrez.csv). This PPI was previously published in @Gysi2020a.
 
-#### Understanding the data
+Before we can start any analysis using this interactome, let us first understand this data.
+
+The PPI contains the EntrezID and the HGNC symbol of each gene, and some might not have a proper map, therefore, it should be removed from further analysis. Moreover, we might have loops, and those should also be removed.
+
+Let us begin by preparing our environment and calling all libraries we will need at this point.
 
 ```{r prepare_enviroment, warning=FALSE, results='hide', message=FALSE}
 require(data.table)
@@ -98,7 +94,7 @@ require(magrittr)
 require(ggplot2)
 ```
 
-Let's read in our data, and check basic statistics of it.
+Let's read in our data.
 
 ```{r}
 PPI = fread("./data/PPI_Symbol_Entrez.csv")
@@ -125,7 +121,9 @@ gPPI = PPI %>%
 gPPI
 ```
 
-Let's check the degree distribution:
+How many genes do we have? How many interactions?
+
+Next, let's check the degree distribution:
 
 ```{r degree-distribution, fig.cap="PPI Degree Distribution"}
 dd = degree(gPPI) %>% table() %>% as.data.frame()
@@ -151,37 +149,47 @@ degree(gPPI) %>%
   knitr::kable()
 ```
 
-## Gene Disease Association
+### Exercises
 
-A Gene Disease Association Database is a systematic data base, typically used to understand the association of genes to diseases, and model the underlying mechanisms of complex diseases.
+Now is your turn. Spend some minutes understanding the data and getting some familiarity with it.
 
-### Data Sets
+1.  What are the top 10 genes with higher degree?
 
--   CTD -- Curated scientific literature
+2.  Are those genes connected?
 
--   OMIM -- Curated scientific literature
+## Gene Disease Association {#GDA}
 
--   DisGeNet -- Based on OMIM, ClinVar and other data bases
+A Gene-Disease-Association (GDA) database are typically used to understand the association of genes to diseases, and model the underlying mechanisms of complex diseases. Those associations often come from GWAS studies and knock-out studies.
+
+### Commonly used data sources for GDAs
+
+As PPIs, GDAs can be found from different sources and with different evidences for each Gene-Disease association. I list here some well known databases for that.
+
+-   CTD -- Curated scientific literature [@davis2020]
+
+-   OMIM -- Curated scientific literature [@mckusick2007]
+
+-   DisGeNet -- Based on OMIM, ClinVar and other data bases [@piñero2019]
 
 -   Orphanet -- Validated - and non validated - GDAs
 
--   ClinGen -- Validated - and non validated - GDAs
+-   ClinGen -- Validated - and non validated - GDAs [@rehm2015]
 
--   ClinVar -- Different levels of evidence
+-   ClinVar -- Different levels of evidence [@landrum2019]
 
--   GWAS catalogue -- GWAS associations to diseases
+-   GWAS catalogue -- GWAS associations to diseases [@buniello2018]
 
--   PheGenI -- GWAS associations to diseases
+-   PheGenI -- GWAS associations to diseases [@ramos2013]
 
--   lncRNADisease -- Experimental validated lncRNAs in diseases
+-   lncRNADisease -- Experimental validated lncRNAs in diseases [@chen2012]
 
--   HMDD -- Experimental validated miRNAs in diseases
+-   HMDD -- Experimental validated miRNAs in diseases [@huang2018]
 
-### Our GDA
+### Understanding a GDA dataset
 
-We will use in this workshop Gene-Disease-Association from DisGeNet.
+We will use in this workshop Gene-Disease-Association from DisGeNet. And can be [found here](https://github.com/deisygysi/NetMed_Workshop/blob/master/data/curated_gene_disease_associations.tsv).
 
-#### Understanding the data
+Similar to the PPI, let us first get some familiarity with the data, before we are able to perform any analysis.
 
 Let's read in the data and again, do some basic statistics.
 
@@ -194,6 +202,8 @@ head(GDA)
 ```{r, results='markup', echo=FALSE}
 head(GDA) %>% knitr::kable()
 ```
+
+The first thing to notice is the inconsistency with the disease names, in order to be able to work with it, let's first put every disease to lower-case.
 
 ```{r}
 Cleaned_GDA = GDA %>% filter(diseaseType == 'disease') %>%
@@ -213,6 +223,8 @@ numGenes = Cleaned_GDA %>%
 
 ```
 
+Let's also understand the degree distribution of the diseases.
+
 ```{r, fig.cap= "Gene-Disease degree distribution"}
 ggplot(numGenes) +
   aes(x = numGenes, y = numDiseases) +
@@ -224,7 +236,7 @@ ggplot(numGenes) +
 
 ```
 
-Importantly is to filter for diseases with at least 10 genes.
+Because we want to focus in well studied diseases, and also that are known to be complex diseases, let's filter for diseases with at least 10 genes.
 
 ```{r}
 Cleaned_GDA %<>% 
@@ -235,7 +247,17 @@ Cleaned_GDA %<>%
 Cleaned_GDA$diseaseName %>% unique() %>%  length()
 ```
 
-## Drug-Targets
+### Exercises
+
+Now is your turn. Spend some minutes understanding the data and getting some familiarity with it.
+
+1.  What are the top 10 genes mostly involved with diseases? What are those diseases?
+
+2.  What are the top 10 highly polygenic diseases?
+
+3.  What are the top 10 highly polygenic disease classes?
+
+## Drug-Targets {#DTs}
 
 A *druggable* target is a protein, peptide or nucleic acid that has activity which can be modulated by a drug. A *drug* can be any small molecular weight chemical compound (SMOL) or a biologic (BIOL), such as an antibody or a recombinant protein that can treat a disease or a sympthom.
 
@@ -259,9 +281,9 @@ A drug-target has a couple of proprieties that are highly desired when construct
 
 -   Target has a favorable IP situation (no competitors on target, freedom to operate).
 
-### Data Sets
+### Commonly used data sources for GDAs
 
-There are a couple of really good data sets that report drug-target interactions:
+There are a couple of really good data sets that report drug-target interactions, I list here three good examples:
 
 1.  DrugBank [@Wishart2006; @wishart2017]
 
@@ -269,11 +291,11 @@ There are a couple of really good data sets that report drug-target interactions
 
 3.  Broad Institute Drug Repositioning Hub [@corsello2017]
 
-### Our DT
+### Understanding a Drug-Target dataset
 
-For this workshop we will use the drug bank drug-target dataset. This dataset has been previously parsed for your convenience.
+For this workshop we will use the drug bank drug-target dataset, and can be [found here](https://github.com/deisygysi/NetMed_Workshop/blob/master/data/DB_DrugTargets_1201.csv). This dataset is from Drug-Bank, and has been previously parsed for your convenience. The original file is an XML file, and needs to be carefully handled to get information needed.
 
-#### Understanding the data
+Similar to the PPI and the GDA, let us understand a little bit of the data set, and what kind of information we have here.
 
 ```{r, results='hide'}
 DT = fread(file = 'data/DB_DrugTargets_1201.csv')
@@ -329,3 +351,11 @@ ggplot(DrugDist) +
   labs(y = "Targets", x = "Drugs")+
   theme_minimal()
 ```
+
+### Exercises
+
+Let us understand a little bit more about the data.
+
+1.  What are the top 10 genes mostly targeted by drugs? Are they types are they mostly?
+
+2.  What are the top 10 most promiscuous drugs? What are their indication?

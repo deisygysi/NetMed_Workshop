@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.2.3)  3 FEB 2021 10:25
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.2.3)  3 FEB 2021 14:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -834,21 +834,21 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 
 ] (./NetMed.toc
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 3.
+(Font)              scaled to size 7.0pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 3.
+(Font)              scaled to size 5.0pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.00092pt on input line 3.
+(Font)              scaled to size 10.00092pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.00064pt on input line 3.
+(Font)              scaled to size 7.00064pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00046pt on input line 3.
+(Font)              scaled to size 5.00046pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 9.99893pt on input line 3.
+(Font)              scaled to size 9.99893pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.99925pt on input line 3.
+(Font)              scaled to size 6.99925pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 3.
+(Font)              scaled to size 4.99947pt on input line 2.
 )
 \tf@toc=\write4
 \openout4 = `NetMed.toc'.
@@ -857,64 +857,99 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 
 ]
 Chapter 1.
-[5] [6
+[5]
+File: NetMed_files/figure-latex/GRAPH-1.pdf Graphic file (type pdf)
+<use NetMed_files/figure-latex/GRAPH-1.pdf>
+[6] [7] [8] [9] [10
 
 ]
 Chapter 2.
-File: NetMed_files/figure-latex/GRAPH-1.pdf Graphic file (type pdf)
-<use NetMed_files/figure-latex/GRAPH-1.pdf>
-[7] [8] [9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 334--336
-
- []
-
-[11] [12
-
-]
-Chapter 3.
-[13] [14] [15]
+[11] [12] [13]
 File: NetMed_files/figure-latex/degree-distribution-1.pdf Graphic file (type pd
 f)
 <use NetMed_files/figure-latex/degree-distribution-1.pdf>
-[16] [17]
-Overfull \hbox (528.99525pt too wide) in paragraph at lines 715--732
+[14] [15] [16]
+Overfull \hbox (528.99525pt too wide) in paragraph at lines 728--745
 [][] 
  []
 
-[18]
 File: NetMed_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-11-1.pdf>
-[19]
-Overfull \hbox (557.28522pt too wide) in paragraph at lines 864--881
+[17] [18] [19]
+Overfull \hbox (557.28522pt too wide) in paragraph at lines 895--912
 [][] 
  []
 
 [20]
 File: NetMed_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-17-1.pdf>
-[21] [22]
+[21]
 File: NetMed_files/figure-latex/unnamed-chunk-19-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-19-1.pdf>
-[23] [24
-
-]
-Chapter 4.
+[22]
+Chapter 3.
 File: NetMed_files/figure-latex/diseasemodule-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/diseasemodule-1.pdf>
-[25]
+[23
+
+]
 File: NetMed_files/figure-latex/unnamed-chunk-23-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-23-1.pdf>
-[26]
+[24]
 File: NetMed_files/figure-latex/unnamed-chunk-24-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-24-1.pdf>
 
 Underfull \vbox (badness 3482) has occurred while \output is active []
 
-[27]
+[25]
 File: NetMed_files/figure-latex/unnamed-chunk-25-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-25-1.pdf>
+[26]
+Overfull \hbox (4522.99498pt too wide) in paragraph at lines 1227--1227
+[]\TU/lmtt/m/n/10 ##   |                                                       
+                       |                                                       
+               |   0%  |                                                       
+                       |==============                                         
+               |  20%  |                                                       
+                       |============================                           
+               |  40%  |                                                       
+                       |==========================================             
+               |  60%  |                                                       
+                       |=======================================================
+=              |  80%  |                                                       
+                       |=======================================================
+===============| 100%[] 
+ []
+
+[27]
+File: NetMed_files/figure-latex/unnamed-chunk-27-1.pdf Graphic file (type pdf)
+<use NetMed_files/figure-latex/unnamed-chunk-27-1.pdf>
 [28]
-Overfull \hbox (4522.99498pt too wide) in paragraph at lines 1183--1183
+
+LaTeX Warning: Reference `fig:separation' on page 29 undefined on input line 12
+93.
+
+File: NetMed_files/figure-latex/separation-1.pdf Graphic file (type pdf)
+<use NetMed_files/figure-latex/separation-1.pdf>
+
+Overfull \hbox (4522.99498pt too wide) in paragraph at lines 1335--1335
+[]\TU/lmtt/m/n/10 ##   |                                                       
+                       |                                                       
+               |   0%  |                                                       
+                       |==============                                         
+               |  20%  |                                                       
+                       |============================                           
+               |  40%  |                                                       
+                       |==========================================             
+               |  60%  |                                                       
+                       |=======================================================
+=              |  80%  |                                                       
+                       |=======================================================
+===============| 100%[] 
+ []
+
+
+Overfull \hbox (4522.99498pt too wide) in paragraph at lines 1343--1343
 []\TU/lmtt/m/n/10 ##   |                                                       
                        |                                                       
                |   0%  |                                                       
@@ -931,63 +966,19 @@ Overfull \hbox (4522.99498pt too wide) in paragraph at lines 1183--1183
  []
 
 [29]
-File: NetMed_files/figure-latex/unnamed-chunk-27-1.pdf Graphic file (type pdf)
-<use NetMed_files/figure-latex/unnamed-chunk-27-1.pdf>
-[30]
-
-LaTeX Warning: Reference `fig:separation' on page 31 undefined on input line 12
-49.
-
-File: NetMed_files/figure-latex/separation-1.pdf Graphic file (type pdf)
-<use NetMed_files/figure-latex/separation-1.pdf>
-
-Overfull \hbox (4522.99498pt too wide) in paragraph at lines 1291--1291
-[]\TU/lmtt/m/n/10 ##   |                                                       
-                       |                                                       
-               |   0%  |                                                       
-                       |==============                                         
-               |  20%  |                                                       
-                       |============================                           
-               |  40%  |                                                       
-                       |==========================================             
-               |  60%  |                                                       
-                       |=======================================================
-=              |  80%  |                                                       
-                       |=======================================================
-===============| 100%[] 
- []
-
-
-Overfull \hbox (4522.99498pt too wide) in paragraph at lines 1299--1299
-[]\TU/lmtt/m/n/10 ##   |                                                       
-                       |                                                       
-               |   0%  |                                                       
-                       |==============                                         
-               |  20%  |                                                       
-                       |============================                           
-               |  40%  |                                                       
-                       |==========================================             
-               |  60%  |                                                       
-                       |=======================================================
-=              |  80%  |                                                       
-                       |=======================================================
-===============| 100%[] 
- []
-
-[31]
 File: NetMed_files/figure-latex/unnamed-chunk-29-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/unnamed-chunk-29-1.pdf>
-[32] [33] [34
+[30] [31] [32
 
 ]
-Chapter 5.
+Chapter 4.
 File: NetMed_files/figure-latex/proximity-1.pdf Graphic file (type pdf)
 <use NetMed_files/figure-latex/proximity-1.pdf>
-[35] [36]
+[33] [34]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1441.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1485.
 
-Overfull \hbox (4522.99498pt too wide) in paragraph at lines 1485--1485
+Overfull \hbox (4522.99498pt too wide) in paragraph at lines 1529--1529
 []\TU/lmtt/m/n/10 ##   |                                                       
                        |                                                       
                |   0%  |                                                       
@@ -1003,24 +994,24 @@ Overfull \hbox (4522.99498pt too wide) in paragraph at lines 1485--1485
 ===============| 100%[] 
  []
 
-[37] [38]
-Chapter 6.
-(./NetMed.bbl [39
+[35] [36]
+Chapter 5.
+(./NetMed.bbl [37
 
-] [40
+] [38
 
-] [41] [42] [43]) [44] (./NetMed.aux)
+] [39] [40] [41] [42]) [43] (./NetMed.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 17854 strings out of 479211
- 315184 string characters out of 5873802
- 787981 words of memory out of 5000000
- 37176 multiletter control sequences out of 15000+600000
+ 17874 strings out of 479211
+ 315645 string characters out of 5873802
+ 790390 words of memory out of 5000000
+ 37196 multiletter control sequences out of 15000+600000
  407441 words of font info for 73 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 98i,8n,122p,1586b,529s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 98i,8n,122p,1077b,561s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on NetMed.pdf (44 pages).
+Output written on NetMed.pdf (43 pages).

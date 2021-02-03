@@ -1,14 +1,22 @@
-# Introduction {#intro}
+# Workshop on Network Medicine
 
-Adapted from @Gysi2020.
+Network medicine (**NetMed**) is a field of Network Science that uses Systems Biology to understand its impact on medicine, and it is mostly focused on network topology. In NetMed we often use biological networks to represent the topological space and it be used to identify disease modules, their relationship to other diseases, drug repurpusing, and drug combinations. The biological networks often used for it are based on protein-protein interactions (PPI), Gene-Disease-Associations (GDA), and Drug-Targets.
+
+In this workshop, we will learn:
+
+-   how to identify disease modules (Session \@ref(diseasemodule));
+-   how to predict disease comorbidities (Session \@ref(dissep));
+-   how to repurpuse drugs using a network approach (Session \@ref(proximity)).
 
 ## What are networks? {#whatarenets}
 
-Network Science is broadly employed in many fields: from understanding *how friends bond in a party* to *how animals interact*; from *how superheroes appear in the same comic books* to *how genes can be related to a specific biological process*. Network analysis is especially beneficial for understanding complex systems, independent of the research field. Examples of complex biological or medical systems include gene regulatory, ecological and neuropsychology networks.
+> Adapted from @Gysi2020.
+
+Network Science is broadly employed in many fields: from understanding *how friends bond in a party* to *how animals interact*; from *how superheroes appear in the same comic books* to *how genes can be related to a specific biological process*. Network analysis is especially beneficial for understanding complex systems, in all research fields. Examples of complex biological or medical systems include gene regulatory, ecological and neuropsychology networks. In this workshop, focus is given to applications of Network Science to the medical sciences.
 
 Here, I will start by introducing the basic network terminologies and then explore how can we define and identify disease modules, identify disease commorbidities and lastly, we will learn how to repurpuse drugs for diseases with known modules. For each step, I will then present some classical and some new studies.
 
-It is expected some degree of familiarity with `R` and `igraph`.
+It is expected some degree of familiarity with `R`, `ggplot2`, `tidyr`, and `igraph`.
 
 ## Terminology {#terminology}
 
@@ -16,11 +24,9 @@ It is expected some degree of familiarity with `R` and `igraph`.
 require(igraph, quietly = TRUE)
 ```
 
-While the nature of each system, i.e. what its entities are and what kind of interactions they have, is different, there are common notations. A short dictionary of common network terms can be found in Session \@ref(network-terminology) and a brief description of biological terms can be found in Session \@ref(biological-terminology).
+While the nature of each system, i.e. what its entities are and what kind of interactions they have, is different, there are common notations. A short review of common network terms can be found in Session \@ref(network-terminology) and a brief review of biological terms can be found in Session \@ref(biological-terminology).
 
-The set of interactions among a set of entities is, in general, called a graph or a network [@Newman2018; @Barabasi2016]. In graph theory, each entity is called a vertex, while in network notation it is called a node [@Barabasi2016].
-
-Accordingly, the connections between two entities are called edges or links, respectively [@Barabasi2016]. In this workshop, I will always use the network notation, unless otherwise specified. The total number of nodes in a network is often denoted as N and the number of links in a network is denoted as L. While nodes can receive a label, links in general, are not labeled [@Barabasi2016] (although, in many cases, weights can also be perceived as a label). A network can be represented mathematically as an adjacency matrix (usually denoted as **A**) (Table \@ref(tab:ADJ)), an edge-list (Table \@ref(tab:EL)), or visually as a graph (Figure \@ref(fig:GRAPH)).
+The set of interactions among a set of entities is, in general, called a graph or a network [@Newman2018; @Barabasi2016]. In graph theory, each entity is called a vertex, while in network notation it is called a node [@Barabasi2016]. Accordingly, the connections between two entities are called edges or links, respectively [@Barabasi2016]. In this workshop, I will always use the network notation, unless otherwise specified. The total number of nodes in a network is often denoted as **N** and the number of links in a network is denoted as **L**. While nodes can receive a label, links in general, are not labeled [@Barabasi2016] (although, in many cases, weights can also be perceived as a label). A network can be represented mathematically as an adjacency matrix (usually denoted as **A**) (Table \@ref(tab:ADJ)), an edge-list (Table \@ref(tab:EL)), or visually as a graph (Figure \@ref(fig:GRAPH)).
 
 ```{r, warning=FALSE, echo=FALSE, results='markup'}
 set.seed(124)
@@ -37,20 +43,22 @@ E(g)$curved = 0.1
 ```
 
 ```{r ADJ, echo=FALSE, results='markup'}
-g %>% as_adjacency_matrix(., sparse = F)%>% knitr::kable(., caption = 'Adjacency Matrix')
+g %>% as_adjacency_matrix(., sparse = F)%>% knitr::kable(., caption = 'Mathematical Representation of a Network: Adjacency Matrix')
 ```
+
+Links of a network can possess a direction (normally depicted by an arrow), which indicates that the interaction is asymmetric, e.g. one gene is regulating another gene, or a person follows somebody else in a social network. Networks with directed links are called directed networks, while networks without directed interactions or in which the direction is not known are referred to as undirected networks, e.g. collaboration in the same study or interactions between proteins. In NetMed - and in this workshop - most of the times we assume that networks do not posses a direction. The links can also have a weight to express the strength of the interaction, which results in a weighted network [@Newman2018; @Barabasi2016]. Usually, the weight is graphically displayed as the thickness or the length of the links.
 
 ```{r EL, echo=FALSE, results='markup'}
 e = g %>% as_edgelist() %>% as.data.frame()
 names(e) = c('Source', 'Target')
-knitr::kable(e, caption = "Edge List")
+knitr::kable(e, caption = "Mathematical Representation of a Network: Edge List")
 ```
 
-```{r GRAPH,echo=FALSE, fig.cap='Graph', out.width='80%', fig.asp=.75, fig.align='center'}
+Networks can also have different dimensions. These dimensions can be understood as layers (or different link types) of the same system [@Kurant2006LayeredNetworks; @Kivela2014MultilayerNetworks]. For example, in a multi-omics multilayer system, each layer can be constructed using different -omics data (for example genomics, transcriptomics, proteomics, etc.) where the 'whole' biological system can be understood as a network of networks [@DeDomenico2017]. The topology and the dynamic properties of the whole network can be changed by simply transforming the weights of the interactions, or by ignoring that nodes can interact in many ways [@Mucha2010CommunityNetworks; @Radicchi2013AbruptNetworks] also ignoring the node's importance to the system. We will not deal with multi-layer networks in this workshop.
+
+```{r GRAPH,echo=FALSE, fig.cap='Visual Representation of a Network: Graph', out.width='80%', fig.asp=.75, fig.align='center'}
 plot(g)
 ```
-
-Links of a network can possess a direction (normally depicted by an arrow), which indicates that the interaction is asymmetric, e.g. one gene is regulating another gene, or a person follows somebody else in a social network. Networks with directed links are called directed networks, while networks without directed interactions or in which the direction is not known are referred to as undirected networks, e.g. collaboration in the same study or interactions between proteins. The links can also have a weight to express the strength of the interaction, which results in a weighted network [@Newman2018; @Barabasi2016]. Usually, the weight is graphically displayed as the thickness or the length of the links. Networks can also have different dimensions. These dimensions can be understood as layers (or different link types) of the same system [@Kurant2006LayeredNetworks; @Kivela2014MultilayerNetworks]. For example, in a multi-omics multilayer system, each layer can be constructed using different -omics data (for example genomics, transcriptomics, proteomics, etc.) where the 'whole' biological system can be understood as a network of networks [@DeDomenico2017]. The topology and the dynamic properties of the whole network can be changed by simply transforming the weights of the interactions, or by ignoring that nodes can interact in many ways [@Mucha2010CommunityNetworks; @Radicchi2013AbruptNetworks] also ignoring the node's importance to the system. We will not deal with multi-layer networks in this workshop.
 
 ### Network Terminology
 
@@ -104,15 +112,17 @@ Links of a network can possess a direction (normally depicted by an arrow), whic
 
 -   **Genes** are the basic physical and functional units of heredity. They are parts of the DNA and contain the information for producing functional RNAs and proteins. [@Slack2013].
 
+-   **Proteins** are large, complex molecules that play many critical roles in the body. The proteins are responsible for most of the work in cells and are necessary for structure, function, and regulation of the cells. They can act as enzymes, antibodies, transporters, transcription factors etc. [@Slack2013].
+
 -   The **RNA** is synthesized from the DNA but has different properties and functions than the DNA. Some RNAs carry out biological functions in a cell, while others, messenger RNA (mRNA), are turned into proteins that fulfil biological functions [@Slack2013].
 
 -   A **non-coding RNA (ncRNA)** is an RNA that does not encode a protein. NcRNAs often play a role in gene regulation [@MattickNon-codingRNA].
 
 -   **microRNAs (miRNA)** are examples of ncRNA; they are involved in posttranscriptional regulation of protein expression [@Tanase2012MicroRNAs].
 
--   **Proteins** are large, complex molecules that play many critical roles in the body. The proteins are responsible for most of the work in cells and are necessary for structure, function, and regulation of the cells. They can act as enzymes, antibodies, transporters, transcription factors etc. [@Slack2013].
+-   **Gene expression** is, in short, the coupled process of transcription (from DNA to RNA) and translation (from RNA to proteins) to transform the stored information inside the DNA into proteins [@Slack2013].
 
--   **Gene expression** is, in short, the coupled process of transcription (from DNA to RNA) and translation (from RNA to proteins) to transform the stored information inside the DNA into proteins [@Slack2013]. **RNA-Seq** is a technique used to sequence the RNAs in a sample. The result is the snapshot abundance of all RNAs expressed in the sample at a particular time, often called the transcriptome [@Metzker2010SequencingGeneration].
+-   **RNA-Seq** is a technique used to sequence the RNAs in a sample. The result is the snapshot abundance of all RNAs expressed in the sample at a particular time, often called the transcriptome [@Metzker2010SequencingGeneration].
 
 -   **Microarrays**, or **gene chips**, are chips with thousands of tiny spots containing a known DNA sequence. It is used to measure the abundance of mRNAs by eminence of fluorescence [@Slack2013].
 
@@ -130,14 +140,10 @@ Links of a network can possess a direction (normally depicted by an arrow), whic
 
 -   **High-throughput Mass Spectrometry** has the ability to detect a characteristic mass to charge ratio of different substances in a sample. It is used to identify the proteins present in a sample [@Kempa2019HighAnalysis].
 
--   **Chromatin immunoprecipitation followed by sequencing (ChIP--Seq)** can be used to identify binding sites of transcription factors in the DNA or of histone modification in a genome-wide manner [@Park2009ChIP-seq:Technology].\
+-   **Chromatin immunoprecipitation followed by sequencing (ChIP--Seq)** can be used to identify binding sites of transcription factors in the DNA or of histone modification in a genome-wide manner [@Park2009ChIP-seq:Technology].
 
 -   **Chromatin Isolation by RNA Purification followed by sequencing (ChIRP-seq)** maps lncRNA interactions to the chromatin [@Park2009ChIP-seq:Technology].
 
 -   **Genome-wide association studies (GWAS)** are studies where millions of SNPs are tested for association with a particular phenotype using hundreds or thousands of individuals. Those studies shed light on the genetic basis of complex traits.
 
 -   **Omics** is a term that refers to the study of different areas in biology, and indicates the totality of some kind, e.g. genome, transcriptome, proteome, etc.
-
-## Aim of the workshop
-
-In this workshop we will deal with some diseases diseases. We will be able to identify its disease modules, identify possible commorbidities and drug repurpusing candidates using Network Medicine tools.

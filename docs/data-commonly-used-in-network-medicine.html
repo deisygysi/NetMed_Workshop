@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Data Commonly Used in Network Medicine | Network Medicine</title>
+  <meta name="description" content="Workshop in Advanced Bioinformatics: Network Medicine." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Data Commonly Used in Network Medicine | Network Medicine" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Workshop in Advanced Bioinformatics: Network Medicine." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Data Commonly Used in Network Medicine | Network Medicine" />
+  
+  <meta name="twitter:description" content="Workshop in Advanced Bioinformatics: Network Medicine." />
+  
+
+<meta name="author" content="Deisy Morselli Gysi" />
+
+
+<meta name="date" content="2021-02-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="workshop-on-network-medicine.html"/>
+<link rel="next" href="methods.html"/>
+<script src="libs/header-attrs-2.6.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Network Medicine</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="workshop-on-network-medicine.html"><a href="workshop-on-network-medicine.html"><i class="fa fa-check"></i><b>1</b> Workshop on Network Medicine</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="workshop-on-network-medicine.html"><a href="workshop-on-network-medicine.html#whatarenets"><i class="fa fa-check"></i><b>1.1</b> What are networks?</a></li>
+<li class="chapter" data-level="1.2" data-path="workshop-on-network-medicine.html"><a href="workshop-on-network-medicine.html#terminology"><i class="fa fa-check"></i><b>1.2</b> Terminology</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="workshop-on-network-medicine.html"><a href="workshop-on-network-medicine.html#network-terminology"><i class="fa fa-check"></i><b>1.2.1</b> Network Terminology</a></li>
+<li class="chapter" data-level="1.2.2" data-path="workshop-on-network-medicine.html"><a href="workshop-on-network-medicine.html#biological-terminology"><i class="fa fa-check"></i><b>1.2.2</b> Biological Terminology</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html"><i class="fa fa-check"></i><b>2</b> Data Commonly Used in Network Medicine</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#PPI"><i class="fa fa-check"></i><b>2.1</b> Protein Protein Interaction Networks</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#measuring-ppis"><i class="fa fa-check"></i><b>2.1.1</b> Measuring PPIs</a></li>
+<li class="chapter" data-level="2.1.2" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#commonly-used-data-sources-for-ppis"><i class="fa fa-check"></i><b>2.1.2</b> Commonly used data sources for PPIs</a></li>
+<li class="chapter" data-level="2.1.3" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#understanding-a-ppi"><i class="fa fa-check"></i><b>2.1.3</b> Understanding a PPI</a></li>
+<li class="chapter" data-level="2.1.4" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#exercises"><i class="fa fa-check"></i><b>2.1.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#GDA"><i class="fa fa-check"></i><b>2.2</b> Gene Disease Association</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#commonly-used-data-sources-for-gdas"><i class="fa fa-check"></i><b>2.2.1</b> Commonly used data sources for GDAs</a></li>
+<li class="chapter" data-level="2.2.2" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#understanding-a-gda-dataset"><i class="fa fa-check"></i><b>2.2.2</b> Understanding a GDA dataset</a></li>
+<li class="chapter" data-level="2.2.3" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#exercises-1"><i class="fa fa-check"></i><b>2.2.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#DTs"><i class="fa fa-check"></i><b>2.3</b> Drug-Targets</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#properties-of-an-ideal-drug-target"><i class="fa fa-check"></i><b>2.3.1</b> Properties of an ideal drug target:</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#commonly-used-data-sources-for-gdas-1"><i class="fa fa-check"></i><b>2.3.2</b> Commonly used data sources for GDAs</a></li>
+<li class="chapter" data-level="2.3.3" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#understanding-a-drug-target-dataset"><i class="fa fa-check"></i><b>2.3.3</b> Understanding a Drug-Target dataset</a></li>
+<li class="chapter" data-level="2.3.4" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#exercises-2"><i class="fa fa-check"></i><b>2.3.4</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>3</b> Methods fo Disease Module Identification and Disease Similarity</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="methods.html"><a href="methods.html#diseasemodule"><i class="fa fa-check"></i><b>3.1</b> Disease Module</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="methods.html"><a href="methods.html#example-in-real-data"><i class="fa fa-check"></i><b>3.1.1</b> Example in real data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="methods.html"><a href="methods.html#exercises-3"><i class="fa fa-check"></i><b>3.1.2</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="methods.html"><a href="methods.html#gene-overlap"><i class="fa fa-check"></i><b>3.2</b> Gene Overlap</a></li>
+<li class="chapter" data-level="3.3" data-path="methods.html"><a href="methods.html#dissep"><i class="fa fa-check"></i><b>3.3</b> Disease Separation</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="methods.html"><a href="methods.html#example-in-real-data-1"><i class="fa fa-check"></i><b>3.3.1</b> Example in real data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="methods.html"><a href="methods.html#exercise"><i class="fa fa-check"></i><b>3.3.2</b> Exercise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="method-for-drug-repurpusing.html"><a href="method-for-drug-repurpusing.html"><i class="fa fa-check"></i><b>4</b> Method for drug-repurpusing</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="method-for-drug-repurpusing.html"><a href="method-for-drug-repurpusing.html#proximity"><i class="fa fa-check"></i><b>4.1</b> Proximity</a></li>
+<li class="chapter" data-level="4.2" data-path="method-for-drug-repurpusing.html"><a href="method-for-drug-repurpusing.html#example-in-real-data-2"><i class="fa fa-check"></i><b>4.2</b> Example in real data</a></li>
+<li class="chapter" data-level="4.3" data-path="method-for-drug-repurpusing.html"><a href="method-for-drug-repurpusing.html#exercises-4"><i class="fa fa-check"></i><b>4.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>5</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="./">Workshop in Advanced Bioinformatics</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Network Medicine</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-commonly-used-in-network-medicine" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Data Commonly Used in Network Medicine</h1>
+<p>In NetMed we are often interested in understanding <em>how genes associated to a particular disease can influence each other</em>, <em>how two diseases are similar (or different)</em>, <em>and how a drug can be used in different set-ups.</em></p>
+<p>For that end, it is necessary to use data sets that are able to represent those associations: <strong>Protein-Protein Interactions</strong> are used as a map of the interactions inside our cells (Session <a href="data-commonly-used-in-network-medicine.html#PPI">2.1</a>); <strong>Gene-Disease-Associations</strong> are used for us to identify genes that were previously associated to diseases, often using a GWAS approach (Session <a href="data-commonly-used-in-network-medicine.html#GDA">2.2</a>); and Drug-Target interactions, often measured by identifying physical binding of a therapeutic compound (often a drug) and a protein (Session <a href="data-commonly-used-in-network-medicine.html#DTs">2.3</a>).</p>
+<div id="PPI" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Protein Protein Interaction Networks</h2>
+<p>In PPI networks, the nodes represent proteins and they are connected by a link if they physically interact with each other <span class="citation">(<a href="references.html#ref-rual2005" role="doc-biblioref">Rual et al. 2005</a>)</span>. Typically, these interactions are measured experimentally, for instance with the Yeast-Two-Hybrid (Y2H) system <span class="citation">(<a href="references.html#ref-uetz2000" role="doc-biblioref">Uetz et al. 2000</a>)</span>, or by protein complex immunoprecipitation followed by high-throughput Mass Spectrometry <span class="citation">(<a href="references.html#ref-zhang2008" role="doc-biblioref">Zhang et al. 2008</a>; <a href="references.html#ref-koh2012" role="doc-biblioref">Koh et al. 2012</a>)</span>, or inferred computationally based on sequence similarity <span class="citation">(<a href="references.html#ref-fong2004" role="doc-biblioref">Fong, Keating, and Singh 2004</a>)</span>. PPI can be used to infer gene functions and the association of sub-networks to diseases <span class="citation">(<a href="references.html#ref-Menche2015" role="doc-biblioref">Menche et al. 2015</a>)</span>. In this type of network, a highly connected protein tends to interact with proteins that are less connected, probably to prevent unwanted cross-talk of functional modules. As mentioned, most of the methods in network medicine are based on PPI.</p>
+<div id="measuring-ppis" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Measuring PPIs</h3>
+<p>Protein Protein Interactions can be measured mainly using three different techniques:</p>
+<ol style="list-style-type: decimal">
+<li><p>By the creation of protein protein interaction maps derived from existing scientific literature;</p></li>
+<li><p>Using computational predictions of PPIs based on available orthogonal information; and</p></li>
+<li><p>By systematic experimental mapping of proteins identify complex association and/or binary interactions. We will focus here only in the third.</p></li>
+</ol>
+<p>Co-complex associations interrogate a protein composition of protein complex in one or several cell lines. The most common approach uses affinity purification to extract the proteins that associate with the <em>bait</em> proteins followed by mass expectometry in order to identify proteins that associate with the <em>bait.</em> This approach is often used for simple organisms, however similar approaches have been reported for humans. Unfortunately, achieving stable expression of bait proteins is challenging. Co-complex map associations are composed by indirect and some direct binary associations. However, raw association data cannot distinguish the indirect from direct association and therefore, co-complex datasets have to be filtered and needs to have incorporated prior knowledge that might lead to bias towards super-start genes. On the other side, for experimental determination of binary interactions between proteins, all possible pair of proteins are systematically tested to generate a data set of all possible biophysical interactions.</p>
+<p>Because the human genome is composed by ~20,000 unique genes - not even considering its isophorms - we would have ~200 million possible combinations in order to robust systematically identify interactions. To meet this requirement Yeast-to-Hybrid (Y2H) technology is the only one that can meet this requirement. This technology is able to interrogate hundreds of millions of human proteins pairs for binary interactions. In short the method works as follows: Protein of interest X and a DNA binding domain (DBD-X) fuse to form <em>bait</em>. Fusion of transcriptional activation domain (AD-Y) and a cDNA library Y results in <em>prey</em>. Those two form the basis of the protein–protein interaction detection system. Without bait–prey interaction, the activation domain is unable to restrict the gene-to-gene expression drive.</p>
+</div>
+<div id="commonly-used-data-sources-for-ppis" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Commonly used data sources for PPIs</h3>
+<p>PPIs can be found from different sources. I list here some well known databases for that.</p>
+<ol style="list-style-type: decimal">
+<li>Binary PPIs derived from high-throughput yeast-two hybrid (Y2H) experiments:</li>
+</ol>
+<ul>
+<li>HI-Union <span class="citation">(<a href="references.html#ref-Luck2020" role="doc-biblioref">Luck et al. 2020</a>)</span></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Binary PPIs three-dimensional (3D) protein structures:</li>
+</ol>
+<ul>
+<li>Interactome3D <span class="citation">(<a href="references.html#ref-Mosca2013" role="doc-biblioref">Mosca, Céol, and Aloy 2013</a>)</span></li>
+<li>Instruct <span class="citation">(<a href="references.html#ref-Meyer2013" role="doc-biblioref">Meyer et al. 2013</a>)</span></li>
+<li>Insider <span class="citation">(<a href="references.html#ref-Meyer2018" role="doc-biblioref">Meyer et al. 2018</a>)</span></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Binary PPIs literature curation:</li>
+</ol>
+<ul>
+<li>PINA <span class="citation">(<a href="references.html#ref-Cowley2012" role="doc-biblioref">Cowley et al. 2012</a>)</span></li>
+<li>MINT <span class="citation">(<a href="references.html#ref-Licata2012" role="doc-biblioref">Licata et al. 2012</a>)</span></li>
+<li>LitBM17 <span class="citation">(<a href="references.html#ref-Luck2020" role="doc-biblioref">Luck et al. 2020</a>)</span></li>
+<li>Interactome3D</li>
+<li>Instruct</li>
+<li>Insider</li>
+<li>BioGrid <span class="citation">(<a href="references.html#ref-Chatr-Aryamontri2017" role="doc-biblioref">Chatr-Aryamontri et al. 2017</a>)</span></li>
+<li>HINT <span class="citation">(<a href="references.html#ref-Das2012" role="doc-biblioref">Das and Yu 2012</a>)</span></li>
+<li>HIPPIE <span class="citation">(<a href="references.html#ref-Alanis-Lobato2017" role="doc-biblioref">Alanis-Lobato, Andrade-Navarro, and Schaefer 2017</a>)</span></li>
+<li>APID <span class="citation">(<a href="references.html#ref-Alonso-Lopez2019a" role="doc-biblioref">Alonso-López et al. 2019</a>)</span></li>
+<li>InWeb <span class="citation">(<a href="references.html#ref-li2016" role="doc-biblioref">T. Li et al. 2016</a>)</span></li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>PPIs identified by affinity purification followed by mass spectrometry:</li>
+</ol>
+<ul>
+<li>BioPlex <span class="citation">(<a href="references.html#ref-Huttlin2017" role="doc-biblioref">Huttlin et al. 2017</a>)</span></li>
+<li>QUBIC <span class="citation">(<a href="references.html#ref-Hein2015" role="doc-biblioref">Hein et al. 2015</a>)</span></li>
+<li>CoFrac <span class="citation">(<a href="references.html#ref-wan2015" role="doc-biblioref">Wan et al. 2015</a>)</span></li>
+<li>HINT</li>
+<li>HIPPIE</li>
+<li>APID</li>
+<li>LitBM17</li>
+<li>InWeb</li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li>Kinase substrate interactions:</li>
+</ol>
+<ul>
+<li>KinomeNetworkX <span class="citation">(<a href="references.html#ref-cheng2014" role="doc-biblioref">Cheng et al. 2014</a>)</span></li>
+<li>PhosphoSitePlus <span class="citation">(<a href="references.html#ref-Hornbeck2015" role="doc-biblioref">Hornbeck et al. 2015</a>)</span></li>
+</ul>
+<ol start="6" style="list-style-type: decimal">
+<li>Signaling interactions:</li>
+</ol>
+<ul>
+<li>SignaLink <span class="citation">(<a href="references.html#ref-Fazekas2013" role="doc-biblioref">Fazekas et al. 2013</a>)</span></li>
+<li>InnateDB <span class="citation">(<a href="references.html#ref-Breuer2013" role="doc-biblioref">Breuer et al. 2013</a>)</span></li>
+</ul>
+<ol start="7" style="list-style-type: decimal">
+<li>Regulatory interactions:</li>
+</ol>
+<ul>
+<li>ENCODE consortium.</li>
+</ul>
+</div>
+<div id="understanding-a-ppi" class="section level3" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Understanding a PPI</h3>
+<p>For this workshop, we will be using for this workshop is a combination of a manually curated PPI that combines all previous data sets. The data can be <a href="https://github.com/deisygysi/NetMed_Workshop/blob/master/data/PPI_Symbol_Entrez.csv">found here</a>. This PPI was previously published in <span class="citation"><a href="references.html#ref-Gysi2020a" role="doc-biblioref">D. M. Gysi et al.</a> (<a href="references.html#ref-Gysi2020a" role="doc-biblioref">2020</a>)</span>.</p>
+<p>Before we can start any analysis using this interactome, let us first understand this data.</p>
+<p>The PPI contains the EntrezID and the HGNC symbol of each gene, and some might not have a proper map, therefore, it should be removed from further analysis. Moreover, we might have loops, and those should also be removed.</p>
+<p>Let us begin by preparing our environment and calling all libraries we will need at this point.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data-commonly-used-in-network-medicine.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(data.table)</span>
+<span id="cb1-2"><a href="data-commonly-used-in-network-medicine.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(tidyr)</span>
+<span id="cb1-3"><a href="data-commonly-used-in-network-medicine.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(igraph)</span>
+<span id="cb1-4"><a href="data-commonly-used-in-network-medicine.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(dplyr)</span>
+<span id="cb1-5"><a href="data-commonly-used-in-network-medicine.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(magrittr)</span>
+<span id="cb1-6"><a href="data-commonly-used-in-network-medicine.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span></code></pre></div>
+<p>Let’s read in our data.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="data-commonly-used-in-network-medicine.html#cb2-1" aria-hidden="true" tabindex="-1"></a>PPI <span class="ot">=</span> <span class="fu">fread</span>(<span class="st">&quot;./data/PPI_Symbol_Entrez.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="data-commonly-used-in-network-medicine.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(PPI)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">GeneA_ID</th>
+<th align="right">GeneB_ID</th>
+<th align="left">Symbol_A</th>
+<th align="left">Symbol_B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">9796</td>
+<td align="right">56992</td>
+<td align="left">PHYHIP</td>
+<td align="left">KIF15</td>
+</tr>
+<tr class="even">
+<td align="right">7918</td>
+<td align="right">9240</td>
+<td align="left">GPANK1</td>
+<td align="left">PNMA1</td>
+</tr>
+<tr class="odd">
+<td align="right">8233</td>
+<td align="right">23548</td>
+<td align="left">ZRSR2</td>
+<td align="left">TTC33</td>
+</tr>
+<tr class="even">
+<td align="right">4899</td>
+<td align="right">11253</td>
+<td align="left">NRF1</td>
+<td align="left">MAN1B1</td>
+</tr>
+<tr class="odd">
+<td align="right">5297</td>
+<td align="right">8601</td>
+<td align="left">PI4KA</td>
+<td align="left">RGS20</td>
+</tr>
+<tr class="even">
+<td align="right">6564</td>
+<td align="right">8933</td>
+<td align="left">SLC15A1</td>
+<td align="left">RTL8C</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s transform our edge-list into a network.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data-commonly-used-in-network-medicine.html#cb4-1" aria-hidden="true" tabindex="-1"></a>gPPI <span class="ot">=</span> PPI <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="data-commonly-used-in-network-medicine.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">&quot;Symbol&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="data-commonly-used-in-network-medicine.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Symbol_A <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="data-commonly-used-in-network-medicine.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Symbol_B <span class="sc">!=</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="data-commonly-used-in-network-medicine.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">graph_from_data_frame</span>(., <span class="at">directed =</span> F) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="data-commonly-used-in-network-medicine.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">simplify</span>()</span>
+<span id="cb4-7"><a href="data-commonly-used-in-network-medicine.html#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="data-commonly-used-in-network-medicine.html#cb4-8" aria-hidden="true" tabindex="-1"></a>gPPI</span></code></pre></div>
+<pre><code>## IGRAPH ea18bf7 UN-- 18507 322289 -- 
+## + attr: name (v/c)
+## + edges from ea18bf7 (vertex names):
+##  [1] PHYHIP--TTR      PHYHIP--NFE2     PHYHIP--DYRK1A   PHYHIP--HNRNPA1 
+##  [5] PHYHIP--COPS6    PHYHIP--SUPT5H   PHYHIP--SMARCC2  PHYHIP--EEF1A1  
+##  [9] PHYHIP--TRIP6    PHYHIP--NDUFV3   PHYHIP--CA10     PHYHIP--ERG28   
+## [13] PHYHIP--S100A13  PHYHIP--PPIE     PHYHIP--LIMD1    PHYHIP--ANKRD12 
+## [17] PHYHIP--ZZEF1    PHYHIP--PRMT5    PHYHIP--KIF15    PHYHIP--MED8    
+## [21] PHYHIP--PRKD2    PHYHIP--PAQR5    PHYHIP--MAGED4B  PHYHIP--NDRG1   
+## [25] PHYHIP--PTRH2    PHYHIP--HDAC11   PHYHIP--METTL18  PHYHIP--PNPLA2  
+## [29] PHYHIP--TMEM255B PHYHIP--WDR89    PHYHIP--FAM131A  GPANK1--TAF1    
+## + ... omitted several edges</code></pre>
+<p>How many genes do we have? How many interactions?</p>
+<p>Next, let’s check the degree distribution:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="data-commonly-used-in-network-medicine.html#cb6-1" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">=</span> <span class="fu">degree</span>(gPPI) <span class="sc">%&gt;%</span> <span class="fu">table</span>() <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb6-2"><a href="data-commonly-used-in-network-medicine.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dd) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;Degree&#39;</span>, <span class="st">&quot;Nodes&quot;</span>)</span>
+<span id="cb6-3"><a href="data-commonly-used-in-network-medicine.html#cb6-3" aria-hidden="true" tabindex="-1"></a>dd<span class="sc">$</span>Degree <span class="sc">%&lt;&gt;%</span> as.character <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
+<span id="cb6-4"><a href="data-commonly-used-in-network-medicine.html#cb6-4" aria-hidden="true" tabindex="-1"></a>dd<span class="sc">$</span>Nodes  <span class="sc">%&lt;&gt;%</span> as.character <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
+<span id="cb6-5"><a href="data-commonly-used-in-network-medicine.html#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="data-commonly-used-in-network-medicine.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dd) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="data-commonly-used-in-network-medicine.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Degree, <span class="at">y =</span> Nodes) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="data-commonly-used-in-network-medicine.html#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">&quot;#1d3557&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="data-commonly-used-in-network-medicine.html#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log10&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="data-commonly-used-in-network-medicine.html#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log10&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="data-commonly-used-in-network-medicine.html#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<pre><code>## Warning: Transformation introduced infinite values in continuous x-axis</code></pre>
+<div class="figure"><span id="fig:degree-distribution"></span>
+<img src="NetMed_files/figure-html/degree-distribution-1.png" alt="PPI Degree Distribution" width="672" />
+<p class="caption">
+Figure 2.1: PPI Degree Distribution
+</p>
+</div>
+<p>Most of the proteins have few connections, and very few proteins have lots of connections. Who’s that protein?</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="data-commonly-used-in-network-medicine.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">degree</span>(gPPI) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="data-commonly-used-in-network-medicine.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="data-commonly-used-in-network-medicine.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="data-commonly-used-in-network-medicine.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(. <span class="sc">&gt;</span> <span class="dv">1000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="data-commonly-used-in-network-medicine.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">UBC</td>
+<td align="right">5199</td>
+</tr>
+<tr class="even">
+<td align="left">ETS1</td>
+<td align="right">1496</td>
+</tr>
+<tr class="odd">
+<td align="left">GATA2</td>
+<td align="right">1369</td>
+</tr>
+<tr class="even">
+<td align="left">CTCF</td>
+<td align="right">1361</td>
+</tr>
+<tr class="odd">
+<td align="left">EP300</td>
+<td align="right">1124</td>
+</tr>
+<tr class="even">
+<td align="left">MYC</td>
+<td align="right">1107</td>
+</tr>
+<tr class="odd">
+<td align="left">AR</td>
+<td align="right">1099</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="exercises" class="section level3" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Exercises</h3>
+<p>Now is your turn. Spend some minutes understanding the data and getting some familiarity with it.</p>
+<ol style="list-style-type: decimal">
+<li><p>What are the top 10 genes with higher degree?</p></li>
+<li><p>Are those genes connected?</p></li>
+</ol>
+</div>
+</div>
+<div id="GDA" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Gene Disease Association</h2>
+<p>A Gene-Disease-Association (GDA) database are typically used to understand the association of genes to diseases, and model the underlying mechanisms of complex diseases. Those associations often come from GWAS studies and knock-out studies.</p>
+<div id="commonly-used-data-sources-for-gdas" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Commonly used data sources for GDAs</h3>
+<p>As PPIs, GDAs can be found from different sources and with different evidences for each Gene-Disease association. I list here some well known databases for that.</p>
+<ul>
+<li><p>CTD – Curated scientific literature <span class="citation">(<a href="references.html#ref-davis2020" role="doc-biblioref">Davis et al. 2020</a>)</span></p></li>
+<li><p>OMIM – Curated scientific literature <span class="citation">(<a href="references.html#ref-mckusick2007" role="doc-biblioref">McKusick 2007</a>)</span></p></li>
+<li><p>DisGeNet – Based on OMIM, ClinVar and other data bases <span class="citation">(<a href="references.html#ref-piñero2019" role="doc-biblioref">Piñero et al. 2019</a>)</span></p></li>
+<li><p>Orphanet – Validated - and non validated - GDAs</p></li>
+<li><p>ClinGen – Validated - and non validated - GDAs <span class="citation">(<a href="references.html#ref-rehm2015" role="doc-biblioref">Rehm et al. 2015</a>)</span></p></li>
+<li><p>ClinVar – Different levels of evidence <span class="citation">(<a href="references.html#ref-landrum2019" role="doc-biblioref">Landrum et al. 2019</a>)</span></p></li>
+<li><p>GWAS catalogue – GWAS associations to diseases <span class="citation">(<a href="references.html#ref-buniello2018" role="doc-biblioref">Buniello et al. 2018</a>)</span></p></li>
+<li><p>PheGenI – GWAS associations to diseases <span class="citation">(<a href="references.html#ref-ramos2013" role="doc-biblioref">Ramos et al. 2013</a>)</span></p></li>
+<li><p>lncRNADisease – Experimental validated lncRNAs in diseases <span class="citation">(<a href="references.html#ref-chen2012" role="doc-biblioref">Chen et al. 2012</a>)</span></p></li>
+<li><p>HMDD – Experimental validated miRNAs in diseases <span class="citation">(<a href="references.html#ref-huang2018" role="doc-biblioref">Huang et al. 2018</a>)</span></p></li>
+</ul>
+</div>
+<div id="understanding-a-gda-dataset" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Understanding a GDA dataset</h3>
+<p>We will use in this workshop Gene-Disease-Association from DisGeNet. And can be <a href="https://github.com/deisygysi/NetMed_Workshop/blob/master/data/curated_gene_disease_associations.tsv">found here</a>.</p>
+<p>Similar to the PPI, let us first get some familiarity with the data, before we are able to perform any analysis.</p>
+<p>Let’s read in the data and again, do some basic statistics.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data-commonly-used-in-network-medicine.html#cb9-1" aria-hidden="true" tabindex="-1"></a>GDA <span class="ot">=</span> <span class="fu">fread</span>(<span class="at">file =</span> <span class="st">&#39;data/curated_gene_disease_associations.tsv&#39;</span>, <span class="at">sep =</span> <span class="st">&#39;</span><span class="sc">\t</span><span class="st">&#39;</span>)</span>
+<span id="cb9-2"><a href="data-commonly-used-in-network-medicine.html#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="data-commonly-used-in-network-medicine.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(GDA)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="3%" />
+<col width="5%" />
+<col width="3%" />
+<col width="3%" />
+<col width="5%" />
+<col width="13%" />
+<col width="6%" />
+<col width="7%" />
+<col width="17%" />
+<col width="3%" />
+<col width="3%" />
+<col width="6%" />
+<col width="5%" />
+<col width="4%" />
+<col width="4%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">geneId</th>
+<th align="left">geneSymbol</th>
+<th align="right">DSI</th>
+<th align="right">DPI</th>
+<th align="left">diseaseId</th>
+<th align="left">diseaseName</th>
+<th align="left">diseaseType</th>
+<th align="left">diseaseClass</th>
+<th align="left">diseaseSemanticType</th>
+<th align="right">score</th>
+<th align="right">EI</th>
+<th align="right">YearInitial</th>
+<th align="right">YearFinal</th>
+<th align="right">NofPmids</th>
+<th align="right">NofSnps</th>
+<th align="left">source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">A1BG</td>
+<td align="right">0.700</td>
+<td align="right">0.538</td>
+<td align="left">C0019209</td>
+<td align="left">Hepatomegaly</td>
+<td align="left">phenotype</td>
+<td align="left">C23;C06</td>
+<td align="left">Finding</td>
+<td align="right">0.30</td>
+<td align="right">1.000</td>
+<td align="right">2017</td>
+<td align="right">2017</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="left">CTD_human</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">A1BG</td>
+<td align="right">0.700</td>
+<td align="right">0.538</td>
+<td align="left">C0036341</td>
+<td align="left">Schizophrenia</td>
+<td align="left">disease</td>
+<td align="left">F03</td>
+<td align="left">Mental or Behavioral Dysfunction</td>
+<td align="right">0.30</td>
+<td align="right">1.000</td>
+<td align="right">2015</td>
+<td align="right">2015</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="left">CTD_human</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">A2M</td>
+<td align="right">0.529</td>
+<td align="right">0.769</td>
+<td align="left">C0002395</td>
+<td align="left">Alzheimer’s Disease</td>
+<td align="left">disease</td>
+<td align="left">C10;F03</td>
+<td align="left">Disease or Syndrome</td>
+<td align="right">0.50</td>
+<td align="right">0.769</td>
+<td align="right">1998</td>
+<td align="right">2018</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="left">CTD_human</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">A2M</td>
+<td align="right">0.529</td>
+<td align="right">0.769</td>
+<td align="left">C0007102</td>
+<td align="left">Malignant tumor of colon</td>
+<td align="left">disease</td>
+<td align="left">C06;C04</td>
+<td align="left">Neoplastic Process</td>
+<td align="right">0.31</td>
+<td align="right">1.000</td>
+<td align="right">2004</td>
+<td align="right">2019</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="left">CTD_human</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">A2M</td>
+<td align="right">0.529</td>
+<td align="right">0.769</td>
+<td align="left">C0009375</td>
+<td align="left">Colonic Neoplasms</td>
+<td align="left">group</td>
+<td align="left">C06;C04</td>
+<td align="left">Neoplastic Process</td>
+<td align="right">0.30</td>
+<td align="right">1.000</td>
+<td align="right">2004</td>
+<td align="right">2004</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="left">CTD_human</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">A2M</td>
+<td align="right">0.529</td>
+<td align="right">0.769</td>
+<td align="left">C0011265</td>
+<td align="left">Presenile dementia</td>
+<td align="left">disease</td>
+<td align="left">C10;F03</td>
+<td align="left">Mental or Behavioral Dysfunction</td>
+<td align="right">0.30</td>
+<td align="right">1.000</td>
+<td align="right">1998</td>
+<td align="right">2004</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="left">CTD_human</td>
+</tr>
+</tbody>
+</table>
+<p>The first thing to notice is the inconsistency with the disease names, in order to be able to work with it, let’s first put every disease to lower-case.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="data-commonly-used-in-network-medicine.html#cb10-1" aria-hidden="true" tabindex="-1"></a>Cleaned_GDA <span class="ot">=</span> GDA <span class="sc">%&gt;%</span> <span class="fu">filter</span>(diseaseType <span class="sc">==</span> <span class="st">&#39;disease&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="data-commonly-used-in-network-medicine.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diseaseName =</span> <span class="fu">tolower</span>(diseaseName)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="data-commonly-used-in-network-medicine.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(geneSymbol, diseaseName, diseaseSemanticType) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="data-commonly-used-in-network-medicine.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>() </span>
+<span id="cb10-5"><a href="data-commonly-used-in-network-medicine.html#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="data-commonly-used-in-network-medicine.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Cleaned_GDA)</span></code></pre></div>
+<pre><code>## [1] 60478     3</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="data-commonly-used-in-network-medicine.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(GDA)</span></code></pre></div>
+<pre><code>## [1] 84038    16</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-commonly-used-in-network-medicine.html#cb14-1" aria-hidden="true" tabindex="-1"></a>numGenes <span class="ot">=</span> Cleaned_GDA <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="data-commonly-used-in-network-medicine.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(diseaseName) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="data-commonly-used-in-network-medicine.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">numGenes =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="data-commonly-used-in-network-medicine.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="data-commonly-used-in-network-medicine.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(numGenes) <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="data-commonly-used-in-network-medicine.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">numDiseases =</span> <span class="fu">n</span>())</span></code></pre></div>
+<p>Let’s also understand the degree distribution of the diseases.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-commonly-used-in-network-medicine.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(numGenes) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="data-commonly-used-in-network-medicine.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> numGenes, <span class="at">y =</span> numDiseases) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="data-commonly-used-in-network-medicine.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">&quot;#1d3557&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="data-commonly-used-in-network-medicine.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log10&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="data-commonly-used-in-network-medicine.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log10&quot;</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="data-commonly-used-in-network-medicine.html#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Genes&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Diseases&quot;</span>)<span class="sc">+</span></span>
+<span id="cb15-7"><a href="data-commonly-used-in-network-medicine.html#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-11"></span>
+<img src="NetMed_files/figure-html/unnamed-chunk-11-1.png" alt="Gene-Disease degree distribution" width="672" />
+<p class="caption">
+Figure 2.2: Gene-Disease degree distribution
+</p>
+</div>
+<p>Because we want to focus in well studied diseases, and also that are known to be complex diseases, let’s filter for diseases with at least 10 genes.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-commonly-used-in-network-medicine.html#cb16-1" aria-hidden="true" tabindex="-1"></a>Cleaned_GDA <span class="sc">%&lt;&gt;%</span> </span>
+<span id="cb16-2"><a href="data-commonly-used-in-network-medicine.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(diseaseName) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="data-commonly-used-in-network-medicine.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">numGenes =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="data-commonly-used-in-network-medicine.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(numGenes <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
+<span id="cb16-5"><a href="data-commonly-used-in-network-medicine.html#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="data-commonly-used-in-network-medicine.html#cb16-6" aria-hidden="true" tabindex="-1"></a>Cleaned_GDA<span class="sc">$</span>diseaseName <span class="sc">%&gt;%</span> <span class="fu">unique</span>() <span class="sc">%&gt;%</span>  <span class="fu">length</span>()</span></code></pre></div>
+<pre><code>## [1] 920</code></pre>
+</div>
+<div id="exercises-1" class="section level3" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Exercises</h3>
+<p>Now is your turn. Spend some minutes understanding the data and getting some familiarity with it.</p>
+<ol style="list-style-type: decimal">
+<li><p>What are the top 10 genes mostly involved with diseases? What are those diseases?</p></li>
+<li><p>What are the top 10 highly polygenic diseases?</p></li>
+<li><p>What are the top 10 highly polygenic disease classes?</p></li>
+</ol>
+</div>
+</div>
+<div id="DTs" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Drug-Targets</h2>
+<p>A <em>druggable</em> target is a protein, peptide or nucleic acid that has activity which can be modulated by a drug. A <em>drug</em> can be any small molecular weight chemical compound (SMOL) or a biologic (BIOL), such as an antibody or a recombinant protein that can treat a disease or a sympthom.</p>
+<div id="properties-of-an-ideal-drug-target" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Properties of an ideal drug target:</h3>
+<p>A drug-target has a couple of proprieties that are highly desired when constructing the drug <span class="citation">(<a href="references.html#ref-Gashaw2011" role="doc-biblioref">Gashaw et al. 2011</a>)</span>:</p>
+<ul>
+<li><p>Target is disease-modifying and/or has a proven function in the pathophysiology of a disease.</p></li>
+<li><p>Modulation of the target is less important under physiological conditions or in other diseases.</p></li>
+<li><p>If the druggability is not obvious (e.g. as for kinases) a 3D-structure for the target protein or a close homolog should be available for a druggability assessment.</p></li>
+<li><p>Target has a favorable ‘assayability’ enabling high throughput screening.</p></li>
+<li><p>Target expression is not uniformly distributed throughout the body.</p></li>
+<li><p>A target/disease-specific biomarker exists to monitor therapeutic efficacy.</p></li>
+<li><p>Favorable prediction of potential side effects according to phenotype data (e.g. in k.o. mice or genetic mutation databases).</p></li>
+<li><p>Target has a favorable IP situation (no competitors on target, freedom to operate).</p></li>
+</ul>
+</div>
+<div id="commonly-used-data-sources-for-gdas-1" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Commonly used data sources for GDAs</h3>
+<p>There are a couple of really good data sets that report drug-target interactions, I list here three good examples:</p>
+<ol style="list-style-type: decimal">
+<li><p>DrugBank <span class="citation">(<a href="references.html#ref-Wishart2006" role="doc-biblioref">Wishart et al. 2006</a>; <a href="references.html#ref-wishart2017" role="doc-biblioref">Wishart et al. 2017</a>)</span></p></li>
+<li><p>CTD <span class="citation">(<a href="references.html#ref-davis2020" role="doc-biblioref">Davis et al. 2020</a>)</span></p></li>
+<li><p>Broad Institute Drug Repositioning Hub <span class="citation">(<a href="references.html#ref-corsello2017" role="doc-biblioref">Corsello et al. 2017</a>)</span></p></li>
+</ol>
+</div>
+<div id="understanding-a-drug-target-dataset" class="section level3" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Understanding a Drug-Target dataset</h3>
+<p>For this workshop we will use the drug bank drug-target dataset, and can be <a href="https://github.com/deisygysi/NetMed_Workshop/blob/master/data/DB_DrugTargets_1201.csv">found here</a>. This dataset is from Drug-Bank, and has been previously parsed for your convenience. The original file is an XML file, and needs to be carefully handled to get information needed.</p>
+<p>Similar to the PPI and the GDA, let us understand a little bit of the data set, and what kind of information we have here.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-commonly-used-in-network-medicine.html#cb18-1" aria-hidden="true" tabindex="-1"></a>DT <span class="ot">=</span> <span class="fu">fread</span>(<span class="at">file =</span> <span class="st">&#39;data/DB_DrugTargets_1201.csv&#39;</span>)</span>
+<span id="cb18-2"><a href="data-commonly-used-in-network-medicine.html#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="data-commonly-used-in-network-medicine.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DT)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="1%" />
+<col width="4%" />
+<col width="5%" />
+<col width="8%" />
+<col width="7%" />
+<col width="3%" />
+<col width="3%" />
+<col width="4%" />
+<col width="6%" />
+<col width="5%" />
+<col width="31%" />
+<col width="4%" />
+<col width="6%" />
+<col width="7%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">i</th>
+<th align="left">ID</th>
+<th align="left">Name</th>
+<th align="left">Started_commer</th>
+<th align="left">Ended_commer</th>
+<th align="left">ATC</th>
+<th align="left">State</th>
+<th align="left">Approved</th>
+<th align="left">Gene_Target</th>
+<th align="left">DB_id</th>
+<th align="left">name</th>
+<th align="left">organism</th>
+<th align="left">Type</th>
+<th align="left">known_action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">DB00001</td>
+<td align="left">Lepirudin</td>
+<td align="left">1997-03-13</td>
+<td align="left">2012-07-27</td>
+<td align="left">B01AE</td>
+<td align="left">liquid</td>
+<td align="left">approved</td>
+<td align="left">F2</td>
+<td align="left">BE0000048</td>
+<td align="left">Prothrombin</td>
+<td align="left">Humans</td>
+<td align="left">Polypeptide</td>
+<td align="left">yes</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">DB00002</td>
+<td align="left">Cetuximab</td>
+<td align="left">2004-06-29</td>
+<td align="left">NA</td>
+<td align="left">L01XC</td>
+<td align="left">liquid</td>
+<td align="left">approved</td>
+<td align="left">EGFR</td>
+<td align="left">BE0002098</td>
+<td align="left">Low affinity immunoglobulin gamma Fc region receptor II-a</td>
+<td align="left">Humans</td>
+<td align="left">Polypeptide</td>
+<td align="left">unknown</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">DB00002</td>
+<td align="left">Cetuximab</td>
+<td align="left">2004-06-29</td>
+<td align="left">NA</td>
+<td align="left">L01XC</td>
+<td align="left">liquid</td>
+<td align="left">approved</td>
+<td align="left">FCGR3B</td>
+<td align="left">BE0002098</td>
+<td align="left">Low affinity immunoglobulin gamma Fc region receptor II-a</td>
+<td align="left">Humans</td>
+<td align="left">Polypeptide</td>
+<td align="left">unknown</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">DB00002</td>
+<td align="left">Cetuximab</td>
+<td align="left">2004-06-29</td>
+<td align="left">NA</td>
+<td align="left">L01XC</td>
+<td align="left">liquid</td>
+<td align="left">approved</td>
+<td align="left">C1QA</td>
+<td align="left">BE0002098</td>
+<td align="left">Low affinity immunoglobulin gamma Fc region receptor II-a</td>
+<td align="left">Humans</td>
+<td align="left">Polypeptide</td>
+<td align="left">unknown</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">DB00002</td>
+<td align="left">Cetuximab</td>
+<td align="left">2004-06-29</td>
+<td align="left">NA</td>
+<td align="left">L01XC</td>
+<td align="left">liquid</td>
+<td align="left">approved</td>
+<td align="left">C1QB</td>
+<td align="left">BE0002098</td>
+<td align="left">Low affinity immunoglobulin gamma Fc region receptor II-a</td>
+<td align="left">Humans</td>
+<td align="left">Polypeptide</td>
+<td align="left">unknown</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">DB00002</td>
+<td align="left">Cetuximab</td>
+<td align="left">2004-06-29</td>
+<td align="left">NA</td>
+<td align="left">L01XC</td>
+<td align="left">liquid</td>
+<td align="left">approved</td>
+<td align="left">C1QC</td>
+<td align="left">BE0002098</td>
+<td align="left">Low affinity immunoglobulin gamma Fc region receptor II-a</td>
+<td align="left">Humans</td>
+<td align="left">Polypeptide</td>
+<td align="left">unknown</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="data-commonly-used-in-network-medicine.html#cb19-1" aria-hidden="true" tabindex="-1"></a>Cleaned_DT <span class="ot">=</span> DT <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="data-commonly-used-in-network-medicine.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(organism <span class="sc">==</span> <span class="st">&#39;Humans&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="data-commonly-used-in-network-medicine.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Gene_Target, Name,ID, Type, known_action) <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="data-commonly-used-in-network-medicine.html#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>() </span>
+<span id="cb19-5"><a href="data-commonly-used-in-network-medicine.html#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="data-commonly-used-in-network-medicine.html#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Cleaned_DT)</span></code></pre></div>
+<pre><code>## [1] 22931     5</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="data-commonly-used-in-network-medicine.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(DT)</span></code></pre></div>
+<pre><code>## [1] 26817    16</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-commonly-used-in-network-medicine.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Cleaned_DT)</span></code></pre></div>
+<pre><code>##    Gene_Target      Name      ID        Type known_action
+## 1:          F2 Lepirudin DB00001 Polypeptide          yes
+## 2:        EGFR Cetuximab DB00002 Polypeptide      unknown
+## 3:      FCGR3B Cetuximab DB00002 Polypeptide      unknown
+## 4:        C1QA Cetuximab DB00002 Polypeptide      unknown
+## 5:        C1QB Cetuximab DB00002 Polypeptide      unknown
+## 6:        C1QC Cetuximab DB00002 Polypeptide      unknown</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="data-commonly-used-in-network-medicine.html#cb25-1" aria-hidden="true" tabindex="-1"></a>TargetDist <span class="ot">=</span> Cleaned_DT <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="data-commonly-used-in-network-medicine.html#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gene_Target) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="data-commonly-used-in-network-medicine.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">numDrugs =</span> <span class="fu">n</span>()) </span>
+<span id="cb25-4"><a href="data-commonly-used-in-network-medicine.html#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="data-commonly-used-in-network-medicine.html#cb25-5" aria-hidden="true" tabindex="-1"></a>DrugDist <span class="ot">=</span> Cleaned_DT <span class="sc">%&gt;%</span> </span>
+<span id="cb25-6"><a href="data-commonly-used-in-network-medicine.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ID) <span class="sc">%&gt;%</span></span>
+<span id="cb25-7"><a href="data-commonly-used-in-network-medicine.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">numTargets =</span> <span class="fu">n</span>()) </span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-commonly-used-in-network-medicine.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(TargetDist) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="data-commonly-used-in-network-medicine.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> numDrugs) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="data-commonly-used-in-network-medicine.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">&quot;#1d3557&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;#a8dadc&quot;</span> ) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="data-commonly-used-in-network-medicine.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Targets&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Drugs&quot;</span>)<span class="sc">+</span></span>
+<span id="cb26-5"><a href="data-commonly-used-in-network-medicine.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-17"></span>
+<img src="NetMed_files/figure-html/unnamed-chunk-17-1.png" alt="Target distribution" width="672" />
+<p class="caption">
+Figure 2.3: Target distribution
+</p>
+</div>
+<p>Which Target is the most targetted gene?</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-commonly-used-in-network-medicine.html#cb27-1" aria-hidden="true" tabindex="-1"></a>TargetDist <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="data-commonly-used-in-network-medicine.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(numDrugs)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="data-commonly-used-in-network-medicine.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(numDrugs <span class="sc">&gt;</span> <span class="dv">400</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   Gene_Target numDrugs
+##   &lt;chr&gt;          &lt;int&gt;
+## 1 CYP3A4           966
+## 2 ABCB1            524</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="data-commonly-used-in-network-medicine.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(DrugDist) <span class="sc">+</span></span>
+<span id="cb29-2"><a href="data-commonly-used-in-network-medicine.html#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> numTargets) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="data-commonly-used-in-network-medicine.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">&quot;#1d3557&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;#a8dadc&quot;</span> ) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="data-commonly-used-in-network-medicine.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Targets&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Drugs&quot;</span>)<span class="sc">+</span></span>
+<span id="cb29-5"><a href="data-commonly-used-in-network-medicine.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-19"></span>
+<img src="NetMed_files/figure-html/unnamed-chunk-19-1.png" alt="Drug distribution" width="672" />
+<p class="caption">
+Figure 2.4: Drug distribution
+</p>
+</div>
+</div>
+<div id="exercises-2" class="section level3" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> Exercises</h3>
+<p>Let us understand a little bit more about the data.</p>
+<ol style="list-style-type: decimal">
+<li><p>What are the top 10 genes mostly targeted by drugs? Are they types are they mostly?</p></li>
+<li><p>What are the top 10 most promiscuous drugs? What are their indication?</p></li>
+</ol>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="workshop-on-network-medicine.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["NetMed.pdf", "NetMed.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
