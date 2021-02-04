@@ -24,7 +24,7 @@
 <meta name="author" content="Deisy Morselli Gysi" />
 
 
-<meta name="date" content="2021-02-03" />
+<meta name="date" content="2021-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,8 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -133,18 +135,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Network Medicine</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="workshop-on-network-medicine.html"><a href="workshop-on-network-medicine.html"><i class="fa fa-check"></i><b>1</b> Workshop on Network Medicine</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Workshop in Advanced Bioinformatics: Network Medicine.</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="workshop-on-network-medicine.html"><a href="workshop-on-network-medicine.html#whatarenets"><i class="fa fa-check"></i><b>1.1</b> What are networks?</a></li>
-<li class="chapter" data-level="1.2" data-path="workshop-on-network-medicine.html"><a href="workshop-on-network-medicine.html#terminology"><i class="fa fa-check"></i><b>1.2</b> Terminology</a>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#whatarenets"><i class="fa fa-check"></i><b>1.1</b> What are networks?</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#terminology"><i class="fa fa-check"></i><b>1.2</b> Terminology</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="workshop-on-network-medicine.html"><a href="workshop-on-network-medicine.html#network-terminology"><i class="fa fa-check"></i><b>1.2.1</b> Network Terminology</a></li>
-<li class="chapter" data-level="1.2.2" data-path="workshop-on-network-medicine.html"><a href="workshop-on-network-medicine.html#biological-terminology"><i class="fa fa-check"></i><b>1.2.2</b> Biological Terminology</a></li>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#network-terminology"><i class="fa fa-check"></i><b>1.2.1</b> Network Terminology</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#biological-terminology"><i class="fa fa-check"></i><b>1.2.2</b> Biological Terminology</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html"><i class="fa fa-check"></i><b>2</b> Data Commonly Used in Network Medicine</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#PPI"><i class="fa fa-check"></i><b>2.1</b> Protein Protein Interaction Networks</a>
+<li class="chapter" data-level="2.1" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#PPI"><i class="fa fa-check"></i><b>2.1</b> Protein-Protein Interaction Networks</a>
 <ul>
 <li class="chapter" data-level="2.1.1" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#measuring-ppis"><i class="fa fa-check"></i><b>2.1.1</b> Measuring PPIs</a></li>
 <li class="chapter" data-level="2.1.2" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#commonly-used-data-sources-for-ppis"><i class="fa fa-check"></i><b>2.1.2</b> Commonly used data sources for PPIs</a></li>
@@ -165,7 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.4" data-path="data-commonly-used-in-network-medicine.html"><a href="data-commonly-used-in-network-medicine.html#exercises-2"><i class="fa fa-check"></i><b>2.3.4</b> Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>3</b> Methods fo Disease Module Identification and Disease Similarity</a>
+<li class="chapter" data-level="3" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>3</b> Methods for Disease Module Identification and Disease Similarity</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="methods.html"><a href="methods.html#diseasemodule"><i class="fa fa-check"></i><b>3.1</b> Disease Module</a>
 <ul>
@@ -210,95 +212,99 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="method-for-drug-repurpusing" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Method for drug-repurpusing</h1>
-<p>In this Chapter we will learn how to calculate the proximity of a drug to a disease - and infer drug repurpusing (Session <a href="method-for-drug-repurpusing.html#proximity">4.1</a>)- based on network methodologies.</p>
-<p>There are different methods that are used for drug-repurpusing based on networks, such as the <strong>diffusion state distance (DSD)</strong> <span class="citation">(<a href="references.html#ref-Cao2013" role="doc-biblioref">Cao et al. 2013</a>)</span>, that uses a <strong>graph diffusion property</strong> to derive a similarity metric for pairs of nodes that takes into account how similarly they affect the rest of the network; and <strong>AI-based methods</strong>, where a heterogeneous graph <span class="math inline">\(G = (V,R)\)</span> with N nodes <span class="math inline">\(v_i \in V\)</span> representing distinct types of biomedical entities and labeled edges representing semantically distinct types of edges between the entities (i.e., protein-protein interactions, drug-target associations, disease-protein associations, and drug-disease indications) and are tasked to predict drugs for a particular disease <span class="citation">(<a href="references.html#ref-Zitnik2018" role="doc-biblioref">Zitnik, Agrawal, and Leskovec 2018</a>)</span>. Due to the limited time, we will focus only on the proximity based method.</p>
+<p>In this Chapter, we will learn how to calculate the proximity of a drug to a disease - and infer drug repurpusing (Session <a href="method-for-drug-repurpusing.html#proximity">4.1</a>)- based on network methodologies.</p>
+<p>There are different methods that are used for drug-repurpusing based on networks, such as the <strong>diffusion state distance (DSD)</strong> <span class="citation">(<a href="references.html#ref-Cao2013" role="doc-biblioref">Cao et al. 2013</a>)</span>, that uses a <strong>graph diffusion property</strong> to derive a similarity metric for pairs of nodes, it takes into account how their similarly affect the rest of the network; and <strong>AI-based methods</strong>, where a heterogeneous graph <span class="math inline">\(G = (V,R)\)</span> with N nodes <span class="math inline">\(v_i \in V\)</span> representing distinct types of biomedical entities and labeled edges representing semantically distinct types of edges between the entities (i.e., protein-protein interactions, drug-target associations, disease-protein associations, and drug-disease indications) and are tasked to predict drugs for a particular disease <span class="citation">(<a href="references.html#ref-Zitnik2018" role="doc-biblioref">Zitnik, Agrawal, and Leskovec 2018</a>)</span>. Due to the limited time, we will focus only on the proximity-based method.</p>
 <p>For this, we will be using the <code>R</code> package <code>NetSci</code> and to make the appropriate visualizations we will use <code>igraph</code>.</p>
 <div id="proximity" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Proximity</h2>
 <p>Given G, the set of Disease-Genes, T, the set of drug targets, and d(g,t), the shortest path length between nodes <span class="math inline">\(g \in G\)</span> and <span class="math inline">\(t \in T\)</span> in the network, the proximity can be defined as <span class="citation">(<a href="references.html#ref-Guney2016" role="doc-biblioref">Guney et al. 2016</a>)</span>:</p>
 <p><span class="math display">\[ 
-d(g,t)  = \frac{1}{|\left|T\right||}\sum_{t\in T}\underset{v\in V}\min{d(g,t)}
+d(g,t)  = \frac{1}{|\left|T\right||}\sum_{t\in T}\underset{v\in V}\min{d(g,t)}.
 \]</span></p>
 <p>A visual representation of the method can be seen in Figure <a href="method-for-drug-repurpusing.html#fig:proximity">4.1</a>.</p>
 <p>The proximity for drug 2 to the disease is calculated by the average of the shortest path from its targets to the disease genes. The shortest path from N to D is 1, from F to D is 3, the average is 2.</p>
-<p>For Drug 1 we have: <span class="math display">\[d(Drug_1, disease) = \frac{2 + 2 + 1}{3} = 1.66\]</span></p>
+<p>For Drug 1, we have:
+<span class="math display">\[d(Drug_1, disease) = \frac{2 + 2 + 1}{3} = 1.66.\]</span></p>
 <div class="figure"><span id="fig:proximity"></span>
-<img src="NetMed_files/figure-html/proximity-1.png" alt="Drug-Target &amp; Disease-Module Proximity. Triangles represents Disease Associated Genes, while circles represent non-associated genes. In dark purple, we see the drugs and light purple, its targets." width="672" />
+<img src="NetMed_files/figure-html/proximity-1.png" alt="Drug-Target &amp; Disease-Module Proximity. Triangles represent Disease Associated Genes, while circles represent non-associated genes. In dark purple, we see the drugs and light purple, its targets." width="672" />
 <p class="caption">
-Figure 4.1: Drug-Target &amp; Disease-Module Proximity. Triangles represents Disease Associated Genes, while circles represent non-associated genes. In dark purple, we see the drugs and light purple, its targets.
+Figure 4.1: Drug-Target &amp; Disease-Module Proximity. Triangles represent Disease Associated Genes, while circles represent non-associated genes. In dark purple, we see the drugs and light purple, its targets.
 </p>
 </div>
-<p>Similarly to the LCC (<a href="methods.html#diseasemodule">3.1</a>) it is important to calculate a measure of randomness associate to the proximity. In the same sense, it is important that the nodes being randomized, they are not simply randomly selected from the pool of proteins in the PPI, but rather selected from matching degree proteins. To calculate the significance of the proximity one can calculate its Z-Score or simply calculate the empirical probability under the curve from the empirical distribution. Similartly as before, the Z-score is given by:</p>
+<p>Similarly to the LCC (Session <a href="methods.html#diseasemodule">3.1</a>) it is important to calculate a measure of randomness associate to the proximity. In the same sense, it is important that the nodes being randomized, the nodes are not simply randomly selected from the pool of proteins in the PPI, but rather selected from matching degree proteins. To calculate the significance of the proximity one can calculate its Z-Score or simply calculate the empirical probability under the curve from the empirical distribution. Similarly, the Z-score is given by:</p>
 <p><span class="math display">\[
-Z-Score_{d(g,t)} = \frac{d(g,t) - \mu_{d(g,t)}}{\sigma_{d(g,t)}}
+Z-Score_{d(g,t)} = \frac{d(g,t) - \mu_{d(g,t)}}{\sigma_{d(g,t)}}.
 \]</span></p>
 </div>
 <div id="example-in-real-data-2" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Example in real data</h2>
-<p>Let’s try it to identify drugs that could work for our disease sets. Let’s focus on hyperlipidemia and focus on 5 drugs at first.</p>
+<p>Let’s try it to identify drugs that could work for our disease sets. Let’s focus on hyperlipidemia and focus on five drugs at first.</p>
 <ul>
-<li>Asenapine,</li>
-<li>Phentermine,</li>
-<li>Simvastatin,</li>
-<li>Pizotifen,</li>
+<li>Asenapine;</li>
+<li>Phentermine;</li>
+<li>Simvastatin;</li>
+<li>Pizotifen;</li>
 <li>Eprotirome.</li>
 </ul>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="method-for-drug-repurpusing.html#cb53-1" aria-hidden="true" tabindex="-1"></a>hyperlipidemia_genes <span class="ot">=</span> Cleaned_GDA <span class="sc">%&gt;%</span> <span class="fu">filter</span>(diseaseName <span class="sc">==</span> <span class="st">&#39;hyperlipidemia&#39;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(geneSymbol) <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
-<span id="cb53-2"><a href="method-for-drug-repurpusing.html#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-3"><a href="method-for-drug-repurpusing.html#cb53-3" aria-hidden="true" tabindex="-1"></a>Asenapine_t <span class="ot">=</span> DT <span class="sc">%&gt;%</span> </span>
-<span id="cb53-4"><a href="method-for-drug-repurpusing.html#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Name <span class="sc">==</span> <span class="st">&#39;Asenapine&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb53-5"><a href="method-for-drug-repurpusing.html#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Gene_Target)</span>
-<span id="cb53-6"><a href="method-for-drug-repurpusing.html#cb53-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-7"><a href="method-for-drug-repurpusing.html#cb53-7" aria-hidden="true" tabindex="-1"></a>Asenapine_t</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="method-for-drug-repurpusing.html#cb54-1" aria-hidden="true" tabindex="-1"></a>hyperlipidemia_genes <span class="ot">=</span> Cleaned_GDA <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a href="method-for-drug-repurpusing.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(diseaseName <span class="sc">==</span> <span class="st">&#39;hyperlipidemia&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb54-3"><a href="method-for-drug-repurpusing.html#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(geneSymbol) <span class="sc">%&gt;%</span> </span>
+<span id="cb54-4"><a href="method-for-drug-repurpusing.html#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb54-5"><a href="method-for-drug-repurpusing.html#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="method-for-drug-repurpusing.html#cb54-6" aria-hidden="true" tabindex="-1"></a>Asenapine_t <span class="ot">=</span> DT <span class="sc">%&gt;%</span> </span>
+<span id="cb54-7"><a href="method-for-drug-repurpusing.html#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Name <span class="sc">==</span> <span class="st">&#39;Asenapine&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-8"><a href="method-for-drug-repurpusing.html#cb54-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Gene_Target)</span>
+<span id="cb54-9"><a href="method-for-drug-repurpusing.html#cb54-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-10"><a href="method-for-drug-repurpusing.html#cb54-10" aria-hidden="true" tabindex="-1"></a>Asenapine_t</span></code></pre></div>
 <pre><code>##  [1] &quot;HTR1A&quot;  &quot;HTR1B&quot;  &quot;HTR2A&quot;  &quot;HTR2B&quot;  &quot;HTR2C&quot;  &quot;HTR5A&quot;  &quot;HTR6&quot;   &quot;HTR7&quot;  
 ##  [9] &quot;DRD2&quot;   &quot;DRD3&quot;   &quot;DRD4&quot;   &quot;DRD1&quot;   &quot;ADRA1A&quot; &quot;ADRA2A&quot; &quot;ADRA2B&quot; &quot;ADRA2C&quot;
 ## [17] &quot;HRH1&quot;   &quot;HRH2&quot;   &quot;ADRB1&quot;  &quot;ADRB2&quot;  &quot;UGT1A4&quot; &quot;CYP1A2&quot; &quot;CYP2D6&quot; &quot;CYP3A4&quot;
 ## [25] &quot;ALB&quot;    &quot;ORM1&quot;</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="method-for-drug-repurpusing.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">proximity_average</span>(gPPI, </span>
-<span id="cb55-2"><a href="method-for-drug-repurpusing.html#cb55-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">source =</span> hyperlipidemia_genes, </span>
-<span id="cb55-3"><a href="method-for-drug-repurpusing.html#cb55-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">targets =</span> Asenapine_t)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="method-for-drug-repurpusing.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">proximity_average</span>(gPPI, </span>
+<span id="cb56-2"><a href="method-for-drug-repurpusing.html#cb56-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">source =</span> hyperlipidemia_genes, </span>
+<span id="cb56-3"><a href="method-for-drug-repurpusing.html#cb56-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">targets =</span> Asenapine_t)</span></code></pre></div>
 <pre><code>## [1] 1.961538</code></pre>
 <p>Let’s do it in a loop:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="method-for-drug-repurpusing.html#cb57-1" aria-hidden="true" tabindex="-1"></a>drugs <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Asenapine&quot;</span>, </span>
-<span id="cb57-2"><a href="method-for-drug-repurpusing.html#cb57-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;Phentermine&#39;</span>, </span>
-<span id="cb57-3"><a href="method-for-drug-repurpusing.html#cb57-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;Simvastatin&#39;</span>, </span>
-<span id="cb57-4"><a href="method-for-drug-repurpusing.html#cb57-4" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;Pizotifen&#39;</span>,</span>
-<span id="cb57-5"><a href="method-for-drug-repurpusing.html#cb57-5" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;Eprotirome&#39;</span>)</span>
-<span id="cb57-6"><a href="method-for-drug-repurpusing.html#cb57-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-7"><a href="method-for-drug-repurpusing.html#cb57-7" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">list</span>()</span>
-<span id="cb57-8"><a href="method-for-drug-repurpusing.html#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(drugs)){</span>
-<span id="cb57-9"><a href="method-for-drug-repurpusing.html#cb57-9" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">=</span> drugs[i]</span>
-<span id="cb57-10"><a href="method-for-drug-repurpusing.html#cb57-10" aria-hidden="true" tabindex="-1"></a>  Drug_targets <span class="ot">=</span> DT <span class="sc">%&gt;%</span> </span>
-<span id="cb57-11"><a href="method-for-drug-repurpusing.html#cb57-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Name <span class="sc">%in%</span> d) <span class="sc">%&gt;%</span></span>
-<span id="cb57-12"><a href="method-for-drug-repurpusing.html#cb57-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(Gene_Target)</span>
-<span id="cb57-13"><a href="method-for-drug-repurpusing.html#cb57-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb57-14"><a href="method-for-drug-repurpusing.html#cb57-14" aria-hidden="true" tabindex="-1"></a>  prox <span class="ot">=</span> <span class="fu">proximity_average</span>(gPPI, </span>
-<span id="cb57-15"><a href="method-for-drug-repurpusing.html#cb57-15" aria-hidden="true" tabindex="-1"></a>                           <span class="at">source =</span> hyperlipidemia_genes, </span>
-<span id="cb57-16"><a href="method-for-drug-repurpusing.html#cb57-16" aria-hidden="true" tabindex="-1"></a>                           <span class="at">targets =</span> Drug_targets)</span>
-<span id="cb57-17"><a href="method-for-drug-repurpusing.html#cb57-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb57-18"><a href="method-for-drug-repurpusing.html#cb57-18" aria-hidden="true" tabindex="-1"></a>  p[[i]] <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">prox =</span> prox, </span>
-<span id="cb57-19"><a href="method-for-drug-repurpusing.html#cb57-19" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ntargets =</span> <span class="fu">length</span>(Drug_targets), </span>
-<span id="cb57-20"><a href="method-for-drug-repurpusing.html#cb57-20" aria-hidden="true" tabindex="-1"></a>                      <span class="at">drug =</span> d)</span>
-<span id="cb57-21"><a href="method-for-drug-repurpusing.html#cb57-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb57-22"><a href="method-for-drug-repurpusing.html#cb57-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-23"><a href="method-for-drug-repurpusing.html#cb57-23" aria-hidden="true" tabindex="-1"></a>p <span class="sc">%&lt;&gt;%</span> <span class="fu">bind_rows</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="method-for-drug-repurpusing.html#cb58-1" aria-hidden="true" tabindex="-1"></a>drugs <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Asenapine&quot;</span>, </span>
+<span id="cb58-2"><a href="method-for-drug-repurpusing.html#cb58-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;Phentermine&#39;</span>, </span>
+<span id="cb58-3"><a href="method-for-drug-repurpusing.html#cb58-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;Simvastatin&#39;</span>, </span>
+<span id="cb58-4"><a href="method-for-drug-repurpusing.html#cb58-4" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;Pizotifen&#39;</span>,</span>
+<span id="cb58-5"><a href="method-for-drug-repurpusing.html#cb58-5" aria-hidden="true" tabindex="-1"></a>          <span class="st">&#39;Eprotirome&#39;</span>)</span>
+<span id="cb58-6"><a href="method-for-drug-repurpusing.html#cb58-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-7"><a href="method-for-drug-repurpusing.html#cb58-7" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb58-8"><a href="method-for-drug-repurpusing.html#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(drugs)){</span>
+<span id="cb58-9"><a href="method-for-drug-repurpusing.html#cb58-9" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">=</span> drugs[i]</span>
+<span id="cb58-10"><a href="method-for-drug-repurpusing.html#cb58-10" aria-hidden="true" tabindex="-1"></a>  Drug_targets <span class="ot">=</span> DT <span class="sc">%&gt;%</span> </span>
+<span id="cb58-11"><a href="method-for-drug-repurpusing.html#cb58-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Name <span class="sc">%in%</span> d) <span class="sc">%&gt;%</span></span>
+<span id="cb58-12"><a href="method-for-drug-repurpusing.html#cb58-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(Gene_Target)</span>
+<span id="cb58-13"><a href="method-for-drug-repurpusing.html#cb58-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb58-14"><a href="method-for-drug-repurpusing.html#cb58-14" aria-hidden="true" tabindex="-1"></a>  prox <span class="ot">=</span> <span class="fu">proximity_average</span>(gPPI, </span>
+<span id="cb58-15"><a href="method-for-drug-repurpusing.html#cb58-15" aria-hidden="true" tabindex="-1"></a>                           <span class="at">source =</span> hyperlipidemia_genes, </span>
+<span id="cb58-16"><a href="method-for-drug-repurpusing.html#cb58-16" aria-hidden="true" tabindex="-1"></a>                           <span class="at">targets =</span> Drug_targets)</span>
+<span id="cb58-17"><a href="method-for-drug-repurpusing.html#cb58-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb58-18"><a href="method-for-drug-repurpusing.html#cb58-18" aria-hidden="true" tabindex="-1"></a>  p[[i]] <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">prox =</span> prox, </span>
+<span id="cb58-19"><a href="method-for-drug-repurpusing.html#cb58-19" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ntargets =</span> <span class="fu">length</span>(Drug_targets), </span>
+<span id="cb58-20"><a href="method-for-drug-repurpusing.html#cb58-20" aria-hidden="true" tabindex="-1"></a>                      <span class="at">drug =</span> d)</span>
+<span id="cb58-21"><a href="method-for-drug-repurpusing.html#cb58-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb58-22"><a href="method-for-drug-repurpusing.html#cb58-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-23"><a href="method-for-drug-repurpusing.html#cb58-23" aria-hidden="true" tabindex="-1"></a>p <span class="sc">%&lt;&gt;%</span> <span class="fu">bind_rows</span>()</span></code></pre></div>
 <p>Now, let’s do the same, but also calculating the significance of the proximity.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="method-for-drug-repurpusing.html#cb58-1" aria-hidden="true" tabindex="-1"></a>Drug_Target <span class="ot">=</span> DT <span class="sc">%&gt;%</span> </span>
-<span id="cb58-2"><a href="method-for-drug-repurpusing.html#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Name <span class="sc">%in%</span> drugs) <span class="sc">%&gt;%</span> </span>
-<span id="cb58-3"><a href="method-for-drug-repurpusing.html#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Name, Gene_Target) <span class="sc">%&gt;%</span> </span>
-<span id="cb58-4"><a href="method-for-drug-repurpusing.html#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
-<span id="cb58-5"><a href="method-for-drug-repurpusing.html#cb58-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-6"><a href="method-for-drug-repurpusing.html#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Drug_Target) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;ID&#39;</span>, <span class="st">&quot;Target&quot;</span> )</span>
-<span id="cb58-7"><a href="method-for-drug-repurpusing.html#cb58-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-8"><a href="method-for-drug-repurpusing.html#cb58-8" aria-hidden="true" tabindex="-1"></a>proximity_significance <span class="ot">=</span> <span class="fu">avr_proximity_multiple_target_sets</span>(</span>
-<span id="cb58-9"><a href="method-for-drug-repurpusing.html#cb58-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">set =</span> drugs,</span>
-<span id="cb58-10"><a href="method-for-drug-repurpusing.html#cb58-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">G =</span> gPPI,</span>
-<span id="cb58-11"><a href="method-for-drug-repurpusing.html#cb58-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ST =</span> Drug_Target,</span>
-<span id="cb58-12"><a href="method-for-drug-repurpusing.html#cb58-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">source =</span> hyperlipidemia_genes,</span>
-<span id="cb58-13"><a href="method-for-drug-repurpusing.html#cb58-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="dv">10</span>,</span>
-<span id="cb58-14"><a href="method-for-drug-repurpusing.html#cb58-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">bins =</span> <span class="dv">100</span>,</span>
-<span id="cb58-15"><a href="method-for-drug-repurpusing.html#cb58-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_per_bin =</span> <span class="dv">20</span></span>
-<span id="cb58-16"><a href="method-for-drug-repurpusing.html#cb58-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="method-for-drug-repurpusing.html#cb59-1" aria-hidden="true" tabindex="-1"></a>Drug_Target <span class="ot">=</span> DT <span class="sc">%&gt;%</span> </span>
+<span id="cb59-2"><a href="method-for-drug-repurpusing.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Name <span class="sc">%in%</span> drugs) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-3"><a href="method-for-drug-repurpusing.html#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Name, Gene_Target) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-4"><a href="method-for-drug-repurpusing.html#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb59-5"><a href="method-for-drug-repurpusing.html#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-6"><a href="method-for-drug-repurpusing.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Drug_Target) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;ID&#39;</span>, <span class="st">&quot;Target&quot;</span> )</span>
+<span id="cb59-7"><a href="method-for-drug-repurpusing.html#cb59-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-8"><a href="method-for-drug-repurpusing.html#cb59-8" aria-hidden="true" tabindex="-1"></a>proximity_significance <span class="ot">=</span> <span class="fu">avr_proximity_multiple_target_sets</span>(</span>
+<span id="cb59-9"><a href="method-for-drug-repurpusing.html#cb59-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">set =</span> drugs,</span>
+<span id="cb59-10"><a href="method-for-drug-repurpusing.html#cb59-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">G =</span> gPPI,</span>
+<span id="cb59-11"><a href="method-for-drug-repurpusing.html#cb59-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ST =</span> Drug_Target,</span>
+<span id="cb59-12"><a href="method-for-drug-repurpusing.html#cb59-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">source =</span> hyperlipidemia_genes,</span>
+<span id="cb59-13"><a href="method-for-drug-repurpusing.html#cb59-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="dv">10</span>,</span>
+<span id="cb59-14"><a href="method-for-drug-repurpusing.html#cb59-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">bins =</span> <span class="dv">100</span>,</span>
+<span id="cb59-15"><a href="method-for-drug-repurpusing.html#cb59-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_per_bin =</span> <span class="dv">20</span></span>
+<span id="cb59-16"><a href="method-for-drug-repurpusing.html#cb59-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## 
   |                                                                            
   |                                                                      |   0%
@@ -313,7 +319,7 @@ Z-Score_{d(g,t)} = \frac{d(g,t) - \mu_{d(g,t)}}{\sigma_{d(g,t)}}
   |                                                                            
   |======================================================================| 100%</code></pre>
 <p>Which are the drugs that we can use for hyperlipidemia?</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="method-for-drug-repurpusing.html#cb60-1" aria-hidden="true" tabindex="-1"></a>proximity_significance</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="method-for-drug-repurpusing.html#cb61-1" aria-hidden="true" tabindex="-1"></a>proximity_significance</span></code></pre></div>
 <pre><code>##                    Drug targets targets_G proximity  IC_97.5   IC_2.5 p_gt p_lt
 ## Asenapine     Asenapine      26        26  1.961538 2.251923 1.978846  0.9  0.1
 ## Phentermine Phentermine       7         7  2.000000 2.792857 2.142857  1.0  0.0
@@ -327,12 +333,12 @@ Z-Score_{d(g,t)} = \frac{d(g,t) - \mu_{d(g,t)}}{\sigma_{d(g,t)}}
 ## Pizotifen   -0.5217939
 ## Eprotirome        -Inf</code></pre>
 <p>Now, let us check those drug indications:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="method-for-drug-repurpusing.html#cb62-1" aria-hidden="true" tabindex="-1"></a>Indication <span class="ot">=</span> DT <span class="sc">%&gt;%</span> </span>
-<span id="cb62-2"><a href="method-for-drug-repurpusing.html#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Name <span class="sc">%in%</span> drugs) <span class="sc">%&gt;%</span> </span>
-<span id="cb62-3"><a href="method-for-drug-repurpusing.html#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Name, Indication) <span class="sc">%&gt;%</span> </span>
-<span id="cb62-4"><a href="method-for-drug-repurpusing.html#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
-<span id="cb62-5"><a href="method-for-drug-repurpusing.html#cb62-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-6"><a href="method-for-drug-repurpusing.html#cb62-6" aria-hidden="true" tabindex="-1"></a>Indication</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="method-for-drug-repurpusing.html#cb63-1" aria-hidden="true" tabindex="-1"></a>Indication <span class="ot">=</span> DT <span class="sc">%&gt;%</span> </span>
+<span id="cb63-2"><a href="method-for-drug-repurpusing.html#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Name <span class="sc">%in%</span> drugs) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-3"><a href="method-for-drug-repurpusing.html#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Name, Indication) <span class="sc">%&gt;%</span> </span>
+<span id="cb63-4"><a href="method-for-drug-repurpusing.html#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb63-5"><a href="method-for-drug-repurpusing.html#cb63-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-6"><a href="method-for-drug-repurpusing.html#cb63-6" aria-hidden="true" tabindex="-1"></a>Indication</span></code></pre></div>
 <pre><code>##           Name
 ## 1: Phentermine
 ## 2: Simvastatin
@@ -349,7 +355,7 @@ Z-Score_{d(g,t)} = \frac{d(g,t) - \mu_{d(g,t)}}{\sigma_{d(g,t)}}
 <div id="exercises-5" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Exercises</h2>
 <ol style="list-style-type: decimal">
-<li><p>Test the same drugs for all the 5 other diseases we are interested in. How those values compare?</p>
+<li><p>Test the same drugs for all the five other diseases we are interested. How do those values compare?</p>
 <ul>
 <li>Autistic Disorder;</li>
 <li>Obesity;</li>

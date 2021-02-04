@@ -1,20 +1,10 @@
-# Workshop on Network Medicine
-
-Network medicine (**NetMed**) is a field of Network Science that uses Systems Biology to understand its impact on medicine, and it is mostly focused on network topology. In NetMed we often use biological networks to represent the topological space and it be used to identify disease modules, their relationship to other diseases, drug repurpusing, and drug combinations. The biological networks often used for it are based on protein-protein interactions (PPI), Gene-Disease-Associations (GDA), and Drug-Targets.
-
-In this workshop, we will learn:
-
--   how to identify disease modules (Session \@ref(diseasemodule));
--   how to predict disease comorbidities (Session \@ref(dissep));
--   how to repurpuse drugs using a network approach (Session \@ref(proximity)).
-
 ## What are networks? {#whatarenets}
 
 > Adapted from @Gysi2020.
 
-Network Science is broadly employed in many fields: from understanding *how friends bond in a party* to *how animals interact*; from *how superheroes appear in the same comic books* to *how genes can be related to a specific biological process*. Network analysis is especially beneficial for understanding complex systems, in all research fields. Examples of complex biological or medical systems include gene regulatory, ecological and neuropsychology networks. In this workshop, focus is given to applications of Network Science to the medical sciences.
+Network Science is broadly employed in many fields: from understanding *how friends bond in a party* to *how animals interact*; from *how superheroes appear in the same comic books* to *how genes can be related to a specific biological process*. Network analysis is especially beneficial for understanding complex systems, in all research fields. Examples of complex biological or medical systems include gene regulatory, ecological, and neuropsychology networks. In this workshop, the focus is given to applications of Network Science to the Medical Sciences.
 
-Here, I will start by introducing the basic network terminologies and then explore how can we define and identify disease modules, identify disease commorbidities and lastly, we will learn how to repurpuse drugs for diseases with known modules. For each step, I will then present some classical and some new studies.
+Here, I will start by introducing the basic network terminologies and then explore how can we define and identify disease modules, identify disease commorbidities, and lastly, we will learn how to repurpuse drugs for diseases with known modules. For each step, I will then present some classical and some new studies.
 
 It is expected some degree of familiarity with `R`, `ggplot2`, `tidyr`, and `igraph`.
 
@@ -22,11 +12,12 @@ It is expected some degree of familiarity with `R`, `ggplot2`, `tidyr`, and `igr
 
 ```{r, results='hide', echo=FALSE, warning=FALSE, message=FALSE}
 require(igraph, quietly = TRUE)
+require(kableExtra)
 ```
 
-While the nature of each system, i.e. what its entities are and what kind of interactions they have, is different, there are common notations. A short review of common network terms can be found in Session \@ref(network-terminology) and a brief review of biological terms can be found in Session \@ref(biological-terminology).
+While the nature of each system, i.e. what its entities are and what kind of interactions they have, is different, there are common notations. A short review of common network terms can be found in Session \@ref(network-terminology), and a brief review of biological terms can be found in Session \@ref(biological-terminology).
 
-The set of interactions among a set of entities is, in general, called a graph or a network [@Newman2018; @Barabasi2016]. In graph theory, each entity is called a vertex, while in network notation it is called a node [@Barabasi2016]. Accordingly, the connections between two entities are called edges or links, respectively [@Barabasi2016]. In this workshop, I will always use the network notation, unless otherwise specified. The total number of nodes in a network is often denoted as **N** and the number of links in a network is denoted as **L**. While nodes can receive a label, links in general, are not labeled [@Barabasi2016] (although, in many cases, weights can also be perceived as a label). A network can be represented mathematically as an adjacency matrix (usually denoted as **A**) (Table \@ref(tab:ADJ)), an edge-list (Table \@ref(tab:EL)), or visually as a graph (Figure \@ref(fig:GRAPH)).
+The set of interactions among a set of entities is, in general, called a graph or a network [@Newman2018; @Barabasi2016]. In graph theory, each entity is called a vertex, while in network notation it is called a node [@Barabasi2016]. Accordingly, the connections between two entities are called edges or links, respectively [@Barabasi2016]. In this workshop, I will always use the network notation, unless otherwise specified. The total number of nodes in a network is often denoted as **N**, and the number of links in a network is denoted as **L**. While nodes can receive a label, links in general, are not labeled [@Barabasi2016] (although, in many cases, weights can also be perceived as a label). A network can be represented mathematically as an adjacency matrix (usually denoted as **A**) (Table \@ref(tab:ADJ)), an edge-list (Table \@ref(tab:EL)), or visually as a graph (Figure \@ref(fig:GRAPH)).
 
 ```{r, warning=FALSE, echo=FALSE, results='markup'}
 set.seed(124)
@@ -43,20 +34,25 @@ E(g)$curved = 0.1
 ```
 
 ```{r ADJ, echo=FALSE, results='markup'}
-g %>% as_adjacency_matrix(., sparse = F)%>% knitr::kable(., caption = 'Mathematical Representation of a Network: Adjacency Matrix')
+g %>% 
+  as_adjacency_matrix(., sparse = F)%>% 
+  kbl(caption = 'Mathematical Representation of a Network: Adjacency Matrix.') %>%
+  kable_styling()
 ```
 
-Links of a network can possess a direction (normally depicted by an arrow), which indicates that the interaction is asymmetric, e.g. one gene is regulating another gene, or a person follows somebody else in a social network. Networks with directed links are called directed networks, while networks without directed interactions or in which the direction is not known are referred to as undirected networks, e.g. collaboration in the same study or interactions between proteins. In NetMed - and in this workshop - most of the times we assume that networks do not posses a direction. The links can also have a weight to express the strength of the interaction, which results in a weighted network [@Newman2018; @Barabasi2016]. Usually, the weight is graphically displayed as the thickness or the length of the links.
+Links of a network can possess a direction (normally depicted by an arrow), which indicates that the interaction is asymmetric, *e.g.*, one gene is regulating another gene, or a person follows somebody else in a social network. Networks with directed links are called directed networks, while networks without directed interactions or in which the direction is not known are referred to as undirected networks, *e.g.*, collaboration in the same study or interactions between proteins. In NetMed - and in this workshop - we assume, most of the time, that networks do not possess a direction. The links can also have a weight to express the strength of the interaction, which results in a weighted network [@Newman2018; @Barabasi2016]. Usually, the weight is graphically displayed as the thickness or the length of the links.
 
 ```{r EL, echo=FALSE, results='markup'}
 e = g %>% as_edgelist() %>% as.data.frame()
 names(e) = c('Source', 'Target')
-knitr::kable(e, caption = "Mathematical Representation of a Network: Edge List")
+kbl(e, caption = "Mathematical Representation of a Network: Edge List.") %>%
+  kable_styling()
 ```
 
-Networks can also have different dimensions. These dimensions can be understood as layers (or different link types) of the same system [@Kurant2006LayeredNetworks; @Kivela2014MultilayerNetworks]. For example, in a multi-omics multilayer system, each layer can be constructed using different -omics data (for example genomics, transcriptomics, proteomics, etc.) where the 'whole' biological system can be understood as a network of networks [@DeDomenico2017]. The topology and the dynamic properties of the whole network can be changed by simply transforming the weights of the interactions, or by ignoring that nodes can interact in many ways [@Mucha2010CommunityNetworks; @Radicchi2013AbruptNetworks] also ignoring the node's importance to the system. We will not deal with multi-layer networks in this workshop.
+Networks can also have different dimensions. These dimensions can be understood as layers (or different link types) of the same system [@Kurant2006LayeredNetworks; @Kivela2014MultilayerNetworks]. For example, in a multi-omics multilayer system, each layer can be constructed using different -omics data (for example, genomics, transcriptomics, proteomics, etc.) where the 'whole' biological system can be understood as a network of networks [@DeDomenico2017]. The topology and the dynamic properties of the whole network can be changed by simply transforming the weights of the interactions, or by ignoring that nodes can interact in many ways [@Mucha2010CommunityNetworks; @Radicchi2013AbruptNetworks], also ignoring the node's importance to the system. We will not deal with multilayer networks in this workshop.
 
-```{r GRAPH,echo=FALSE, fig.cap='Visual Representation of a Network: Graph', out.width='80%', fig.asp=.75, fig.align='center'}
+```{r GRAPH,echo=FALSE, fig.cap='Visual Representation of a Network: Graph.', out.width='80%', fig.asp=.75, fig.align='center'}
+par(mar = c(0,0,0,0))
 plot(g)
 ```
 
@@ -64,13 +60,13 @@ plot(g)
 
 -   A **network** is a pair **G = (N, L)** of a set **N** of nodes connected by a set **L** of links.
 
--   Two nodes are **neighbours** if they are **connected**. The **degree** (d) of a node is the **number of nodes** it interacts with [@Bondy2008GraphTheory].
+-   Two nodes are neighbors if they are **connected**. The **degree** (d) of a node is the **number of nodes** it interacts with [@Bondy2008GraphTheory].
 
 -   The **weight** is a measure of how strong a particular interaction is [@Bondy2008GraphTheory].
 
 -   The **strength** of a node is the **sum of the weights** attached to links belonging to a node [@Barrat2003TheNetworks].
 
--   The **direction** of a link specifies the source (starting point) and a target (endpoint) where the interaction occurs [@Barabasi2016] .
+-   The **direction** of a link specifies the source (starting point) and a target (endpoint) where the interaction occurs [@Barabasi2016].
 
 -   **Hubs** are nodes with a **much larger degree** compared to the average degree value [@Barrat2003TheNetworks].
 
@@ -82,7 +78,7 @@ plot(g)
 
 -   The **diameter** is the maximum distance between two nodes [@Bondy2008GraphTheory].
 
--   The **modularity index** is a measure of the strength of the network division into modules when this measure is maximized; it can be used for identifying nodes communities [@Newman2018].
+-   The **modularity index** is a measure of the strength of the network division into modules when this measure is maximized; it can be used for identifying nodes' communities [@Newman2018].
 
 -   **Preferential attachment** is the tendency of nodes to form new links preferentially to nodes with a high number of links [@barabasi1999emergence; @Vazquez2003GrowingCorrelations].
 
@@ -90,17 +86,17 @@ plot(g)
 
 -   A **bipartide graph** is a network in which the nodes can be divided into two disjoint sets of nodes such that links connect nodes from the two sets to each other, but never inside the same set [@Barabasi2016]. In those networks, most of the network measures are calculated differently than in a unipartide network.
 
--   The **clustering coefficient** describes the degree with which a node is connected to all its neighbours [@barabasi2004network].
+-   The **clustering coefficient** describes the degree with which a node is connected to all its neighbors [@barabasi2004network].
 
 -   The **global clustering** coefficient measures the total number of triangles in a network [@Barabasi2016].
 
 -   The **average clustering** coefficient is the average of the clustering coefficient of all nodes in a network [@barabasi2004network].
 
--   **Centrality** is a set of measures that have been proposed to help to define the most central nodes. It has many interpretations for autonomy, control, risk, exposure, influence and power [@Borgatti2006ACentrality].
+-   **Centrality** is a set of measures that have been proposed to help to define the most central nodes. It has many interpretations for autonomy, control, risk, exposure, influence, and power [@Borgatti2006ACentrality].
 
-    -   **Closeness centrality** is defined as the average distance from a single vertex to all other vertices[@Newman2018].
+-   **Closeness centrality** is defined as the average distance from a single vertex to all other vertices[@Newman2018].
 
-    -   **Betweenness centrality** is defined as the total number of shortest paths between pairs of nodes that pass through a particular node [@Newman2018].
+-   **Betweenness centrality** is defined as the total number of shortest paths between pairs of nodes that pass through a particular node [@Newman2018].
 
 -   **Global measures** are measures that describe the whole network, for example, *degree distribution; average clustering coefficient; path length; modularity index*.
 
@@ -108,13 +104,13 @@ plot(g)
 
 ### Biological Terminology
 
--   **DNA** is the hereditary material of most organisms -- usually all cells of an organism have the same DNA [@Slack2013].
+-   **DNA** is the hereditary material of most organisms -- usually, all cells of an organism have the same DNA [@Slack2013].
 
 -   **Genes** are the basic physical and functional units of heredity. They are parts of the DNA and contain the information for producing functional RNAs and proteins. [@Slack2013].
 
 -   **Proteins** are large, complex molecules that play many critical roles in the body. The proteins are responsible for most of the work in cells and are necessary for structure, function, and regulation of the cells. They can act as enzymes, antibodies, transporters, transcription factors etc. [@Slack2013].
 
--   The **RNA** is synthesized from the DNA but has different properties and functions than the DNA. Some RNAs carry out biological functions in a cell, while others, messenger RNA (mRNA), are turned into proteins that fulfil biological functions [@Slack2013].
+-   The **RNA** is synthesized from the DNA but has different properties and functions than the DNA. Some RNAs carry out biological functions in a cell, while others, messenger RNA (mRNA), are turned into proteins that fulfill biological functions [@Slack2013].
 
 -   A **non-coding RNA (ncRNA)** is an RNA that does not encode a protein. NcRNAs often play a role in gene regulation [@MattickNon-codingRNA].
 
@@ -128,7 +124,7 @@ plot(g)
 
 -   **Transcription Factors** are DNA binding proteins that activate or repress the transcription of particular target genes [@Latchman1997TranscriptionOverview].
 
--   **Gene Regulatory Factors** are responsible for controlling the expression of genomic information and include transcription factors, co-factors, epigenetic modifiers, miRNAs and others [@Hobert2008GeneMicroRNAs].
+-   **Gene Regulatory Factors** are responsible for controlling the expression of genomic information and include transcription factors, co-factors, epigenetic modifiers, miRNAs, and others [@Hobert2008GeneMicroRNAs].
 
 -   **Systems Biology** examines the structures and dynamics of cellular and organismal function, instead of isolated characteristics of a cell or organism.
 
@@ -146,4 +142,4 @@ plot(g)
 
 -   **Genome-wide association studies (GWAS)** are studies where millions of SNPs are tested for association with a particular phenotype using hundreds or thousands of individuals. Those studies shed light on the genetic basis of complex traits.
 
--   **Omics** is a term that refers to the study of different areas in biology, and indicates the totality of some kind, e.g. genome, transcriptome, proteome, etc.
+-   **Omics** is a term that refers to the study of different areas in biology, and indicates the totality of some kind, *e.g.*, genome, transcriptome, proteome, etc.

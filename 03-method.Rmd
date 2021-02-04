@@ -1,16 +1,16 @@
-# Methods fo Disease Module Identification and Disease Similarity {#methods}
+# Methods for Disease Module Identification and Disease Similarity {#methods}
 
-In this chapter, I will introduce the main methods used in Network Medicine. We will start by understanding what a Disease Module is (Session \@ref(diseasemodule)), how can we calculate its significance and also understand its importance. We next will explore the disease separation (Session \@ref(dissep)), how to calculate, make interpretations.
+In this chapter, I will introduce the main methods used in Network Medicine. We will start by understanding what a Disease Module is (Session \@ref(diseasemodule)), how we can calculate its significance, and also understand its importance. Next, we will explore the disease separation (Session \@ref(dissep)), how to calculate, and make interpretations.
 
 ## Disease Module {#diseasemodule}
 
-In biological networks often genes involved in the same topological communities are also associated with similar biological processes [@Ahn2010]. It also reflects on *how diseases localized themselves in the interaction*; meaning that disease modules are highly localized in specific network neighborhoods [@Menche2015] (Figure \@ref(fig:diseasemodule)).
+In biological networks, genes are often involved in the same topological communities are also associated with similar biological processes [@Ahn2010]. It also reflects on *how diseases localized themselves in the interaction*; meaning that, disease modules are highly localized in specific network neighborhoods [@Menche2015] (Figure \@ref(fig:diseasemodule)).
 
 ### Largest connected component
 
-The size of the largest connected component (LCC) is the number of nodes that form a connected subgraph (in our case, it is the number of proteins that are interconnected in the PPI). Many properties of this quantity allow us to understand how a particular disease interacts with the interactome. It is important to note here that this measure is highly dependent on the completeness of an interactome. If a link between a protein and their counterparts is unknown -- therefore missing -- we might say that that particular node is not involved in a disease module (or that the LCC is not significant).
+The size of the largest connected component (LCC) is the number of nodes that form a connected subgraph (in our case, it is the number of proteins that are interconnected in the PPI). Many properties of this quantity allow us to understand how a particular disease interacts with the interactome. It is important to note here that this measure is highly dependent on the completeness of an interactome. If a link between a protein and its counterparts is unknown -- therefore missing -- we might say that that particular node is not involved in a disease module (or that the LCC is not significant).
 
-```{r diseasemodule,fig.cap='Disease-Module. A schematic of a PPI, in pink we see genes associated with a disease, forming a connected component of size 4.', results='hide', echo=FALSE, warning=FALSE, message=FALSE}
+```{r diseasemodule,fig.cap='Disease-Module. In a schematic of a PPI, in pink, we see genes associated with a disease, forming a connected component of size 4.', results='hide', echo=FALSE, warning=FALSE, message=FALSE}
 
 require(NetSci)
 require(magrittr)
@@ -39,21 +39,21 @@ E(g)$width = 0.6
 E(g)$width = ifelse(E(g)$type == "DM", 0.6, E(g)$width)
 E(g)$curved = 0.1
 V(g)$frame.color = V(g)$color
-
+par(mar = c(0,0,0,0))
 plot(g)
 ```
 
 However, just computing this number might not be informative, and it is expected a randomness. To calculate this randomness, we often calculate the significance of the LCC by selecting proteins in the interactome with similar degrees (aka degree preserving randomization).
 
-To calculate the significance of the LCC one can calculate its Z-Score or simply calculate the empirical probability under the curve from the empirical distribution. The Z-score is given by:
+To calculate the significance of the LCC, one can calculate its Z-Score or simply calculate the empirical probability under the curve from the empirical distribution. The Z-score is given by:
 
 $$
-Z-Score_{LCC} = \frac{LCC - \mu_{LCC}}{\sigma_{LCC}}
+Z-Score_{LCC} = \frac{LCC - \mu_{LCC}}{\sigma_{LCC}}.
 $$
 
 ### Example in real data
 
-Our first task now, is to understand if some diseases, from our `Cleaned_GDA` are able to form a Disease-Module. Let's start doing it for Schizophrenia and later we will add some more diseases.
+Our first task now is to understand if some diseases, from our `Cleaned_GDA` are able to form a Disease-Module. Let's start doing it for Schizophrenia and later we will add some more diseases.
 
 The idea now is: Gather the genes associated to our disease in the data, find them in the PPI, check if they form a connected component, check the significance of the component and visualize the Disease-Module.
 
@@ -80,7 +80,8 @@ SCZ_Genes =
 # And lastly, let's visualize it.
 
 SCZ_PPI = SCZ_Genes[SCZ_Genes %in% V(gPPI)$name]
-gScz = gPPI %>% induced.subgraph(., SCZ_PPI)
+gScz = gPPI %>%
+  induced.subgraph(., SCZ_PPI)
 
 components(gScz)
 ```
@@ -111,6 +112,7 @@ V(gScz)$label.color = '#e29578'
 E(gScz)$width = edge.betweenness(gScz, directed = F) %>% CoDiNA::normalize()
 E(gScz)$width = E(gScz)$width + 0.01
 E(gScz)$weight = E(gScz)$width
+par(mar = c(0,0,0,0))
 plot(gScz)
 ```
 
@@ -140,19 +142,19 @@ plot(gScz)
     -   Hyperlipidemia;
     -   Rheumatoid Arthritis.
 
-2.  Now choose any disease you are interested in and do the same thing.
+2.  Choose any disease of your interest and do the same thing.
 
 ## Gene Overlap
 
-A first intuitive way to measure the overlap of two gene sets is by calculating its overlap, or its normalized overlap, the **Jaccard Index**. The Jaccard index is calculated by taking the ratio of **Intersection of two sets over Union of those sets**. The Jaccard coefficient measures similarity between finite sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets:
+A first intuitive way to measure the overlap of two gene sets is by calculating its overlap, or its normalized overlap, the **Jaccard Index**. The Jaccard index is calculated by taking the ratio of **Intersection of two sets over the Union of those sets**. The Jaccard coefficient measures similarity between finite sample sets, and is defined as the size of the intersection divided by the size of the union of the sample sets:
 
 $$
-J(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{|A \cap B|}{|A| + |B| - |A \cap B|}
+J(A,B) = \frac{|A \cap B|}{|A \cup B|} = \frac{|A \cap B|}{|A| + |B| - |A \cap B|}.
 $$
 
-Note that by design, $0 \leq J(A,B) \leq 1$. If A and B are both empty, define $J(A,B) = 1$
+Note that by design, $0 \leq J(A,B) \leq 1$. If A and B are both empty, define $J(A,B) = 1$.
 
-Let's calculate the Jaccard Index for the 5 diseases we calculated its LCCs.
+Let's calculate the Jaccard Index for the five diseases we calculated its LCCs.
 
 ```{r}
 Dis_Ex1 = c('schizophrenia',
@@ -191,29 +193,27 @@ plot(EULER, quantities = TRUE)
 
 ## Disease Separation {#dissep}
 
-When looking into the Jaccard Index, we have a sense of how similar two diseases are based on genes that are **known** to be associated to both diseases. The main problem with this is that we assume that all genes associated with a disease is known, and we do not take the topology of the underlying network into account.
+When looking into the Jaccard Index, we have a sense of how similar two diseases are based on genes that are **known** to be associated with both diseases. The main problem with this is that we assume that all genes associated with a disease is known, and we do not take the topology of the underlying network into account.
 
-The **separation** is a complementary quantity that is a bit less sensitive to the incompleteness of the PPI, we can measure the distances $d_s$ of each disease associated node to all other disease associated nodes. Taking into account only the shortest distance among the result among them results in a distribution $P(d_s)$. The mean value $<d_s>$ can be interpreted as the diameter of the disease model. **Note** the diameter here is the average distance instead of the maximal distance.
+The **separation** is a complementary quantity that is a bit less sensitive to the incompleteness of the PPI, we can measure the distances $d_s$ of each disease-associated node to all other disease associated nodes. Taking into account only the shortest distance between them results in a distribution  $P(d_s)$. The mean value $<d_s>$ can be interpreted as the diameter of the disease model. **Note** the diameter here is the average distance instead of the maximal distance.
 
-The **concept of network localization** can be further generalized to exam the relationship between any different sets of nodes, for example, proteins associated with two different diseases.
-
+The **concept of network localization** can be further generalized to examine the relationship between any different sets of nodes, for example, proteins associated with two different diseases.
 The network serves as a **map**, where diseases are represented by different neighborhoods.
+How close and the degree of overlap of two network neighborhoods can be found to be highly predictive of the pathological similarity of those diseases [@Menche2015] (Figure \@ref(fig:separation)).
 
-How close and degree of overlap of two network neighborhoods can be found to be highly predictive of the pathological similarity of those diseases [@Menche2015] (Figure \@ref(fig:separation)).
-
-To quantify the distance of two sets of nodes A and B we first compute the distribution $P(d_{AB})$ of all shortest distances $d_{AB}$ between nodes A and B and the respective mean distance $<d_{AB}>$.
+To quantify the distance of two sets of nodes A and B, we first compute the distribution $P(d_{AB})$ of all shortest distances $d_{AB}$ between nodes A and B and the respective mean distance $<d_{AB}>$.
 
 The network based separation $S_{AB}$ can be obtained by comparing the mean shortest distance **within** the respective node sets and the mean shortest distance **between** them.
 
 $$
-S_{AB} = <d_{AB}> - \frac{<d_{AA}> + <d_BB>}{2}
+S_{AB} = <d_{AB}> - \frac{<d_{AA}> + <d_BB>}{2}.
 $$
 
-**Note**: negative $S_{AB}$ indicates topological overlap of the two node sets, while a positive $S_{AB}$ indicates topological separation of the two node sets.
+**Note**: negative $S_{AB}$ indicates topological overlap of the two node sets, while a positive $S_{AB}$ indicates a topological separation of the two node sets.
 
-The size of the overlap is highly predictive of pathological and functional similarity, elevated co-expression, symptoms similarity and high comorbidity diseases.
+The size of the overlap is highly predictive of pathological and functional similarity, elevated co-expression, symptoms similarity, and high comorbidity diseases.
 
-```{r separation,fig.cap='Disease-Separation. A schematic of a PPI, in pink we see genes associated with a disease A, and in green genes associated to disease B.', results='hide', echo=FALSE}
+```{r separation,fig.cap='Disease-Separation. In a schematic PPI, we see genes associated with a disease A (in pink), and genes associated to disease B (in green).', results='hide', echo=FALSE}
 
 set.seed(124)
 N = 35
@@ -260,7 +260,7 @@ $$
 $$
 <d_{AB}> = 2.7
 $$ $$
-S_{AB} = 2.7 - \frac{1.5+ 1.5}2 = 1.2
+S_{AB} = 2.7 - \frac{1.5+ 1.5}2 = 1.2.
 $$
 
 ### Example in real data
@@ -289,4 +289,4 @@ Sep_ex2 %>% heatmap(., symm = T)
 
 3.  Optional: Try to make the network visualization for the heatmap of `Sep_ex2`. Use diseases as nodes, and their weight as links.
 
-4.  Optional: Plot the PPI with genes selected in `GDA_Interest` where each node is a piechart representing which diseases are associated to that particular gene. Tip: Check `vertex.shape.pie` for help.
+4.  Optional: Plot the PPI with genes selected in `GDA_Interest`, where each node is a piechart representing which diseases are associated with that particular gene. Tip: Check `vertex.shape.pie` for help.
