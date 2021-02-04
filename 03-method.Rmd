@@ -93,7 +93,7 @@ components(gScz)$csize %>% max
 ```{r}
 # The size of the LCC is 683. But... How does it compare to a random selection genes?
 
-LCC_scz = LCC_Significance(N = 10, Targets = SCZ_PPI,
+LCC_scz = LCC_Significance(N = 1000, Targets = SCZ_PPI,
                            G = gPPI)
 Histogram_LCC(LCC_scz)
 ```
@@ -130,6 +130,7 @@ V(gScz)$label.color = '#e29578'
 E(gScz)$width = edge.betweenness(gScz, directed = F) %>% CoDiNA::normalize()
 E(gScz)$width = E(gScz)$width + 0.01
 E(gScz)$weight = E(gScz)$width
+par(mar = c(0,0,0,0))
 plot(gScz)
 ```
 
@@ -246,6 +247,7 @@ E(g)$width = ifelse(E(g)$type == "DM1" |E(g)$type == "DM2" , 1.5, E(g)$width)
 E(g)$curved = 0.1
 V(g)$frame.color = V(g)$color
 
+par(mar = c(0,0,0,0))
 plot(g)
 ```
 

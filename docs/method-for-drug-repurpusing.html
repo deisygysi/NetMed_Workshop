@@ -301,7 +301,7 @@ Z-Score_{d(g,t)} = \frac{d(g,t) - \mu_{d(g,t)}}{\sigma_{d(g,t)}}.
 <span id="cb59-10"><a href="method-for-drug-repurpusing.html#cb59-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">G =</span> gPPI,</span>
 <span id="cb59-11"><a href="method-for-drug-repurpusing.html#cb59-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ST =</span> Drug_Target,</span>
 <span id="cb59-12"><a href="method-for-drug-repurpusing.html#cb59-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">source =</span> hyperlipidemia_genes,</span>
-<span id="cb59-13"><a href="method-for-drug-repurpusing.html#cb59-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="dv">10</span>,</span>
+<span id="cb59-13"><a href="method-for-drug-repurpusing.html#cb59-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="dv">1000</span>,</span>
 <span id="cb59-14"><a href="method-for-drug-repurpusing.html#cb59-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">bins =</span> <span class="dv">100</span>,</span>
 <span id="cb59-15"><a href="method-for-drug-repurpusing.html#cb59-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_per_bin =</span> <span class="dv">20</span></span>
 <span id="cb59-16"><a href="method-for-drug-repurpusing.html#cb59-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
@@ -320,18 +320,18 @@ Z-Score_{d(g,t)} = \frac{d(g,t) - \mu_{d(g,t)}}{\sigma_{d(g,t)}}.
   |======================================================================| 100%</code></pre>
 <p>Which are the drugs that we can use for hyperlipidemia?</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="method-for-drug-repurpusing.html#cb61-1" aria-hidden="true" tabindex="-1"></a>proximity_significance</span></code></pre></div>
-<pre><code>##                    Drug targets targets_G proximity  IC_97.5   IC_2.5 p_gt p_lt
-## Asenapine     Asenapine      26        26  1.961538 2.251923 1.978846  0.9  0.1
-## Phentermine Phentermine       7         7  2.000000 2.792857 2.142857  1.0  0.0
-## Simvastatin Simvastatin      20        19  2.157895 2.619737 2.327632  1.0  0.0
-## Pizotifen     Pizotifen      17        17  2.058824 2.294118 1.876471  0.7  0.3
-## Eprotirome   Eprotirome       2         2  1.500000 2.000000 2.000000  1.0  0.0
-##                      Z
-## Asenapine   -1.7084389
-## Phentermine -1.8973666
-## Simvastatin -2.8460499
-## Pizotifen   -0.5217939
-## Eprotirome        -Inf</code></pre>
+<pre><code>##                    Drug targets targets_G proximity  IC_97.5   IC_2.5  p_gt
+## Asenapine     Asenapine      26        26  1.961538 2.269231 1.923077 0.905
+## Phentermine Phentermine       7         7  2.000000 2.860714 2.000000 0.952
+## Simvastatin Simvastatin      20        19  2.157895 2.578947 2.103947 0.920
+## Pizotifen     Pizotifen      17        17  2.058824 2.295588 1.880882 0.642
+## Eprotirome   Eprotirome       2         2  1.500000 3.000000 1.000000 0.929
+##              p_lt          Z
+## Asenapine   0.095 -1.5969867
+## Phentermine 0.048 -1.6491003
+## Simvastatin 0.080 -1.6865893
+## Pizotifen   0.358 -0.4609439
+## Eprotirome  0.071 -1.4765928</code></pre>
 <p>Now, let us check those drug indications:</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="method-for-drug-repurpusing.html#cb63-1" aria-hidden="true" tabindex="-1"></a>Indication <span class="ot">=</span> DT <span class="sc">%&gt;%</span> </span>
 <span id="cb63-2"><a href="method-for-drug-repurpusing.html#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Name <span class="sc">%in%</span> drugs) <span class="sc">%&gt;%</span> </span>

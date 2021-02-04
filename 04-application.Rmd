@@ -152,7 +152,7 @@ proximity_significance = avr_proximity_multiple_target_sets(
   G = gPPI,
   ST = Drug_Target,
   source = hyperlipidemia_genes,
-  N = 10,
+  N = 1000,
   bins = 100,
   min_per_bin = 20
 )

@@ -600,9 +600,9 @@ Let's transform our edge-list into a network.
 \end{Shaded}
 
 \begin{verbatim}
-## IGRAPH 3dfac61 UN-- 18507 322289 -- 
+## IGRAPH e853688 UN-- 18507 322289 -- 
 ## + attr: name (v/c)
-## + edges from 3dfac61 (vertex names):
+## + edges from e853688 (vertex names):
 ##  [1] PHYHIP--TTR      PHYHIP--NFE2     PHYHIP--DYRK1A   PHYHIP--HNRNPA1 
 ##  [5] PHYHIP--COPS6    PHYHIP--SUPT5H   PHYHIP--SMARCC2  PHYHIP--EEF1A1  
 ##  [9] PHYHIP--TRIP6    PHYHIP--NDUFV3   PHYHIP--CA10     PHYHIP--ERG28   
@@ -1118,7 +1118,7 @@ The idea now is: Gather the genes associated to our disease in the data, find th
 \begin{Highlighting}[]
 \CommentTok{\# The size of the LCC is 683. But... How does it compare to a random selection genes?}
 
-\NormalTok{LCC\_scz }\OtherTok{=} \FunctionTok{LCC\_Significance}\NormalTok{(}\AttributeTok{N =} \DecValTok{10}\NormalTok{, }\AttributeTok{Targets =}\NormalTok{ SCZ\_PPI,}
+\NormalTok{LCC\_scz }\OtherTok{=} \FunctionTok{LCC\_Significance}\NormalTok{(}\AttributeTok{N =} \DecValTok{1000}\NormalTok{, }\AttributeTok{Targets =}\NormalTok{ SCZ\_PPI,}
                            \AttributeTok{G =}\NormalTok{ gPPI)}
 \FunctionTok{Histogram\_LCC}\NormalTok{(LCC\_scz)}
 \end{Highlighting}
@@ -1133,9 +1133,9 @@ The idea now is: Gather the genes associated to our disease in the data, find th
 \end{Shaded}
 
 \begin{verbatim}
-## IGRAPH 2026338 UN-- 846 2564 -- 
+## IGRAPH 6b3b146 UN-- 846 2564 -- 
 ## + attr: name (v/c)
-## + edges from 2026338 (vertex names):
+## + edges from 6b3b146 (vertex names):
 ##  [1] PI4KA  --SP1    F2     --SP1    DNM1   --CTCF   GSK3B  --HSPA1A
 ##  [5] DNM1   --GRB2   SP1    --GRB2   MET    --GRB2   GSK3B  --MAPK14
 ##  [9] SP1    --MAPK14 CTCF   --MAPK14 GRB2   --MAPK14 MET    --ACTB  
@@ -1182,6 +1182,7 @@ The idea now is: Gather the genes associated to our disease in the data, find th
 \FunctionTok{E}\NormalTok{(gScz)}\SpecialCharTok{$}\NormalTok{width }\OtherTok{=} \FunctionTok{edge.betweenness}\NormalTok{(gScz, }\AttributeTok{directed =}\NormalTok{ F) }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ CoDiNA}\SpecialCharTok{::}\FunctionTok{normalize}\NormalTok{()}
 \FunctionTok{E}\NormalTok{(gScz)}\SpecialCharTok{$}\NormalTok{width }\OtherTok{=} \FunctionTok{E}\NormalTok{(gScz)}\SpecialCharTok{$}\NormalTok{width }\SpecialCharTok{+} \FloatTok{0.01}
 \FunctionTok{E}\NormalTok{(gScz)}\SpecialCharTok{$}\NormalTok{weight }\OtherTok{=} \FunctionTok{E}\NormalTok{(gScz)}\SpecialCharTok{$}\NormalTok{width}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{))}
 \FunctionTok{plot}\NormalTok{(gScz)}
 \end{Highlighting}
 \end{Shaded}
@@ -1539,7 +1540,7 @@ Now, let's do the same, but also calculating the significance of the proximity.
   \AttributeTok{G =}\NormalTok{ gPPI,}
   \AttributeTok{ST =}\NormalTok{ Drug\_Target,}
   \AttributeTok{source =}\NormalTok{ hyperlipidemia\_genes,}
-  \AttributeTok{N =} \DecValTok{10}\NormalTok{,}
+  \AttributeTok{N =} \DecValTok{1000}\NormalTok{,}
   \AttributeTok{bins =} \DecValTok{100}\NormalTok{,}
   \AttributeTok{min\_per\_bin =} \DecValTok{20}
 \NormalTok{)}
@@ -1559,18 +1560,18 @@ Which are the drugs that we can use for hyperlipidemia?
 \end{Shaded}
 
 \begin{verbatim}
-##                    Drug targets targets_G proximity  IC_97.5   IC_2.5 p_gt p_lt
-## Asenapine     Asenapine      26        26  1.961538 2.251923 1.978846  0.9  0.1
-## Phentermine Phentermine       7         7  2.000000 2.792857 2.142857  1.0  0.0
-## Simvastatin Simvastatin      20        19  2.157895 2.619737 2.327632  1.0  0.0
-## Pizotifen     Pizotifen      17        17  2.058824 2.294118 1.876471  0.7  0.3
-## Eprotirome   Eprotirome       2         2  1.500000 2.000000 2.000000  1.0  0.0
-##                      Z
-## Asenapine   -1.7084389
-## Phentermine -1.8973666
-## Simvastatin -2.8460499
-## Pizotifen   -0.5217939
-## Eprotirome        -Inf
+##                    Drug targets targets_G proximity  IC_97.5   IC_2.5  p_gt
+## Asenapine     Asenapine      26        26  1.961538 2.269231 1.923077 0.905
+## Phentermine Phentermine       7         7  2.000000 2.860714 2.000000 0.952
+## Simvastatin Simvastatin      20        19  2.157895 2.578947 2.103947 0.920
+## Pizotifen     Pizotifen      17        17  2.058824 2.295588 1.880882 0.642
+## Eprotirome   Eprotirome       2         2  1.500000 3.000000 1.000000 0.929
+##              p_lt          Z
+## Asenapine   0.095 -1.5969867
+## Phentermine 0.048 -1.6491003
+## Simvastatin 0.080 -1.6865893
+## Pizotifen   0.358 -0.4609439
+## Eprotirome  0.071 -1.4765928
 \end{verbatim}
 
 Now, let us check those drug indications:

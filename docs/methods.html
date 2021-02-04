@@ -262,14 +262,14 @@ Z-Score_{LCC} = \frac{LCC - \mu_{LCC}}{\sigma_{LCC}}.
 <pre><code>## [1] 683</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="methods.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The size of the LCC is 683. But... How does it compare to a random selection genes?</span></span>
 <span id="cb35-2"><a href="methods.html#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="methods.html#cb35-3" aria-hidden="true" tabindex="-1"></a>LCC_scz <span class="ot">=</span> <span class="fu">LCC_Significance</span>(<span class="at">N =</span> <span class="dv">10</span>, <span class="at">Targets =</span> SCZ_PPI,</span>
+<span id="cb35-3"><a href="methods.html#cb35-3" aria-hidden="true" tabindex="-1"></a>LCC_scz <span class="ot">=</span> <span class="fu">LCC_Significance</span>(<span class="at">N =</span> <span class="dv">1000</span>, <span class="at">Targets =</span> SCZ_PPI,</span>
 <span id="cb35-4"><a href="methods.html#cb35-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">G =</span> gPPI)</span>
 <span id="cb35-5"><a href="methods.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Histogram_LCC</span>(LCC_scz)</span></code></pre></div>
 <p><img src="NetMed_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="methods.html#cb36-1" aria-hidden="true" tabindex="-1"></a>gScz </span></code></pre></div>
-<pre><code>## IGRAPH 9c34fcb UN-- 846 2564 -- 
+<pre><code>## IGRAPH ac014bc UN-- 846 2564 -- 
 ## + attr: name (v/c)
-## + edges from 9c34fcb (vertex names):
+## + edges from ac014bc (vertex names):
 ##  [1] PI4KA  --SP1    F2     --SP1    DNM1   --CTCF   GSK3B  --HSPA1A
 ##  [5] DNM1   --GRB2   SP1    --GRB2   MET    --GRB2   GSK3B  --MAPK14
 ##  [9] SP1    --MAPK14 CTCF   --MAPK14 GRB2   --MAPK14 MET    --ACTB  
@@ -306,7 +306,8 @@ Z-Score_{LCC} = \frac{LCC - \mu_{LCC}}{\sigma_{LCC}}.
 <span id="cb39-11"><a href="methods.html#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(gScz)<span class="sc">$</span>width <span class="ot">=</span> <span class="fu">edge.betweenness</span>(gScz, <span class="at">directed =</span> F) <span class="sc">%&gt;%</span> CoDiNA<span class="sc">::</span><span class="fu">normalize</span>()</span>
 <span id="cb39-12"><a href="methods.html#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(gScz)<span class="sc">$</span>width <span class="ot">=</span> <span class="fu">E</span>(gScz)<span class="sc">$</span>width <span class="sc">+</span> <span class="fl">0.01</span></span>
 <span id="cb39-13"><a href="methods.html#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(gScz)<span class="sc">$</span>weight <span class="ot">=</span> <span class="fu">E</span>(gScz)<span class="sc">$</span>width</span>
-<span id="cb39-14"><a href="methods.html#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gScz)</span></code></pre></div>
+<span id="cb39-14"><a href="methods.html#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))</span>
+<span id="cb39-15"><a href="methods.html#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gScz)</span></code></pre></div>
 <p><img src="NetMed_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
 <div id="exercises-3" class="section level3" number="3.1.3">
